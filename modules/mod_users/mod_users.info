@@ -1,0 +1,8 @@
+{
+	"Id": "mod_users",
+	"Name": "Users Module",
+	"Description": "A users module for little CMS",
+	"Author": "Sintic Bolivia",
+	"Website": "http://sinticbolivia.net",
+	"Version": "1.0"
+}

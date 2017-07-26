@@ -1,0 +1,8 @@
+{
+	"Id": "mod_menu",
+	"Name": "Navigation Menu",
+	"Description" : "Build your navigation menu using your current content.",
+	"Website": "http://sinticbolivia.net",
+	"Author": "Sintic Bolivia",
+	"Version": "1.0"
+}

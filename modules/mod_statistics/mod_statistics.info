@@ -1,0 +1,8 @@
+{
+	"Id": "mod_statistics",
+	"Name": "Statistics",
+	"Description" : "Show and build reports about your site statistics.",
+	"Website": "http://sinticbolivia.net",
+	"Author": "Sintic Bolivia",
+	"Version": "1.0"
+}

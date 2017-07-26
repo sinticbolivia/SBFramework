@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Storage Module\n"
+"POT-Creation-Date: 2016-11-11 15:43-0400\n"
+"PO-Revision-Date: 2016-11-11 15:46-0400\n"
+"Last-Translator: \n"
+"Language-Team: Sintic Bolivia <info@sinticbolivia.net>\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+#: ../../../admin.controller.php:22 ../../../admin.controller.php:132
+msgid "index.php?mod=storage&task=upload"
+msgstr ""
+
+#: ../../../admin.controller.php:83
+msgid "Invalid file identifier"
+msgstr ""
+
+#: ../../../admin.controller.php:84 ../../../admin.controller.php:90
+#: ../../../admin.controller.php:145 ../../../admin.controller.php:150
+#: ../../../init.php:23
+msgid "index.php?mod=storage"
+msgstr ""
+
+#: ../../../admin.controller.php:89
+msgid "The file requested does not exists"
+msgstr ""
+
+#: ../../../admin.controller.php:95
+msgid "The file you are trying to download does not exists"
+msgstr ""
+
+#: ../../../admin.controller.php:111
+msgid "ID"
+msgstr ""
+
+#: ../../../admin.controller.php:112 ../../../views/admin/default.php:33
+msgid "Image"
+msgstr "Imagen"
+
+#: ../../../admin.controller.php:113 ../../../views/admin/default.php:34
+msgid "File"
+msgstr "Archivo"
+
+#: ../../../admin.controller.php:114 ../../../views/admin/default.php:36
+msgid "Type"
+msgstr "Tipo"
+
+#: ../../../admin.controller.php:117
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../../../admin.controller.php:118
+#: ../../../views/admin/attachment-row.php:21
+msgid "Delete"
+msgstr "Borrar"
+
+#: ../../../admin.controller.php:149
+msgid "The attachment has been deleted"
+msgstr "El adjunto ha sido borrado"
+
+#: ../../../init.php:23
+msgid "Storage"
+msgstr "Almacenamiento"
+
+#: ../../../views/admin/attachment-row.php:15
+msgid "Save"
+msgstr "Guardar"
+
+#: ../../../views/admin/attachment-row.php:16
+msgid "index.php?mod=storage&task=download&id="
+msgstr ""
+
+#: ../../../views/admin/attachment-row.php:17
+msgid "Download"
+msgstr "Descargar"
+
+#: ../../../views/admin/attachment-row.php:20
+msgid "index.php?mod=storage&task=delete&id="
+msgstr ""
+
+#: ../../../views/admin/attachment-row.php:22
+msgid "Are you sure to delete the file?"
+msgstr "Esta seguro de borrar el archivo?"
+
+#: ../../../views/admin/uploader.php:5
+msgid "Files"
+msgstr "Archivos"
+
+#: ../../../views/admin/uploader.php:6
+msgid "Upload"
+msgstr "Subir"
+
+#: ../../../views/admin/uploader.php:23 ../../../views/admin/default.php:51
+msgid "Drop your files here"
+msgstr "Suelte sus archivos aqui"
+
+#: ../../../views/admin/uploader.php:31 ../../../views/admin/uploader.php:37
+#: ../../../views/admin/default.php:59 ../../../views/admin/default.php:65
+msgid "Uploading File 65%"
+msgstr "Subiendo archivo 65%"
+
+#: ../../../views/admin/uploader.php:117 ../../../views/admin/default.php:145
+msgid "Uploading file {0}"
+msgstr "Subiendo archivo {0}"
+
+#: ../../../views/admin/default.php:6
+msgid "Files Storage"
+msgstr "Almacenamiento de Archivos"
+
+#: ../../../views/admin/default.php:8
+msgid "The file types you can upload are:"
+msgstr ""
+
+#: ../../../views/admin/default.php:9
+msgid "up to 50MB"
+msgstr "hasta 50MB"
+
+#: ../../../views/admin/default.php:35
+msgid "Description"
+msgstr "Descripci&oacute;n"
+
+#: ../../../views/admin/default.php:37
+msgid "Actions"
+msgstr "Acciones"

@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+.drag-drop-box{width:100%;border: 2px dashed #bcbcbc;height:150px;text-align:center;font-size:30px;font-weightbold;padding:50px 0;margin:0 0 10px 0;}
+.upload-progress{width:100%;border:1px solid #bcbcbc;border-radius:5px;}
+.progress{height:40px;background:#fff;}
+.progress .progress-bar{background:#569533;color:#fff;font-weight:bold;}
+.progress .progress-bar .text{margin:10px 0;}
+.qq-upload-drop-area-active{background:#f2dede;border:1px solid #ebccd1;}

@@ -1,0 +1,21 @@
+{
+	"Id": "mod_dbreset",
+	"Name": "Database Reseter",
+    "Names": 
+    {
+        "es_ES":"Reinicializar de Base de Datos"
+    },
+	"Description": "The module allow to reset database tables, including data and increment index.",
+    "Descriptions": 
+    {
+        "es_ES": "El modulo le permite resetear las tablas de la base de datos, incluyendo datos e index de incremento."
+    },
+	"Website": "http://sinticbolivia.net",
+	"Author": "Sintic Bolivia",
+	"Version": "1.0",
+    "Email": "info@sinticbolivia.net",
+	"deps":
+	{
+		"modules": []
+	}
+}

@@ -1,0 +1,114 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Little CMS - Settings Module\n"
+"POT-Creation-Date: 2016-01-11 18:38-0400\n"
+"PO-Revision-Date: 2016-01-11 18:38-0400\n"
+"Last-Translator: J. Marcelo Aviles Paco <maviles@sinticbolivia.net>\n"
+"Language-Team: Sintic Bolivia <info@sinticbolivia.net>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.11\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;SBText;SB_Text\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/marcelo/html/little-cms/modules/mod_settings\n"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/admin.controller.php:7
+msgid "Configuraci&oacute;n"
+msgstr "Settings"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/admin.controller.php:15
+msgid "La configuracion se ha guardado correctamente."
+msgstr "The settings has been saved."
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/admin.controller.php:16
+msgid "settings.php"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:9
+msgid "Settings"
+msgstr "Configuracion"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:14
+msgid "SETTINGS_TAB_LABEL_GENERAL"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:15
+msgid "General"
+msgstr "General"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:31
+#, fuzzy
+msgid "SETTINGS_LABEL_SITE_TITLE"
+msgstr "Titulo del Sitio:"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:32
+msgid "Site Title:"
+msgstr "Titulo del Sitio:"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:37
+msgid "Color de T&iacute;tulo"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:43
+msgid "SETTINGS_LABEL_TIME_ZONE"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:44
+msgid "Hourly Zone:"
+msgstr "Zona Horaria:"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:50
+#, fuzzy
+msgid "SETTINGS_LABEL_DATE_FORMAT"
+msgstr "Formato de fecha:"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:51
+msgid "Date Format:"
+msgstr "Formato de fecha:"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:59
+msgid "Country:"
+msgstr "Pais:"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:67
+msgid "Language:"
+msgstr "Idioma:"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:69
+msgid "English"
+msgstr "Ingles"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:70
+msgid "Spanish"
+msgstr "Espa&ntilde;ol"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:82
+msgid "index.php"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:82
+msgid "Cancelar"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:83
+#, fuzzy
+msgid "SETTINGS_BUTTON_SAVE"
+msgstr "Guardar"
+
+#: /home/marcelo/html/little-cms/modules/mod_settings/views/admin/default.php:84
+msgid "Save"
+msgstr "Guardar"
+
+#~ msgid "Guardar"
+#~ msgstr "Save"
+
+#~ msgid "Titulo del Sitio:"
+#~ msgstr "Site Title:"
+
+#~ msgid "Zona horaria:"
+#~ msgstr "Hourly Zone:"
+
+#~ msgid "Formato Fecha:"
+#~ msgstr "Date Format:"

@@ -1,0 +1,442 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lttle CMS user module\n"
+"POT-Creation-Date: 2015-09-17 22:38-0400\n"
+"PO-Revision-Date: 2015-09-17 22:42-0400\n"
+"Last-Translator: J. Marcelo Aviles Paco <maviles@sinticbolivia.net>\n"
+"Language-Team: Sintic Bolivia <info@sinticbolivia.net>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;SBText;SB_Text\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/marcelo/html/little-cms/modules/mod_users\n"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:17
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:25
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:32
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:43
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:99
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:179
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:24
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:160
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:167
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:173
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:303
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:319
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:352
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:358
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:366
+msgid "index.php?mod=users"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:31
+msgid "El texto de seguridad es invalido"
+msgstr "Invalid captcha"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:63
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:108
+msgid "index.php"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:92
+msgid "index.php?mod=users&task=upload_image&update=1"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controller.php:178
+msgid "Datos actualizados correctamente"
+msgstr "Data is update correctly"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:23
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:58
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/default.php:5
+msgid "Usuarios"
+msgstr "Users"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:26
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.php:5
+msgid "Roles de Usuario"
+msgstr "User Roles"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:27
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.edit.php:34
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:31
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:37
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:105
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:133
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:140
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:148
+msgid "index.php?mod=users&view=roles"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:52
+msgid "Estadisticas de Usuarios"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:62
+msgid "Usuarios Conectados"
+msgstr "Online Users"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:73
+msgid "index.php?mod=users&view=profile"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/init.php:73
+msgid "Mi Perfil"
+msgstr "My Profile"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:126
+msgid "login.php"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:145
+msgid "index.php?mod=users&task=upload_image"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:147
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:207
+msgid "Crear Nuevo Usuario"
+msgstr "Create New User"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:159
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:351
+msgid "Identificador de usuario no valido"
+msgstr "User identifier not valid"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:166
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:357
+msgid "El usuario no existe"
+msgstr "The user does not exists"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:172
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:318
+msgid "No puede editar el usuario solicitado."
+msgstr "You can't edit the requested user "
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:187
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:207
+msgid "Editar Usuario"
+msgstr "Edit User"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:188
+msgid "index.php?mod=users&task=upload_image&user_id="
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:239
+msgid "El rol de usuario no existe"
+msgstr "The user role does not exists"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:244
+msgid "No esta autorizado para crear este rol de usuario"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:313
+msgid "El identificador de usuario no existe."
+msgstr "The user identifier does not exists."
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:335
+msgid "index.php?mod=users&view=edit_user&id="
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/admin.controller.php:365
+msgid "El usuario se borro correctamente."
+msgstr "Uset deleted correctly."
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:5
+msgid "Gestionar configuracion"
+msgstr "Settings Management"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:6
+msgid "Configuraci&oacute;n General"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:7
+msgid "Configuraci&oacute;n de Est&eacute;tica"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:8
+msgid "Configuraci&oacute;n de Aplicaci&oacute;n"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:9
+msgid "Gestionar roles"
+msgstr "Roles management"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:10
+msgid "Crear rol"
+msgstr "Create role"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:11
+msgid "Editar rol"
+msgstr "Edit role"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:12
+msgid "Borrar rol"
+msgstr "Delete role"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:13
+msgid "Gestionar usuarios"
+msgstr "Users management"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:14
+msgid "Crear usuario"
+msgstr "Create user"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:15
+msgid "Editar usuario"
+msgstr "Edit user"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/on_enabled.php:16
+msgid "Borrar usuario"
+msgstr "Delete user"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/form-login.php:8
+msgid "Usuario:"
+msgstr "User:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/form-login.php:12
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:73
+msgid "Contrase&ntilde;a:"
+msgstr "Password:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/form-login.php:16
+msgid "captcha.php?time="
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/form-login.php:20
+msgid "index.php?mod=users&view=recover_pwd"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/form-login.php:20
+msgid "No recuerdas tu contrase&ntilde;a?"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/form-login.php:23
+msgid "Entrar a mi cuenta"
+msgstr "Enter to my account"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/recover_pwd.php:6
+msgid "Recuperaci&oacute;n de Contrase&ntilde;a"
+msgstr "Password recovery"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/recover_pwd.php:10
+msgid "Su direccion de correo"
+msgstr "You email address"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/recover_pwd.php:14
+msgid "Recuperar contrase&ntilde;a"
+msgstr "Recover my password"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:4
+msgid "Mi Cuenta"
+msgstr "My Account"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:10
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:32
+msgid "Select user image"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:14
+msgid "Subiendo imagen"
+msgstr "Uploading image"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:30
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:55
+msgid "Perfil"
+msgstr "Profile"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:31
+msgid "Personal"
+msgstr "Personal"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:37
+msgid "Email:"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:41
+msgid "Password:"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:42
+msgid "Dejar en blanco para no actualizar."
+msgstr "Leave blank to no update."
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:47
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:118
+msgid "Fecha de Nacimiento:"
+msgstr "Birthday:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:51
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:124
+msgid "Direccion:"
+msgstr "Address:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:55
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:129
+msgid "Ciudad:"
+msgstr "City:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:59
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:135
+msgid "Provincia:"
+msgstr "State:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:63
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:141
+msgid "Pais:"
+msgstr "Country:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:65
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:143
+msgid "-- pais --"
+msgstr "-- country --"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/default.php:73
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:157
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.edit.php:35
+msgid "Guardar"
+msgstr "Save"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:37
+msgid "Subiendo imagen..."
+msgstr "Uploading image..."
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:42
+msgid "Nombres:"
+msgstr "Firstname:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:46
+msgid "Apellidos:"
+msgstr "Lastname:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:79
+msgid "Fecha Creaci&oacute;n:"
+msgstr "Creation Date:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:92
+msgid "Rol de Usuario:"
+msgstr "Use Role"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:94
+msgid "-- rol --"
+msgstr "-- role --"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:106
+msgid "Observaciones:"
+msgstr "Observations:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:110
+msgid "Notas:"
+msgstr "Notes:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/edit_user.php:156
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.edit.php:34
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/default.php:7
+msgid "Nuevo"
+msgstr "New"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/default.php:16
+msgid "Usuario"
+msgstr "User"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/default.php:22
+msgid "Nombre"
+msgstr "Name"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/default.php:28
+msgid "Email"
+msgstr "Email"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/default.php:34
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.php:19
+msgid "Rol"
+msgstr "Role"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/default.php:38
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.php:23
+msgid "Acciones"
+msgstr "Actions"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/default.php:56
+msgid "Esta seguro de borrar el usuario?"
+msgstr "Are you sure to delete the user?"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.php:8
+msgid "index.php?mod=users&view=roles.new&ctrl=roles"
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.php:9
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:19
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:49
+msgid "Nuevo Rol"
+msgstr "New Role"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.php:32
+msgid "Editar"
+msgstr "Edit"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.php:33
+msgid "Esta seguro de borrar el rol de usuario?"
+msgstr "Are you sure to delete the user?"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.edit.php:14
+msgid "Rol:"
+msgstr "Role:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.edit.php:20
+msgid "Descripci&oacute;n:"
+msgstr "Description:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/views/admin/roles.edit.php:24
+msgid "Permisos:"
+msgstr "Permissions:"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:30
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:132
+msgid "Identificador de rol no valido"
+msgstr "Role identifier is invalid"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:36
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:139
+msgid "El rol no existe"
+msgstr "The role does not exists"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:39
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:49
+msgid "Editar Rol"
+msgstr "Edit Role"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:60
+msgid "Debe ingresar un nombre para el rol de usuario"
+msgstr "You must enter a role name"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:70
+msgid "El nombre de rol ya existe."
+msgstr "The role name already exists."
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:99
+#, php-format
+msgid "Asignar Rol %s"
+msgstr "Assign Role %s"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:104
+msgid "Se ha creado un nuevo rol de usuario."
+msgstr "The new rol has been created."
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:123
+msgid "El rol se ha actualizado."
+msgstr "Role update"
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:124
+msgid "index.php?mod=users&view=roles.edit&id="
+msgstr ""
+
+#: /home/marcelo/html/little-cms/modules/mod_users/controllers/admin.controller.roles.php:147
+#, php-format
+msgid "El rol %s ha sido borrado"
+msgstr "The role %s has been deleted"

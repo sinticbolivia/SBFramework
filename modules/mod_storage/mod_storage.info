@@ -1,0 +1,8 @@
+{
+	"Id": "mod_storage",
+	"Name": "Storage Module",
+	"Description" : "Upload files",
+	"Website": "http://sinticbolivia.net",
+	"Author": "Sintic Bolivia",
+	"Version": "1.0"
+}

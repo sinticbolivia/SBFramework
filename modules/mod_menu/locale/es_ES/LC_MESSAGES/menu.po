@@ -1,0 +1,173 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Sintic Bolivia CMS module menu\n"
+"POT-Creation-Date: 2017-01-27 11:32-0400\n"
+"PO-Revision-Date: 2017-01-27 11:36-0400\n"
+"Last-Translator: \n"
+"Language-Team: Sintic Bolivia <info@sinticbolivia.net>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin.controller.php:13 views/admin/default.php:6
+msgid "Content Menus"
+msgstr "Menu de Contenidos"
+
+#: admin.controller.php:19
+msgid "New Content Menu"
+msgstr "Nuevo Menu de Contenidos"
+
+#: admin.controller.php:29
+msgid "The menu does not exists"
+msgstr "El menu no existe"
+
+#: admin.controller.php:34
+msgid "Edit Content Menu"
+msgstr "Editar menu de contenido"
+
+#: admin.controller.php:52 init.php:23 views/admin/new.php:7
+msgid "index.php?mod=menu"
+msgstr ""
+
+#: admin.controller.php:70 views/admin/default.php:27
+msgid "index.php?mod=menu&view=edit&key="
+msgstr ""
+
+#: admin.controller.php:73
+msgid "The new menu has been created"
+msgstr "El nuevo menu fue creado."
+
+#: admin.controller.php:83
+msgid "The menu has been deleted"
+msgstr "El menu fue borrado"
+
+#: functions.php:10 functions.php:52 views/admin/new.php:44
+msgid "index.php?mod=content&view=article&id="
+msgstr ""
+
+#: functions.php:14 functions.php:56 views/admin/new.php:62
+msgid "index.php?mod=content&view=section&id="
+msgstr ""
+
+#: init.php:23
+msgid "Menus"
+msgstr ""
+
+#: on_enabled.php:4
+msgid "Manage Content Menus"
+msgstr "Administrar Menus de Contenido"
+
+#: views/admin/default.php:7
+msgid "index.php?mod=menu&view=new"
+msgstr ""
+
+#: views/admin/default.php:7
+msgid "New"
+msgstr "Nuevo"
+
+#: views/admin/default.php:12
+msgid "No."
+msgstr ""
+
+#: views/admin/default.php:13 views/admin/new.php:18
+msgid "Name"
+msgstr "Nuevo"
+
+#: views/admin/default.php:14
+msgid "Key"
+msgstr "Llave"
+
+#: views/admin/default.php:15 views/admin/new.php:22
+msgid "Language"
+msgstr "Lenguage"
+
+#: views/admin/default.php:30
+msgid "index.php?mod=menu&task=delete&key="
+msgstr ""
+
+#: views/admin/new.php:5
+msgid "New Menu"
+msgstr "Nuevo Menu"
+
+#: views/admin/new.php:7
+msgid "Cancel"
+msgstr "Calcelar"
+
+#: views/admin/new.php:8
+msgid "Save"
+msgstr "Guardar"
+
+#: views/admin/new.php:32 views/admin/new.php:127
+msgid "Menu Items"
+msgstr "Items del Menu"
+
+#: views/admin/new.php:36
+msgid "Pages"
+msgstr "Paginas"
+
+#: views/admin/new.php:47 views/admin/new.php:65 views/admin/new.php:83
+#: views/admin/new.php:101 views/admin/new.php:118
+msgid "Add"
+msgstr "Adicionar"
+
+#: views/admin/new.php:54
+msgid "Sections"
+msgstr "Secciones"
+
+#: views/admin/new.php:72
+msgid "Posts"
+msgstr "Entradas"
+
+#: views/admin/new.php:80
+msgid "index.php?mod=content&view=post&id="
+msgstr ""
+
+#: views/admin/new.php:90
+msgid "Categories"
+msgstr "Categorias"
+
+#: views/admin/new.php:98
+msgid "index.php?mod=content&view=category&id="
+msgstr ""
+
+#: views/admin/new.php:108 views/admin/new.php:113
+msgid "Custom Link"
+msgstr "Enlace personalizado"
+
+#: views/admin/new.php:117
+msgid "Add Custom Menu Item"
+msgstr "Adicionar Item Personalizado"
+
+#: views/admin/new.php:140 views/admin/new.php:174 views/admin/new.php:208
+msgid "Menu Data"
+msgstr "Datos del Menu"
+
+#: views/admin/new.php:144 views/admin/new.php:178 views/admin/new.php:212
+#: views/admin/new.php:265
+msgid "Title"
+msgstr "Titulo"
+
+#: views/admin/new.php:147 views/admin/new.php:181 views/admin/new.php:215
+msgid "Link"
+msgstr "Enlace"
+
+#: views/admin/new.php:152 views/admin/new.php:186 views/admin/new.php:220
+#: views/admin/new.php:270
+msgid "Css Id"
+msgstr ""
+
+#: views/admin/new.php:155 views/admin/new.php:189 views/admin/new.php:223
+#: views/admin/new.php:273
+msgid "Css Class"
+msgstr ""
+
+#: views/admin/new.php:160 views/admin/new.php:194 views/admin/new.php:228
+#: views/admin/new.php:278
+msgid "Remove"
+msgstr "Borrar"
