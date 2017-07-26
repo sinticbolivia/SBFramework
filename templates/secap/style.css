@@ -1,0 +1,102 @@
+/*
+Template Name: Consultora SECAP
+Template URL: http://sinticbolivia.net
+Template Author: Sintic Bolivia
+*/
+a, a:hover, a:link{text-decoration:none;}
+body{font-family:Arial;}
+ul{padding:0;}
+#header{color:#fff;background:#10638f;}
+#header .last-col .bg{background:url(images/cabecera-marca-de-agua-x3.png) no-repeat center right #10638f;height:100%;}
+#logo{padding:15px 0;}
+#navigation{background:#fff;}
+#navigation ul{list-style:none;padding:0 15px;margin:0;}
+#navigation ul li{position:relative;float:left;margin:10px 10px 10px 0;}
+#navigation ul li:last-child{margin-right:0;}
+#navigation ul li a{display:block;text-align:center;padding:4px 6px;color:#010101;font-family:'Adam';font-size:18px;text-transform:uppercase;transition: background 0.7s;}
+#navigation ul li a:hover, #navigation ul li.active a{color:#fff;background:#b11e16;font-weight:bold;}
+#navigation ul li ul{padding:0;min-width:200px;background:#fff;display:none;position:absolute;left:0;top:100%;z-index:500;text-align:left;}
+#navigation ul li ul li{text-align:left;margin:0;float:none;}
+#navigation ul li ul li a{text-align:left;margin:2px;}
+#wrap-content{min-height:300px;}
+#content #content-title{font-family:'CoolVetica';font-weight:bold;background:#10638f;color:#fff;margin:0 0 10px 0;padding:1px 15px;}
+#footer{background:#000;color:#fff;padding:25px 0;}
+#footer a{color:inherit;}
+#footer .btn{border:1px solid #fff;border-radius:5px;transition:background 0.5s;}
+#footer .btn:hover{background:#b11e16;}
+.widget{margin:0 0 10px 0;}
+.widget .title{margin:0;padding:8px;}
+.widget .body{padding:8px;}
+.carousel-caption{bottom:25% !important;}
+.carousel-caption .content{background:rgba(0, 0, 0, 0.3);padding:0px;}
+.carousel-caption .content .title{font-family:'CoolVetica';font-size:38px;text-align:center;font-weight:bold;color:#fff;background:rgba(0, 0, 0, 0.3);}
+.carousel-caption .content .text{padding:8px;font-size:18px;}
+.btn-readmore{font-family:'CoolVetica';font-size:18px;padding:6px 20px;background:#b11e16;text-align:center;color:#fff;font-weight:bold;}
+.btn-readmore:hover{color:#fff;}
+#frontpage-services{}
+#frontpage-services #services-title{font-family:'CoolVetica';font-size:40px;text-align:center;margin:20px 0 30px 0;}
+#frontpage-services #services-title span{border-bottom:3px solid #0c6492;}
+#frontpage-services .service{display:block;text-align:center;margin:0 0 20px 0;color:#000;}
+#frontpage-services .service span{display:block;}
+#frontpage-services .service .image{}
+#frontpage-services .service .image img{max-width:60%;}
+#frontpage-services .service .title{font-family:'Adam';font-size:25px;}
+.social-icons{width:200px;margin:0 auto 10px auto;overflow:hidden;}
+.social-icons a{display:inline-block;width:30px;height:30px;float:left;margin:0 10px 0 0;}
+.social-icons a img{max-width:100%;max-height:100%;} 
+#content-body{padding:30px 0;}
+#content-body img{max-width:100%;max-height:100%;}
+#content-body #content-text{font-family:'CoolVetica';font-size:16px;}
+#btn-mobile-menu{color:#fff;font-size:20px;padding:5px 15px;}
+#btn-mobile-menu:link, #btn-mobile-menu:focus, #btn-mobile-menu:visited{border:0;}
+#btn-mobile-menu span{border:1px solid #fff;padding:6px;border-radius:6px;}
+form input, form textarea{border:2px solid #1aa0dd !important;border-radius:5px;}
+form textarea{min-height:150px;}
+#form-contact-wrap{border:2px solid #f7f7f7;padding:20px;border-radius:20px;}
+#form-contact-wrap h2{margin:0 0 10px 0;}
+.btn-submit{background:#1aa0dd;color:#fff;text-transform:uppercase;}
+.gmap-container{padding:8px;}
+.gmap-container .gmap{width:100%;min-height:270px;}
+.item-content.cursos{height:335px;margin:0 0 10px 0;}
+.item-content.cursos img{max-width:100%;max-height:100%;}
+
+@font-face {
+    font-family: 'CoolVetica';
+    src: url(fonts/coolvetica_rg.ttf);
+	font-weight:bold;
+}
+@font-face {
+    font-family: 'Adam';
+    src: url(fonts/Adam.otf);
+	font-weight:900;
+}
+@media (max-width: 767px) 
+{ 
+	#logo{text-align:center;}
+	.carousel-inner .item .carousel-caption{bottom:-10px !important;}
+	.carousel-inner .item .carousel-caption .title{font-size:20px;}
+	.carousel-inner .item .carousel-caption .text,
+	.carousel-inner .item .carousel-caption .btn-readmore{display:none;}
+	#navigation{display:none;margin:0;}
+	#navigation ul{float:none !important;background:#fff;}
+	#navigation li{width:100%;float:none !important;text-align:left;}
+	#navigation li a{text-align:left !important;}
+	#footer .widget{text-align:left;}
+	.btn-send-message-wrap{text-align:center;}
+}
+@media (min-width: 768px) and (max-width: 991px) 
+{ 
+	#navigation{display:block;}
+	.carousel-inner .item .carousel-caption{bottom:-20px !important;}
+	.carousel-inner .item .carousel-caption .title{font-size:20px;}
+	.carousel-inner .item .carousel-caption .text{font-size:16px;}
+	.carousel-inner .item .carousel-caption .btn-readmore{display:none;}
+}
+@media (min-width: 992px) and (max-width:  1199px) 
+{ 
+	#navigation{display:block;}
+}
+@media (min-width: 1200px) 
+{
+	#navigation{display:block;}
+}

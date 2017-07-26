@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Insert Picasa Photo</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/jquery.picasagallery.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+
+<body class="mce-panel">
+<div class="container">
+<form class="form-horizontal" role="form">
+
+<div class="row">
+  <div class="col-xs-7">
+  <label for="inpUsername" class="control-label" >Username or id:</label>
+    <div class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+      <input id="inpUsername" placeholder="username or id" class="form-control" type="text" value="" />
+      <span class="input-group-btn">
+        <button class="btn btn-default picasa_init" type="button">Get images!</button>
+      </span>
+    </div>
+  </div>
+  <div class="col-xs-3 pull-right return_btn">
+  <label for="inpUsername" class="control-label" >&nbsp;</label>
+        <button class="btn btn-default picasa_init" type="button" ><span class="glyphicon glyphicon-arrow-left"></span> Return to albums</button>
+  </div>
+</div>
+
+<div class="space10"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div runat="server" id="divScroll">
+        <div class="picasagallery"></div>
+    </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class=" col-xs-5">
+        <label for="inpTitle" class="control-label">Title:</label>
+        <input id="inpTitle" class="form-control" type="text"/>
+        <input id="inpFilename" value="" type="hidden"/>
+        <input id="inpUrl" value="" type="hidden"/>
+    </div>
+    <div class="col-xs-3">
+        <label for="selCrop" class="control-label">Crop:</label>
+        <select id="selCrop" class="form-control">
+            <option value="0">Not Cropped</option>
+            <option value="1">Cropped</option>
+        </select>
+    </div>
+    <div class="col-xs-2">
+        <label for="inpWidth" class="control-label">Width:</label>
+        <input id="inpWidth" class="form-control" type="text" value="250"/>
+    </div>
+    <div class="col-xs-2">
+        <label for="selAlign" class="control-label">Align:</label>
+        <select id="selAlign" class="form-control">
+            <option value=""></option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+        </select>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-6 lightbox"><br/>
+        <label class="checkbox-inline" class="control-label" for="chkOpenLarger">
+            <input id="chkOpenLarger" type="checkbox" /> Open larger Image in a lightbox
+        </label>
+    </div>
+    <div class="col-xs-12"><br/>
+            <input type="button" name="btnInsert" id="btnInsert" value="Insert" onclick="I_Insert();" class="btn btn-default pull-right insert">
+            <input type="button" name="btnInsert" id="btnInsert" value="Insert and close" onclick="I_Insert();I_Close();" class="btn btn-primary pull-right insert">
+    </div>
+</div>
+
+</form>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+    if (typeof jQuery === 'undefined')
+{
+  document.write(unescape("%3Cscript src='js/jquery.js' type='text/javascript'%3E%3C/script%3E"));
+}
+</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.picasagallery.js" type="text/javascript"></script>
+<script src="js/picasa.js" type="text/javascript"></script>
+
+</body>
+</html>

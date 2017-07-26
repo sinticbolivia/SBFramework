@@ -1,0 +1,52 @@
+/*
+Template Name: Kokett Jeans
+Template URL: http://sinticbolivia.net
+Template Author: Sintic Bolivia
+*/
+.img-resp{max-width:100%;max-height:100%;}
+html,body{padding:0;margin:0;font-family: 'CoolVetica';font-size:17px;}
+a:hover,a:link{text-decoration:none;}
+#header{position:fixed;z-index:310;top:0;right:0;left:0;clear:both;height:90px;background:#000000;}
+#header #header-bg{position:absolute;top:0;bottom:0;left:0;width:50%;background:transparent;
+	border-left: 0px solid transparent; border-right: 80px solid transparent; border-bottom: 90px solid #db0077;}
+#header #social-icons{text-align:center;padding:40px 0 0 0;}
+#header #social-icons .social-icon{width:30px;height:30px;display:inline-block;margin:0 10px 0 0;}
+#header #social-icons .social-icon img{max-width:100%;max-height:100%;transition:transform 0.5s;}
+.social-icon:hover img{transform: scale(1.5) rotate(360deg) /*translate(50px)*/;}
+#header #navigation{position:fixed;top:110px;left:0;z-index:200;width:190px;}
+#header #navigation ul{list-style:none;padding:0;margin:0;}
+#header #navigation ul li{}
+#header #navigation ul li a{font-family: 'LemonMilk';font-size:17px;padding:29px 30px 0 75px;color:#fff;display:block;width:100%;height:90px;}
+#header #navigation ul li:nth-child(odd) a{background:url(images/menu-item-bg-01.png) no-repeat left center;background-size:90%;}
+#header #navigation ul li:nth-child(even) a{background:url(images/menu-item-bg-02.png) no-repeat left center;background-size:90%;}
+#logo-p-jota{height:90px;text-align:right;}
+#logo-p-jota img{max-width:100%;max-height:100%;}
+#content{margin:90px 0 0 0;}
+#front-content{}
+#front-content .section{margin:0 0 20px 0;}
+#front-sidebar{position:relative;}
+#front-sidebar img{max-width:100%;max-height:100%;}
+#front-sidebar #front-image{}
+#footer{position:relative;z-index:300;min-height:350px;}
+#footer img.bg{position:absolute;top:0;right:0;bottom:0;left:0;display:block;width:100%;}
+.btn-pink,.btn-pink:hover{color:#fff;background:#db0077;}
+/*******************/
+/***** FONTS *******/
+/*******************/
+@font-face {
+    font-family: 'LemonMilk';
+    src: url(fonts/LemonMilk.otf);
+}
+@font-face {
+    font-family: 'CoolVetica';
+    src: url(fonts/coolvetica_rg.ttf);
+}
+@media (max-width: 767px) 
+{ 
+	#header #social-icons{padding:10px 0 0 0;}
+	#header #social-icons .social-icon{margin:0 3px 5px 0;}
+	#navigation{display:none;margin:0;}
+	#navigation ul{float:none !important;background:#2d3e50;}
+	#navigation li{width:100%;float:none !important;text-align:left;}
+	#navigation li a{text-align:left !important;color:#fff !important;}
+}

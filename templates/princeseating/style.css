@@ -1,0 +1,123 @@
+/**
+Template Name: Princeseating
+Template URL: http://sinticbolivia.net
+Template Author: Sintic Bolivia
+*/
+*{font-family: Helvetica,Verdana,Arial;font-size:14px;}
+body{color:#565555;}
+a:hover{text-decoration:none;}
+.menu{list-style:none;padding:0;margin:0;}
+.menu li a{display:block;}
+.menu li .submenu{list-style:none;}
+.menu.horizontal{}
+.menu.horizontal li{float:left;position:relative;}
+.menu.horizontal li a{text-align:center;}
+.menu.horizontal li .submenu{margin:0;padding:0;display:none; position:absolute;}
+.menu.vertical li{}
+.menu.vertical li .submenu{margin:0 0 10px 15px;}
+#top-navigation .menu{float:right;}
+#top-navigation .menu li a{padding:4px 6px;}
+#navigation{position:relative;clear:both;background: #3c94cb linear-gradient(#3c94cb,#116390);padding:0 60px;text-align:center;}
+#navigation:before{content:'';position:absolute;top:0;left:0;border-left:50px solid #fff;border-bottom:35px solid transparent;}
+#navigation:after{content:'';position:absolute;top:0;right:0;border-right:50px solid #fff;border-bottom:35px solid transparent;}
+#navigation .menu{display:inline-block;margin:0 auto;height:35px;width:auto;}
+#navigation .menu li a{padding:7px 8px;color:#fff;font-size:18px;}
+#navigation .menu li a span{font-size:inherit;}
+#navigation .menu > li > .submenu{background:#4f4f4f;opacity:0.9;min-width:200px;z-index:1000;}
+#navigation .menu > li > .submenu li{float:left;width:20%;}
+#navigation .menu > li > .submenu li .submenu{display:block;float:left;width:100px;}
+.products-menu{width:700%;min-height: 200px;overflow:hidden;}
+.products-menu > li > a{color:#4099d1 !important;font-size:15px !important;font-weight:bold;text-transform:uppercase;}
+.products-menu > li .submenu{width:100% !important;position:relative !important;}
+.products-menu > li .submenu a{color:#fff !important;font-size:12px !important;}
+.products-menu > li .submenu li{width:100% !important;float:none;text-align:left;}
+.products-menu > li .submenu li a{text-align:left !important;}
+#content,#frontpage{min-height:600px;}
+#footer{clear:both;background: #3c94cb linear-gradient(#3c94cb,#116390);color:#fff;}
+#footer .wrap{padding:10px;}
+#footer a, #footer a:hover{color:#fff;}
+#footer .widget .title{color:#fff;}
+/********************/
+/***** Frontpage ****/
+/********************/
+.front-category{}
+.front-category .image{margin:0 0 8px 0;text-align:center;}
+.front-category .title{margin:0 0 8px 0;}
+.front-category .title a{display:block;font-size:20px;color:#565555;text-transform:uppercase;text-align:center;}
+#front-slider{margin:30px 0 50px 0;}
+/*
+#front-slider .slide{text-align:center;}
+#front-slider .slide a{display:block;}
+#front-slider .slide a img{max-width:100%;}
+*/
+#home_carousel{width:85%;margin:0 auto;}
+/**************************/
+/****** Product listing ***/
+/**************************/
+#product_list{}
+#product_list .product{height:300px;position:relative;}
+#product_list .product .image{height:225px;text-align:center;}
+#product_list .product .image a{display:block;position:relative;width:100%;height:100%;}
+#product_list .product .image a img{max-width:100%;max-height:100%;}
+#product_list .product .name,
+#product_list .product .code{text-align:center;}
+#product_list .product .options{position:absolute;top:0;right:0;left:0;background:transparent;display:none;}
+#product_list .product:hover .options{display:block;padding:10px;}
+#product_list .product:hover .options .option{display:block;margin:0 0 8px 0;}
+/************************/
+/** widget styles	   **/
+/************************/
+.widget{width:100%;}
+.widget .title{font-size:20px;color:#0f608d;margin:0;padding:5px 7px;text-transform:uppercase;}
+.widget .body{padding:8px;}
+/************************/
+/** product categories **/
+/************************/
+.product-categories .category a{color:inherit;padding:5px 0;}
+.product-categories .category ul{/*display:none;*/}
+/********************/
+/** product styles **/
+/********************/
+#the-image{}
+#the-image a{display:block;}
+#the-image a img{max-width:100%;}
+#thumbnails{overflow:hidden;clear:both;list-style:none;padding:0;margin:0 8px 15px 0;}
+#thumbnails li{float:left;width:80px;height:80px;}
+#thumbnails li a{display:block;}
+#thumbnails li a img{max-width:100%;max-height:100%;}
+.dimensions{list-style:none;margin:0;padding:0;}
+.dimensions li{float:left;margin:0 15px 10px 0;min-width:75px;}
+.dimensions li .icon, .dimensions li .text{float:left;display:block;}
+.dimensions li .icon{display:block;width:25px;height:29px;}
+.dimensions li .text{padding-top:15px;}
+.dimensions .dimension-height .icon{background: url(images/dimesion-01.gif) no-repeat center center;}
+.dimensions .dimension-width .icon{background: url(images/dimesion-02.gif) no-repeat center center;}
+.dimensions .dimension-depth .icon{background: url(images/dimesion-03.gif) no-repeat center center;}
+.dimensions .dimension-seat-height .icon{background: url(images/dimesion-04.gif) no-repeat center center;}
+.dimensions .dimension-weight .icon{background: url(images/pr-weight-icon.gif) no-repeat center center;}
+.btn-specs, .btn-blue{background: #3c94cb linear-gradient(#3c94cb,#116390);color:#fff;}
+.btn-specs:hover, .btn-blue:hover{color:#fff;}
+#product-container #product-categories{}
+#product-container #product-categories .list{list-style:none;padding:0;margin:0;}
+#product-container #product-categories .list li{float:left;margin:0 8px 0 8px;}
+#product-container #product-categories .list li a{font-size:12px;}
+/*************************/
+/** related products *****/
+/*************************/
+#related-products{overflow:hidden}
+#related-products .r-product{float:left;width:25%;margin:0 10px 10px 0;}
+#related-products .r-product a{display:block;}
+#related-products .r-product a .image{display:block;width:100%;height:70%;}
+#related-products .r-product a .image img{max-width:100%;max-height:100%;}
+#related-products .r-product a .info{display:block;background:#ececec;color:#565555;}
+#related-products .r-product a .info .name{display:block;text-align:center;margin:0 0 5px 0;}
+#related-products .r-product a .info .code{display:block;text-align:center;}
+
+#product-fabrics{list-style:none;padding:0;margin:0;overflow:hidden;} 
+#product-fabrics .fabric{float:left;margin:0 10px 10px 0;text-align:center;width:100px;height:auto;}
+#product-fabrics .fabric .image{width:100%;height:100px;}
+#product-fabrics .fabric .image img{max-width:100%;}
+
+.tab-pane{padding:10px;}
+#reps-data{margin:20px 0;}
+.rep-row{overflow:hidden;padding:10px;margin:0 0 10px 0;border-bottom:1px solid #3c94cb;}

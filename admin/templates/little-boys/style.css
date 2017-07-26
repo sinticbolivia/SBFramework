@@ -1,0 +1,140 @@
+@CHARSET "UTF-8";
+/**
+Template Name: Little Boys
+Template Author: Sintic Bolivia
+Template Url: http://sinticbolivia.net
+**/
+.clear{clear:both;width:100%;}
+img{max-width:100%;max-height:100%;border:0;}
+a{text-decoration:none;color:/*rgba(255,255,255,.9)*/#607d8b;}
+a:hover{text-decoration:none;color:/*rgba(255,255,255,.9)*/#607d8b;}
+ul{list-style:none;margin:0;padding:0;}
+.right{float:right;}
+.left{float:left;}
+html{/*position:absolute;overflow:hidden;*/width:100%;height:100%;}
+body{margin:0;padding:0;width:100%;height:100%;font-family: Arial, Verdana;font-size:14px;background:#e8e5df;/*overflow:auto;*/}
+#container{width:100%;font-family:inherit;font-size:inherit;}
+.container{width:80%;margin:0 auto;}
+#menu{background:#263238;height:100%;min-height:100%;/*position:absolute;top:0;bottom:0;left:0;*/}
+#menu #user-session{}
+#menu #user-session img.thumbnail{margin:0 auto;border-radius: 27px;width:90px;}
+#menu #user-session #hello-user, #menu #user-session a{color:#bcbcbc;}
+#menu #user-session a:hover{color:#ececec;}
+#menu #user-session #hello-user{font-size:18px;}
+#menu nav{background:#263238;margin:0 -15px;position:relative;}
+#menu nav ul{list-style:none;margin:0;padding:0;background:inherit;position:relative;}
+#menu nav ul li{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.1);}
+#menu nav ul li a{display:block;padding:8px;text-align:left;color:rgba(255,255,255,.9);font-weight: normal;}
+#menu nav ul li a:hover{/*color:#e64a19;*/background:#566f7c;}
+#menu nav ul li ul{display:none;position:absolute;min-width:200px;z-index:99999999;top:0;left:100%;background:inherit;}
+#menu nav ul li ul li{width:100%;clear:both;text-align:left;}
+#menu nav ul li ul li a{text-align:left;padding:5px 8px !important;}
+#menu nav ul li ul li a .glyphicon{margin-right:5px;}
+#menu nav ul li ul li ul{left:100%;top:0;}
+#content{padding:10px;position:relative;}
+#content > .wrap{background:#fff;float:left;width:100%;padding:8px;position:relative;}
+#page-title{margin:0 0 8px 0;}
+.view-buttons{float:left;width:100%;overflow:hidden;list-style:none;margin:0 0 15px 0;}
+.view-buttons li{float:left;margin:0 10px 0 0;}
+.view-buttons li a{}
+.view-buttons li.current a{text-decoration: underline;}
+#article {}
+#article #the-banner{position:relative;}
+#article #the-banner .remove{position:absolute;top:0;right:0;background:#fff;}
+#sidebar{/*border:1px solid #ddd;*/}
+#sidebar .widget{border:1px solid #ddd; border-radius:5px;margin:0 0 10px 0;}
+#sidebar .widget .title{margin:0;padding:8px;font-size:16px;background-color: #e6e6e6;
+    border-color: #adadad;
+    color: #333;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125) inset;
+}
+#sidebar .widget .body{padding:8px;}
+#dashboard{}
+#dashboard .widget{border:1px solid #ddd;margin:0 0 8px 0;} 
+#dashboard .widget .widget-header{font-size:16px;background-color: #e6e6e6;color:#333;}
+#dashboard .widget .widget-header h3{margin:0;padding:4px 6px;}
+#dashboard .widget .widget-content{padding:8px;}
+#dashboard #big_stats{}
+#dashboard #big_stats .stat{float:left;width:25%;margin: 5px;padding:5px;}
+#dashboard #big_stats .stat .value{
+	color: #545454;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1em;
+    display:block;clear:both;text-align:center;
+}
+#dashboard #big_stats .stat .text{text-align:center;display:block;clear:both;height:70px;display:block;vertical-align: middle;}
+.tab-content{border-right:1px solid #ddd;border-bottom:1px solid #ddd;border-left:1px solid #ddd;}
+.tab-content > .tab-pane{padding:10px;}
+/** buttons styles **/
+.btn-secondary 
+{
+    color: #fff !important;
+    background-color: #607d8b;
+    border-color: #607d8b;
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+}
+.btn-secondary:hover,.btn-secondary:focus{color: #fff;background-color:#4b626d;border-color:#475c67}
+/** table styles **/
+.cool-table{width:100%;background:#fff;}
+/*.cool-table .heading, .table thead, .table thead tr th{background:#607d8b;color:rgba(255,255,255,.9) !important;}*/
+.cool-table .trow{overflow:hidden;}
+.cool-table .trow .cell{float:left;padding:4px 6px;overflow:hidden;}
+.cool-table .heading .trow .cell, 
+.table thead tr th
+{background:#607d8b;color:rgba(255,255,255,.9);font-weight: normal;text-align:center;}
+.cool-table .heading .trow .cell a, 
+.table thead tr th a
+{color:rgba(255,255,255,.9);}
+.cool-table .body, .table tbody{overflow:auto;background:#fff;}
+.table tr:nth-child(even) {background: #ececec}
+.table tr:nth-child(odd) {background: #FFF}
+/** totals table **/
+.totals-table{background:#fff;border-collapse: collapse;border-radius:15px;}
+.totals-table tr th,.totals-table tr td{text-transform: uppercase;border:1px solid #ececec;padding:5px;width:50%;}
+.totals-table #row-total *{font-weight:bold;color:#0071bc;font-size:18px;}
+/** tabs **/
+.nav-tabs li a{color:#555;}
+/*.wrap a,.wrap a:hover{color:#607d8b;}*/
+/** detepicker styles **/
+input.datepicker{background:url(images/icons/50x50_gris/icon-17.png) #fff no-repeat 98% center;background-size:23px;}
+/** panel styles **/
+.panel{border:0;}
+.panel .panel-heading{/*background:#607d8b;color:rgba(255,255,255,.9);font-size:17px;*/}
+
+#mobile-menu{display:none;background:#263238;z-index:200;}
+#mobile-menu ul{background:#263238;}
+#mobile-menu ul li{float:left;position:relative;}
+#mobile-menu ul li a{color:#fff;padding:8px 9px;display:block;}
+#mobile-menu ul li a:hover{}
+#mobile-menu .mobile-menu-item{}
+#mobile-menu ul li a#menu-home{font-size:20px;}
+#mobile-menu ul li ul{display:none;position:absolute;top:100%;width:150px;}
+#mobile-menu ul li ul li{float:none;width:100%;}
+#mobile-menu-right ul{right:0;}
+@media (max-width:768px)
+{
+	#mobile-menu{display:block;position:fixed;left:0;top:0;right:0;height:45px;}
+	#menu{display:none;position:absolute;top:45px;z-index:100;}
+	#menu #user-session{display:none;}
+	#menu nav{}
+	#menu nav > ul > li{}
+	#menu nav ul .sb-submenu{display:none;}
+	#menu nav ul li ul li{}
+	#content{margin-top:40px;}
+} 
+@media all {
+	/*.page-break	{ display: none; }*/	
+}
+
+@media print 
+{
+	#container,#content{position:relative !important;float:none !important;}
+	.wrap{padding:0;float:none !important;margin:0;font-size:11px;}
+	.page-break	{position:relative !important; display: block; page-break-after: always;page-break-inside: avoid; -webkit-region-break-inside: avoid;}
+	table{position:relative !important;clear:both !important;}
+	table thead th,table tbody td{color:#000 !important;border:1px solid #000 !important;padding:3px !important;}
+	
+}

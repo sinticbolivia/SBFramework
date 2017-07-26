@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Insert Flickr Photo</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="mce-panel">
+
+<div class="container">
+<form class="form-horizontal" role="form">
+<input id="hidPage" type="hidden" value="1" />
+<div class="row">
+
+<div class="row">
+  <div class="col-xs-7">
+  <label for="inpKeywords" class="control-label" >Keywords:</label>
+    <div class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+      <input id="inpKeywords" class="form-control" type="text"/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="document.getElementById('inpUsername').value='';search(true)">Search!</button>
+      </span>
+    </div>
+  </div>
+  <div class="col-xs-5">
+  <label for="inpUsername" class="control-label" >or Flickr User Name:</label>
+    <div class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+      <input id="inpUsername" class="form-control" type="text"/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="document.getElementById('inpKeywords').value='';search(true)">Get!</button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="space10"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div runat="server" id="divScroll">
+        <div id="images"></div>
+        <div class="loadMore">
+            <a href="javascript:loadmore()">Load More</a>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-5">
+        <label for="inpImgURL" class="control-label">Image URL:</label>
+        <input id="inpImgURL" class="form-control" type="text"/>
+    </div>
+    <div class=" col-xs-5">
+        <label for="inpTitle" class="control-label">Title:</label>
+        <input id="inpTitle" class="form-control" type="text"/>
+    </div>
+    <div class="col-xs-2">
+        <label for="selAlign">Align:</label>
+        <select id="selAlign" class="form-control">
+            <option value=""></option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-16">
+        <label class="control-label" for="rdoSize">Size:</label>
+        <label class="checkbox-inline" for="rdoSize1">
+            <input id="rdoSize1" name="rdoSize" type="radio" value="s" group="size" onclick="changeSize()" /> Small Square (75)
+        </label>
+        <label class="checkbox-inline" for="rdoSize2">
+            <input id="rdoSize2" name="rdoSize" type="radio" value="t" group="size" onclick="changeSize()" /> Thumbnail (100)
+        </label>
+        <label class="checkbox-inline" for="rdoSize3">
+            <input id="rdoSize3" name="rdoSize" type="radio" value="m" group="size" onclick="changeSize()" checked="checked" /> Small (240)
+        </label>
+        <label class="checkbox-inline" for="rdoSize4">
+            <input id="rdoSize4" name="rdoSize" type="radio" value="z" group="size" onclick="changeSize()" /> Medium (640)
+        </label>
+        <label class="checkbox-inline" for="rdoSize5">
+            <input id="rdoSize5" name="rdoSize" type="radio" value="b" group="size" onclick="changeSize()" /> Large (1024)
+        </label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 lightbox"><br/>
+        <label class="checkbox-inline" class="control-label" for="chkOpenLarger">
+            <input id="chkOpenLarger" type="checkbox" /> Open larger Image in a lightbox
+        </label>
+    </div>
+    <div class="col-xs-12"><br/>
+            <input type="button" name="btnInsert" id="btnInsert" value="Insert" onclick="I_Insert();" class="btn btn-default pull-right insert">
+            <input type="button" name="btnInsert" id="btnInsert" value="Insert and close" onclick="I_Insert();I_Close();" class="btn btn-primary pull-right insert">
+    </div>
+</div>
+
+<div class="space10"></div>
+
+<div class="row">
+    <div class="col-xs-8 disclaimer">
+        <em>This product uses the Flickr API but is not endorsed or certified by <a href="http://www.flickr.com" title="Flickr" target="_blank">Flickr</a>.
+    </div>
+</div>
+</form>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+    if (typeof jQuery === 'undefined')
+{
+  document.write(unescape("%3Cscript src='js/jquery.js' type='text/javascript'%3E%3C/script%3E"));
+}
+</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/flickr.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+body{background:url(../images/login_bg.jpg);background-size:100%;font-family:Arial;font-size:12px;}
+#login-container{width:400px;padding:20px;margin: 20px auto 0 auto;}
+#form-login{padding:25px;background:#fff;border-radius:6px;position:relative;/*box-shadow:10px 10px 5px #ececec*/}
+.form-group{margin:0 0 8px 0;}
+input[type=text], input[type=password]
+{background:#f2f2f2;color:#808080;padding:3px 3px 3px 35px;border:1px solid #b6b6b6;border-radius:5px;display:block;width:98%;line-height:25px;text-transform: uppercase;margin:0 0 20px 0;}
+input[name=username]{background-image:url(../images/icons/50x50_gris/icon-09.png);background-repeat: no-repeat;background-position: 5px center;background-size:25px;}
+input[name=pwd]{background-image:url(../images/icons/50x50_gris/icon-14.png);background-repeat: no-repeat;background-position: 5px center;background-size:25px;}
+#btn-login{background:#c1272d;border:0;text-transform: uppercase;color:#fff;font-weight:bold;padding:6px 4px;border-radius:6px;display:block;width:100%;text-align:center;}
+#btn-register{background:#00958b url('../images/icons/50x50_blancos/icon-03.png') center center no-repeat;background-size:30px;color:#fff;border-radius:0 6px 6px 0;position:absolute;right:-50px;top:17px;width:50px;height:50px;box-shadow:5px 5px 10px #555;}

@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+/**
+Template Name: Univida
+Template Author: Sintic Bolivia
+Template Url: http://sinticbolivia.net
+**/
+.slide-service
+{
+	display:block;
+	background: #124c8c;
+    color: #fff;
+    padding: 8px;
+    width:100%;
+    height: 99px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin:0 0 8px 0px;
+    border-bottom:10px solid #f7981a;
+}
+.slide-service:hover{color:#f7981a;}
+.slide-service .banner{display:block;float:left;width:40%;height:100%;}
+.slide-service .title{display:block;float:right;width:60%;font-size:19px;}
+.services-why{}
+.services-why .why{margin:8px 0;padding:8px;background:#f7981a;color:#fff;height:110px;border-left:10px solid #124c8c;border-radius:8px;}
+.faqs .panel-collapse{padding:10px;}
+.modal-dialog{background:#fff;border-radius:8px;}
+label.required:before{content:'*';color:red;}
+.nav.nav-tabs li a{padding-top:6px;padding-bottom:6px;font-size:11px;}
+.tab-content > .tab-pane{padding:8px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;border-left: 1px solid #ddd;}
+form {font-size:12px;}
+.form-group-sm .form-control{height:25px;}

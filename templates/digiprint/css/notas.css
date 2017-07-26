@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+.contenedor-nota{font-size:11px;font-family:Helvetica,Verdana,Arial;background:#f2f2f2;}
+.nota{background:#fff;border:1px solid #bcbcbc;padding:8px;}
+table{width:100%;border-collapse: collapse;}
+.text-right{text-align:right;}
+.text-center{text-align:center;}
+.text-left{text-align:left;}
+table th, table td{padding:2px;}
+table th{background:#808080;color:#fff;}
+.totals{background:#f2f2f2;}
+.order-items tbody td{border-bottom:1px solid #808080;}
+.btn{display:inline-block;padding:4px 6px;text-align:center;}
+.btn-red{color:#fff;background:#c1272d;text-decoration: none;width:auto;border-radius:5px;}
+.text-red{color:#c1272d;}

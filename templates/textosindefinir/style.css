@@ -1,0 +1,69 @@
+/**
+Template Name: Texto Sin Definir
+Template URL: http://sinticbolivia.net
+Template Author: Sintic Bolivia
+*/
+*{font-family: Helvetica,Verdana,Arial;font-size:14px;}
+html,body{width:100%;height:100%;position:relative;top:0;bottom:0;color:#54627e;background:#f4f4f4;}
+body.tpl-login{background:#4d88fd;}
+a,a:hover, a:focus{text-decoration:none;}
+#container{height:100%;}
+#header{background:#4d88fd;padding:10px;box-shadow:0 4px 10px #333}
+#logo{color:#fff;font-size:22px;font-weight:normal;}
+#navigation{list-style:none;margin:0;padding:0;float:right;}
+#navigation li{float:left;}
+#navigation li a{width:90px;display:block;padding:4px 10px;margin:0 5px;background:#f8c755;color:#fff;border-radius:3px;text-align:center;font-weight:normal;}
+#row-content{height:100%;}
+#sidebar{background:#242e40;color:#fff;height:100%;}
+#sidebar a{color:inherit;}
+#user-info
+{
+	margin:10px 0;
+}
+#user-info img
+{
+	padding:2px;
+	border-radius:4px;
+	border:1px solid #bcbcbc;
+	background:#bcbcbc;
+	max-width:100%;
+	max-height: 100%;
+}
+#user-menu ul{list-style:none;margin:0 0 10px 0;padding:0;}
+#user-menu ul li{border-bottom:1px solid rgb(124, 130, 142);}
+#user-menu ul li a{display:block;padding:10px 4px;}
+#user-menu ul li a .glyphicon{background:#4d88fd;padding:8px;border-radius:15px;}
+#new-script-container{color:#fff;width:70%;height:auto;border-radius:8px;margin:30px auto;background:#172332 url(images/bg_lap.png) no-repeat center center;background-size:100% 100%;}
+#new-script-container .wrap{padding:10px;}
+#new-script-container .title{text-align:center;color:#fff;margin:0 0 10px 0;}
+#new-script-container .body{position:relative;}
+#new-script-container input{background:#efefef;}
+#scripts .template{display:block;cursor:pointer;border:1px solid #4386fe;width:83px;height:80px;color:#fff;border-radius:6px;font-size:32px;float:left;}
+#scripts .template .number{display:table-cell;text-align:center;vertical-align:middle;width:83px;height:80px;font-size:32px;}
+#scripts .template.selected, #scripts .template:hover{background:rgb(94,103,103);}
+#script-info{border-radius:7px;width:300px;height:auto;border:1px solid #4386fe;padding:10px;position:absolute;top:-50px;right:-250px;z-index:100;display:none;background:rgba(31,46,61,0.8);}
+#content{}
+#content #content-wrap{padding:10px;}
+/*********************/
+/**** LOGIN STYLES ***/
+/*********************/
+#login-wrap{background:#fff;padding:10px;border-radius:6px;margin:20px 0;}
+#login-wrap h1{text-align:center;margin:0 0 10px 0;font-size:25px;}
+.btn-dark-blue{background:#333f56;color:#fff;}
+.btn-dark-blue:hover{color:#fff;}
+
+
+/**********************/
+/*** BUILDER STYLES ***/
+/**********************/
+#step-numeration{display:inline-block;border-radius:6px;background:#4d88fd;color:#fff;padding:4px 6px;text-align:center;}
+#step-title{text-transform:uppercase;padding:4px 8px;text-align:center;font-weight:bold;}
+#step-container{}
+#step-container #paragraphs{background:#fff;padding:8px;height:300px;overflow:auto;margin:0 0 10px 0;}
+#step-container .paragraph{margin:0 0 0 0;padding:8px;cursor:pointer;}
+#step-container .paragraph:hover{background:#4d88fd;color:#fff;}
+#script-paragraphs{background:#fff;height:500px;overflow:auto;margin:0 0 10px 0;}
+#script-paragraphs .block{margin:5px;padding:8px;border:1px solid red;position:relative;}
+#script-paragraphs .block .btn-remove{position:absolute;top:0;right:0;}
+#script-paragraphs .block textarea{border:0;resize:none;}
+#placeholders{background:#fff;padding:8px;}

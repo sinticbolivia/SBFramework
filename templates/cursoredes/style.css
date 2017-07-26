@@ -1,0 +1,77 @@
+/*
+Template name: Curso Redes
+Template Description: Plataforma de E-Learning con pagos electronicos
+Template Version: 1.0.0
+Template Author: Sintic Bolivia
+Template Url: http://sinticbolivia.net
+*/
+a, a:hover,a:link,a:visited{color:#406474;text-decoration:none;}
+body{font-family:Helvetica,Verdana,Arial;font-size:15px;}
+#header{clear:both;position:relative;z-index:101;}
+#header #header-social{background:#406474;color:#fff;border-bottom:5px solid #00aec6;}
+#header #header-logo-menu-container{background:#fff;height:75px;border-bottom:5px solid #00aec6;}
+#header #header-logo-menu-container.affix{z-index:999;top:0;width:100%;}
+#header #header-logo-menu-container #logo{height:70px;}
+#header #header-logo-menu-container #logo a{display:block;height:100%;} 
+#header #header-logo-menu-container #logo a img{max-width:100%;max-height:100%;}
+#header-social .social-icons{text-align:center;padding:5px 0;float:right;}
+#header-social .social-icons a{display:inline-block;width:25px;height:25px;text-align:center;margin:0 4px 0 0;}
+#header-social .social-icons a:hover img{transform:scale(0.8);}
+#header-social .social-icons a img{transition:transform 0.3s ease-in-out;max-width:100%;max-height:100%;}
+#navigation{}
+#navigation .menu{list-style:none;margin:0;padding:0;float:right;}
+#navigation .menu li{float:left;margin:0 5px 0 0;}
+#navigation .menu li:last-child{margin-right:0;}
+#navigation .menu li a{font-family:'LemonMilk';font-size:15px;display:block;padding:35px 7px 15px 7px;text-transform:uppercase;}
+#navigation .menu li a:hover, 
+#navigation .menu li.active a{background:#406474;color:#fff;}
+#front-slides{}
+#front-slides .slide{height:100%;overflow:hidden;position:relative;}
+#front-slides .slide img{max-width:100%;}
+#front-slides .slide .bubble-desc{width:30%;position:absolute;z-index:10;left:50px;top:53%;padding:10px;border-radius:15px;color:#fff;background:rgba(65,100,116,0.7);}
+.front-section{}
+.front-section > .title{text-align:center;color:#406474;font-size:30px;font-family:'LemonMilk';}
+.front-section > .title span{text-decoration:underline;}
+#latest-courses{}
+#latest-courses .body{padding:15px;background:#d9e0e3;}
+#latest-courses .course, #courses-listing .course
+{background:#fff;transition:transform 0.3s ease-in-out;padding:8px;border:1px solid #d9e0e3;}
+#latest-courses .course:hover, #courses-listing .course:hover{transform: scale(1.15);}
+#latest-courses .course .image{}
+#latest-courses .course .image a, #courses-listing .course .image a{display:block;} 
+#latest-courses .course .image a img, #courses-listing .course .image a img{max-width:100%;}
+#latest-courses .course .course-type, #courses-listing .course .course-type{color:#ff7d00;}
+#latest-courses .btn-more-container{background:#fff;text-align:center;margin:10px -15px -15px -15px;padding:10px;}
+#latest-courses .btn-more-container .btn{text-transform:uppercase;background:#406474;color:#fff;border-radius:15px;}
+#front-video-text{font-size:50px;background:#2881ba;width:80%;margin:20% auto 0 auto;color:#fff;padding:10px;}
+.video-container{padding:10px;}
+/********************/
+/******** PAGE ******/
+/********************/
+#page-image{position:relative;overflow:hidden;margin:0 -15px;}
+#page-image figure{text-align:center;}
+#page-image figure img{max-width:100%;}
+/********************/
+/******** CONTACT ***/
+/********************/
+.page-contacto #content-wrap{margin:0 -15px;}
+#contact-content{position:relative;}
+#contact-content #form-wrap{background:rgba(65,100,116,0.6);color:#fff;padding:10px;width:30%;position:absolute;z-index:10;top:0;right:0;bottom:0;}
+
+#course-container{}
+#course-container .course-image{}
+#course-container .course-image img{max-width:100%;}
+#footer{clear:both;background:#406474 /*url('images/banner-pie-de-pagina.jpg') no-repeat left top*/;color:#fff;}
+#footer #copyright{}
+#footer #copyright #company{position:relative;}
+#footer #copyright #company span{transition:font-size 0.4s ease-in-out;}
+#footer #copyright #company:hover span{font-size:25px;padding:5px 5px 20px 5px;/*position:absolute;top:-40px;left:-40px;width:150px;*/}
+@font-face{font-family:'LemonMilk';src:url('fonts/LemonMilk.otf')}
+@media (max-width: 767px) 
+{
+	#btn-mobile-menu{margin: 20px 0 0 0;
+display: block;
+border: 1px solid #000;
+text-align: center;}
+	#logo{padding:0;}
+}

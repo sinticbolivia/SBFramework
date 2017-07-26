@@ -1,0 +1,23 @@
+.mce-i-google {
+    background: url('../img/google.png');
+    height: 16px;
+    width: 16px;
+}
+
+.mce-i-drive {
+    background: url('../img/drive.png');
+    height: 16px;
+    width: 16px;
+}
+
+.mce-i-youtube {
+    background: url('../img/youtube.png');
+    height: 16px;
+    width: 16px;
+}
+
+.mce-i-youtube_search {
+    background: url('../img/youtube_search.png');
+    height: 16px;
+    width: 16px;
+}
