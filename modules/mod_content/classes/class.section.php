@@ -63,9 +63,10 @@ class LT_Section extends SB_ORMObject
 	{
 		sb_include_module_helper('content');
 		$args = array(
-				'section_id' => $this->section_id,
-				'order_by'	=> 'show_order',
-				'order'		=> 'asc'
+				'section_id' 	=> $this->section_id,
+				'type'			=> $this->for_object,
+				'order_by'		=> 'show_order',
+				'order'			=> 'asc'
 		);
 		$args = SB_Module::do_action('section_query_contents_args', $args);
 		$data = LT_HelperContent::GetArticles($args);
