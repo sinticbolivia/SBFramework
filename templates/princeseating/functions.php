@@ -8,7 +8,7 @@ if( !is_dir(LITERATURE_UPLOADS_DIR) )
 	
 class LT_ThemePrinceseating
 {
-	public function __construct()
+	protected function __construct()
 	{
 		$this->AddActions();
 	}
@@ -93,6 +93,15 @@ class LT_ThemePrinceseating
 							'featured_image'	=> true,
 							'use_dates'			=> false,
 							'calculated_dates'	=> false
+					),
+					'section'	=> array(
+						'for_object'	=> 'finishes',
+						'labels'		=> array(
+								'menu_label' 	=> '<span class="glyphicon glyphicon-folder-open"></span> Groups', 
+								'new_label' 	=> 'New Group',
+								'edit_label'	=> 'Edit Group',
+								'listing_label'	=> 'Finishes Groups'
+						)
 					)
 		);
 		$types['reps'] = array(
@@ -203,10 +212,10 @@ class LT_ThemePrinceseating
 		
 		//##fabrics
 		sb_include_module_helper('content');
-		$fabrics	= array();
-		$finishes 	= array();
-		$c_fabrics 	= array();
-		$c_finishes	= array();
+		$fabrics			= array();
+		$finishes 			= array();
+		$c_fabrics 			= array();
+		$c_finishes			= array();
 		if( $product )
 		{
 			$c_fabrics = (array)json_decode($product->_fabrics);
@@ -217,12 +226,15 @@ class LT_ThemePrinceseating
 				'order'			=> 'asc'
 			));
 			$c_finishes = (array)json_decode($product->_finishes);
+			/*
 			$finishes = LT_HelperContent::GetArticles(array(
 				'type' 			=> 'finishes',
 				'rows_per_page'	=> -1,
 				'order_by'		=> 'title',
 				'order'			=> 'asc'
 			));
+			*/
+			$finishes = LT_HelperContent::GetSections(0, 'finishes');
 		}
 		?>
 		<div id="dimensions" class="tab-pane">
@@ -281,12 +293,12 @@ class LT_ThemePrinceseating
 			<div class="form-group">
 				<label><?php _e('Select Finishes'); ?></label>
 				<div style="width:100%;height:200px;overflow:auto;" class="form-control">
-					<?php foreach($finishes['articles'] as $f): ?>
+					<?php foreach($finishes as $g): ?>
 					<div>
 						<label>
-							<input type="checkbox" name="meta[_finishes][]" value="<?php print $f->content_id; ?>"
-								<?php print in_array($f->content_id, $c_finishes) ? 'checked' : ''; ?>/>
-							<?php print $f->title; ?>
+							<input type="checkbox" name="meta[_finishes][]" value="<?php print $g->section_id; ?>"
+								<?php print in_array($g->section_id, $c_finishes) ? 'checked' : ''; ?>/>
+							<?php print $g->name; ?>
 						</label>
 					</div>
 					<?php endforeach; ?>
@@ -485,6 +497,16 @@ class LT_ThemePrinceseating
 		</div>
 		<?php
 	}
+	
+	public static function GetInstance()
+	{
+		static $instance;
+		if( !$instance )
+		{
+			$instance = new LT_ThemePrinceseating();
+		}
+		return $instance;
+	}
 }
 function ps_get_us_states()
 {
@@ -506,4 +528,4 @@ function ps_get_us_states()
 			"Wisconsin","Wyoming","Canada","Caribbean","Europe"
 	);
 }
-new LT_ThemePrinceseating();
+LT_ThemePrinceseating::GetInstance();

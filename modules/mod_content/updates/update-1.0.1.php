@@ -3,6 +3,7 @@ $dbh = SB_Factory::GetDbh();
 if( $dbh->db_type == 'mysql' )
 {
 	$column = $dbh->FetchRow("SHOW COLUMNS FROM section WHERE Field = 'for_object'");
+	
 	if( !$column )
 	{
 		$dbh->Query("ALTER TABLE section ADD COLUMN for_object varchar(64) default 'page' after lang_code");

@@ -47,7 +47,8 @@ $classes = array(
 		'class.cron.php',
 		'class.attachment.php',
 		'class.table-list.php',
-		'class.widget.php'
+		'class.widget.php',
+		'class.theme.php'
 );
 $db_drivers = array(
 		'database.class.php',

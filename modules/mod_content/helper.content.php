@@ -1,7 +1,7 @@
 <?php
 class LT_HelperContent
 {
-	public static function GetSections($parent_id = null, $for_object = 'page')
+	public static function GetSections($parent_id = null, $for_object = 'page', $in = array())
 	{
 		$parent_id = (int)$parent_id;
 		$dbh = SB_Factory::getDbh();
@@ -13,6 +13,10 @@ class LT_HelperContent
 		if( $for_object )
 		{
 			$query .= "AND for_object = '$for_object' ";
+		}
+		if( $in && is_array($in) )
+		{
+			$query .= "AND section_id IN(".implode(',', $in).") ";
 		}
 		$query .= "ORDER BY show_order ASC";
 		$dbh->Query($query);

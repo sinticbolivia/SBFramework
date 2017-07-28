@@ -130,8 +130,11 @@ if( !isset($attr->height) )
 				</ul>
 			</div><!-- end id="fabrics" -->
 			<div id="finishes" class="tab-pane">
-				<?php 
-				sb_include_module_helper('content');
+				<?php
+				$f_groups_ids = (array)json_decode($product->_finishes);
+				$groups = LT_HelperContent::GetSections(null, 'finishes', $f_groups_ids);
+				foreach($groups as $group):
+				/*
 				$finishes = LT_HelperContent::GetArticles(array(
 					'type'			=> 'finishes',
 					'rows_per_page'	=> -1,
@@ -139,15 +142,18 @@ if( !isset($attr->height) )
 					'order'			=> 'asc',
 					'in_ids' 		=> (array)json_decode($product->_finishes)
 				));
+				*/
+				$finishes = $group->GetArticles();
 				?>
 				<ul id="product-fabrics">
-					<?php foreach($finishes['articles'] as $f): ?>
+					<?php foreach($finishes as $f): ?>
 					<li class="fabric">
 						<div class="image"><?php print $f->TheThumbnail(); ?></div>
 						<div class="title"><?php print $f->title; ?></div>
 					</li>
 					<?php endforeach; ?>
 				</ul>
+				<?php endforeach; ?>
 			</div><!-- end id="finishes" -->
 			<div id="features" class="tab-pane">
 				<?php print $product->_features; ?>
