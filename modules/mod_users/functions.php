@@ -255,3 +255,39 @@ function sb_get_security_questions()
 				'best_friend' 		=> __('Which is the name if your best friend?', 'users'),
 		));
 }
+/**
+ * Start the user session
+ * 
+ * @param object $user The user database record
+ * @param string The user password (for logging purposes)
+ */
+function sb_user_start_session($user, $pwd = null)
+{
+	SB_Session::setVar('user', $user);
+	$cookie_value = md5(serialize($user) . ':' . session_id());
+	SB_Session::setVar('lt_session', $cookie_value);
+	SB_Session::setVar('timeout', time());
+	SB_Session::unsetVar('login_captcha');
+	SB_Session::unsetVar('inverse_captcha');
+	//##mark user as logged in
+	sb_update_user_meta($user->user_id, '_logged_in', 'yes');
+	sb_update_user_meta($user->user_id, '_logged_in_time', time());
+	sb_update_user_meta($user->user_id, '_last_login', time());
+	SB_Module::do_action('authenticated', $user, $user->username, $pwd);
+}
+/**
+ * Close the user session
+ * @param SB_User $user The user object
+ */
+function sb_user_close_session($user)
+{
+	if( $user && $user->user_id )
+	{
+		sb_update_user_meta($user->user_id, '_logged_in', 'no');
+		sb_update_user_meta($user->user_id, '_logged_in_time', 0);
+	}
+	SB_Module::do_action('logout', $user);
+	SB_Session::unsetVar('user');
+	SB_Session::unsetVar('lt_session');
+	SB_Session::unsetVar('timeout');
+}

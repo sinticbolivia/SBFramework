@@ -92,6 +92,8 @@ function sb_get_template_dir($type = null)
 	{
 		$template 		= defined('LT_ADMIN') ? sb_get_parameter('template_admin', 'default') : sb_get_parameter('template_frontend', 'default');
 		$templates_dir 	= defined('LT_ADMIN') ? ADM_TEMPLATES_DIR : TEMPLATES_DIR;
+		if( !$template )
+			return null;
 		define('TEMPLATE_DIR', $templates_dir . SB_DS . $template);
 		return $templates_dir . SB_DS . $template;
 	}
@@ -126,7 +128,7 @@ function sb_process_template($tpl_file = 'index.php')
 	$mod			= SB_Request::getString('mod', null);
 	
 	//##check if template directory exists
-	if( !is_dir($template_dir) )
+	if( !$template_dir || !is_dir($template_dir) )
 	{
 		require_ONCE INCLUDE_DIR . SB_DS . 'template-functions.php';
 		lt_template_fallback();
@@ -240,8 +242,10 @@ function sb_is_user_logged_in($cookie_name = null)
 }
 function sb_set_view_var($name, $value, $view = null)
 {
-	global $view_vars; //##declare global variable
-	
+	//global $view_vars; //##declare global variable
+	if( $ctrl = SB_Factory::getApplication()->GetController() )
+		$ctrl->SetVar($name, $value);
+	/*	
 	if( $view_vars == null || !is_array($view_vars) )
 		$view_vars = array();
 	$view = $view ? $view : SB_Request::getString('view', 'default');
@@ -250,6 +254,7 @@ function sb_set_view_var($name, $value, $view = null)
 		$view_vars[$view] = array();
 	}
 	$view_vars[$view][$name] = $value;
+	*/
 }
 function sb_include_module_helper($module)
 {
@@ -431,6 +436,15 @@ function sb_redirect($link = null)
 	header('Location: ' . $link);
 	die($link);
 }
+/**
+ * Enqueue a javascript file
+ * 
+ * @param string $src The script url
+ * @param string $id  The unique id for script
+ * @param mixed $order 
+ * @param mixed $footer 
+ * @return  void
+ */
 function sb_add_script($src, $id, $order = 0, $footer = false)
 {
 	$scripts =& SB_Globals::GetVar($footer ? 'footer_scripts' : 'scripts');
@@ -821,6 +835,11 @@ function lt_is_admin()
 }
 function lt_die($str)
 {
+	if( !$str )
+	{
+		SB_Factory::getDbh()->Close();
+		die();
+	}
 	$url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : SB_Route::_('index.php');
 	ob_start();
 	?>
@@ -841,6 +860,7 @@ function lt_die($str)
 	</html>
 	<?php 
 	$html = SB_Module::do_action('lt_die', ob_get_clean());
+	
 	die($html);
 }
 function sb_get_dir_contents($path)
@@ -1094,6 +1114,13 @@ function sb_dropdown_countries($args)
 	}
 	return $select;
 }
+/**
+ * Append a new var into query string
+ * 
+ * @param string $query_string The query string
+ * @param array $new_args The new vars (key => value)
+ * @return string
+ */
 function sb_querystring_append($query_string, $new_args)
 {
 	

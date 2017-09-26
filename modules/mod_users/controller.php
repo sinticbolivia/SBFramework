@@ -58,17 +58,7 @@ class LT_ControllerUsers extends LT_ControllerUsersBase
 		{
 			sb_redirect($error_link);
 		}
-		SB_Session::setVar('user', $row);
-		$cookie_value = md5(serialize($row) . ':' . session_id());
-		SB_Session::setVar('lt_session', $cookie_value);
-		SB_Session::setVar('timeout', time());
-		SB_Session::unsetVar('login_captcha');
-		SB_Session::unsetVar('inverse_captcha');
-		//##mark user as logged in
-		sb_update_user_meta($row->user_id, '_logged_in', 'yes');
-		sb_update_user_meta($row->user_id, '_logged_in_time', time());
-		sb_update_user_meta($row->user_id, '_last_login', time());
-		SB_Module::do_action('authenticated', $row, $username, $pwd);
+		sb_user_start_session($row);
 		$r = SB_Module::do_action('users_login_redirect_link', $r);
 		if( $r )
 		{
@@ -86,15 +76,7 @@ class LT_ControllerUsers extends LT_ControllerUsersBase
 		}
 		*/
 		$user = sb_get_current_user();
-		if( $user->user_id )
-		{
-			sb_update_user_meta($user->user_id, '_logged_in', 'no');
-			sb_update_user_meta($user->user_id, '_logged_in_time', 0);
-		}
-		SB_Module::do_action('logout', $user);
-		SB_Session::unsetVar('user');
-		SB_Session::unsetVar('lt_session');
-		SB_Session::unsetVar('timeout');
+		sb_user_close_session($user);
 		SB_Module::do_action('users_logout_before_redirect', $user);
 		sb_redirect(SB_Route::_('index.php'));
 	}

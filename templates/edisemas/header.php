@@ -5,6 +5,11 @@ if( is_file($site_logo) )
 {
 	$site_logo_url = UPLOADS_URL . '/' . basename($site_logo);
 }
+else
+{
+	$site_logo_url = TEMPLATE_URL . '/images/logo.png';
+}
+$site_logo_url = TEMPLATE_URL . '/images/logo.png';
 ?>
 <!doctype html>
 <html>
@@ -23,13 +28,14 @@ if( is_file($site_logo) )
 	<header id="header">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-5">
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
 					<div id="logo">
 						<?php if($site_logo_url): ?>
 						<a href="index.php">
-							<img src="<?php print $site_logo_url; ?>" alt="<?php print lt_site_title(); ?>" title="<?php print lt_site_title(); ?>" />
+							<img src="<?php print $site_logo_url; ?>" alt="<?php print lt_site_title(); ?>" 
+								title="<?php print lt_site_title(); ?>" />
 						</a>
-						<p><?php print lt_site_title(); ?></p>
+						<p><?php //print lt_site_title(); ?></p>
 						<?php else: ?>
 						<div class="text">
 							<a href="index.php">
@@ -46,6 +52,10 @@ if( is_file($site_logo) )
 				<div class="hidden-xs col-sm-3 col-md-2">
 					<?php if( !sb_widget_area('header_widgets') ): ?>
 					<?php endif; ?>
+					<div class="widget language-selector">
+						<a href="<?php print SB_Route::_('index.php?lang=en_US'); ?>"><?php _e('English', 'edisemas'); ?></a> |
+						<a href="<?php print SB_Route::_('index.php?lang=es_ES'); ?>"><?php _e('Spanish', 'edisemas'); ?></a>
+					</div>
 				</div>
 			</div>
 			<div class="row">

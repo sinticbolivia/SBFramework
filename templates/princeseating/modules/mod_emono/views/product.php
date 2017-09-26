@@ -1,4 +1,5 @@
 <?php
+sb_include_module_helper('content');
 $attr = json_decode($product->_attributes);
 //##check if attributes are in correct format
 if( !isset($attr->height) )
@@ -100,6 +101,7 @@ if( !isset($attr->height) )
 	<div id="tabs-container">
 		<ul id="product-tabs" class="nav nav-tabs">
 			<li class="active"><a href="#enquiry" data-toggle="tab"><?php _e('Enquiry', 'ps'); ?></a></li>
+			<li><a href="#colors" data-toggle="tab"><?php _e('Colors', 'ps'); ?></a></li>
 			<li><a href="#fabrics" data-toggle="tab"><?php _e('Fabrics', 'ps'); ?></a></li>
 			<li><a href="#finishes" data-toggle="tab"><?php _e('Finishes', 'ps'); ?></a></li>
 			<li><a href="#features" data-toggle="tab"><?php _e('Features', 'ps'); ?></a></li>
@@ -109,9 +111,33 @@ if( !isset($attr->height) )
 			<div id="enquiry" class="tab-pane active">
 				<?php print SB_Shortcode::ParseShortcodes('[forms id="1"]'); ?>
 			</div><!-- end id="enquiry" -->
+			<div id="colors" class="tab-pane">
+				<?php
+				$colors = LT_HelperContent::GetArticles(array(
+					'type'			=> 'colors',
+					'rows_per_page'	=> -1,
+					'order_by'		=> 'title',
+					'order'			=> 'asc',
+					'in_ids' 		=> (array)json_decode($product->_colors)
+				));
+				?>
+				<?php if( is_array($colors['articles']) && count($colors['articles']) ): ?>
+				<ul id="product-colors" class="product-supplies">
+					<?php foreach($colors['articles'] as $c): ?>
+					<li class="fabric">
+						<div class="image"><?php print $c->TheThumbnail(); ?></div>
+						<div class="title"><?php print $c->title; ?></div>
+					</li>
+					<?php endforeach; ?>
+				</ul>
+				<?php else: ?>
+				<b><?php _e('The product has no colors', 'ps'); ?></b>
+				<?php endif; ?>
+			</div><!-- end id="colors" -->
 			<div id="fabrics" class="tab-pane">
 				<?php 
-				sb_include_module_helper('content');
+				$c_fabrics = (array)json_decode($product->_fabrics);
+				/*
 				$fabrics = LT_HelperContent::GetArticles(array(
 					'type'			=> 'fabrics',
 					'rows_per_page'	=> -1,
@@ -119,41 +145,40 @@ if( !isset($attr->height) )
 					'order'			=> 'asc',
 					'in_ids' 		=> (array)json_decode($product->_fabrics)
 				));
+				*/
+				$groups = LT_HelperContent::GetSections(null, 'fabrics', $c_fabrics);
+				if( is_array($c_fabrics) && count($c_fabrics) ):
 				?>
-				<ul id="product-fabrics">
-					<?php foreach($fabrics['articles'] as $f): ?>
+				<ul id="product-fabrics" class="product-supplies">
+					<?php foreach($groups as $group): $fabrics = $group->GetArticles(); foreach($fabrics as $f): ?>
 					<li class="fabric">
 						<div class="image"><?php print $f->TheThumbnail(); ?></div>
 						<div class="title"><?php print $f->title; ?></div>
 					</li>
-					<?php endforeach; ?>
+					<?php endforeach; endforeach; ?>
 				</ul>
+				<?php else: ?>
+				<b><?php _e('The product has no fabrics', 'ps'); ?></b>
+				<?php endif; ?>
 			</div><!-- end id="fabrics" -->
 			<div id="finishes" class="tab-pane">
 				<?php
 				$f_groups_ids = (array)json_decode($product->_finishes);
+				if( is_array($f_groups_ids) && count($f_groups_ids) ):
 				$groups = LT_HelperContent::GetSections(null, 'finishes', $f_groups_ids);
-				foreach($groups as $group):
-				/*
-				$finishes = LT_HelperContent::GetArticles(array(
-					'type'			=> 'finishes',
-					'rows_per_page'	=> -1,
-					'order_by'		=> 'title',
-					'order'			=> 'asc',
-					'in_ids' 		=> (array)json_decode($product->_finishes)
-				));
-				*/
-				$finishes = $group->GetArticles();
+				
 				?>
-				<ul id="product-fabrics">
-					<?php foreach($finishes as $f): ?>
+				<ul id="product-finishes" class="product-supplies">
+					<?php foreach($groups as $group):	$finishes = $group->GetArticles(); foreach($finishes as $f): ?>
 					<li class="fabric">
 						<div class="image"><?php print $f->TheThumbnail(); ?></div>
 						<div class="title"><?php print $f->title; ?></div>
 					</li>
-					<?php endforeach; ?>
+					<?php endforeach; endforeach; ?>
 				</ul>
-				<?php endforeach; ?>
+				<?php else: ?>
+				<b><?php _e('The product has no finishes', 'ps'); ?></b>
+				<?php endif; ?>
 			</div><!-- end id="finishes" -->
 			<div id="features" class="tab-pane">
 				<?php print $product->_features; ?>

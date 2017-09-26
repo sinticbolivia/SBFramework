@@ -1,2 +1,8 @@
+RewriteEngine On
+RewriteBase /SBFramework/
 RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
-RewriteRule (.*) error404b.html [L,QSA]
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php [L,QSA]
+#RewriteRule (.*) error404b.html [L,QSA]

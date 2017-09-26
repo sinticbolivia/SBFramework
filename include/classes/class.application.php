@@ -1,4 +1,14 @@
 <?php
+/**
+ * @package SBFramework
+ */
+
+/**
+ * The base application case to initializa any web application
+ * 
+ * @author SinticBolivia <info@sinticbolivia.net>
+ * @version 1.0.0
+ */
 class SB_Application extends SB_Object
 {
 	protected	$defaultModules = array(
@@ -28,18 +38,20 @@ class SB_Application extends SB_Object
 	{
 		if( !defined('LT_REWRITE') || !constant('LT_REWRITE') )
 			return;
-		$the_path = SB_Request::$request;
+		$the_path = SB_Request::$path;
+		//var_dump($the_path);
 		if( strstr($the_path, '?') && strstr($the_path, '=') )
 		{
 			return;
 		}
-		$def = array(
-				
-		);
+		
+		$def = array();
 		$routes = SB_Module::do_action('rewrite_routes', $def);
+		//print_r($routes);
 		$the_route = null;
 		foreach($routes as $match => $route)
 		{
+			//var_dump($match, $the_path);
 			if( preg_match($match, $the_path, $matches) )
 			{
 				//print_r($matches);
@@ -54,7 +66,7 @@ class SB_Application extends SB_Object
 		}
 		if( !$the_route )
 			return false;
-		SB_Route::SetRoute($the_route);
+		SB_Route::SetRoute($the_route, SB_Request::$requestMethod);
 	}
 	public function LoadModules()
 	{
@@ -98,6 +110,11 @@ class SB_Application extends SB_Object
 		}
 		SB_Module::do_action('init');
 	}
+	/**
+	 * Load default language for application
+	 * 
+	 * @return  
+	 */
 	public function LoadLanguage()
 	{
 		$r_lang		= SB_Request::getString('lang');
@@ -135,7 +152,11 @@ class SB_Application extends SB_Object
 	public function ProcessModule($mod)
 	{	
 		if( !$mod )
+		{
+			//##create a dummy controller
+			$this->controller = new SB_Controller();
 			return false;
+		}
 		$this->module	= $mod;
 		SB_Request::setVar('mod', $mod);
 		
@@ -266,5 +287,16 @@ class SB_Application extends SB_Object
 				'es_ES'	=> __('Spanish', 'lt'),
 				'en_US'	=> __('English', 'lt'),
 		));
+	}
+	/**
+	 * Log a thing into application log file
+	 * @param mixed $str 
+	 * @return  
+	 */
+	public function Log($str)
+	{
+		$fh = is_file(LOG_FILE) ? fopen(LOG_FILE, 'a+') : fopen(LOG_FILE, 'w+');
+		fwrite($fh, sprintf("[%s]:\n%s\n", date('Y-m-d H:i:s'), print_r($str, 1)));
+		fclose($fh);
 	}
 }

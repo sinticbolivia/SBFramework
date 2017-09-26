@@ -56,10 +56,14 @@ function lt_show_content_menu($key, $args = array())
 		{
 			$link = SB_Route::_('index.php?mod=content&view=article&id='.$item->id . '&slug=' . $item->slug);
 		}
-		if( @$item->type == 'section' )
+		elseif( @$item->type == 'section' )
 		{
 			$link = SB_Route::_('index.php?mod=content&view=section&id='.$item->id . '&slug='.$item->slug);
 		} 
+		else
+		{
+			$link = SB_Route::_($item->link);
+		}
 		if( !empty($c_slug) && $c_slug == $item->slug )
 			$css_class .= ' active';
 		if( lt_is_frontpage() && !strstr($css_class, 'active') && $mi == 0 )

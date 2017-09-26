@@ -1,7 +1,7 @@
 /**
  * Ajax completion
  * @author Sintic Bolivia
- * 
+ * @developer Juan Marcelo Aviles Paco
  */
 
 function SBCompletion(options)
@@ -41,8 +41,6 @@ function SBCompletion(options)
 		{
 			return false;
 		}
-		
-		
 		//##check for cursor codes
 		if(e.keyCode >= 37 && e.keyCode <= 40 )
 		{
@@ -86,8 +84,9 @@ function SBCompletion(options)
 					var a = jQuery('<a class="the_suggestion" href="javascript:;" data-id="'+obj.id+'" data-full_name="'+obj.name+'" style="display:block;">'
 								+obj.label+
 							'</a>');
-					a.click($this.OnSuggestionSelected)
+					a.get(0).data = obj;
 					a.data('obj', obj);
+					a.click($this.OnSuggestionSelected)
 					var li = jQuery('<li style="display:block;width:100%;"></li>');
 					li.append(a);
 					$this.suggestions_list.append(li);
@@ -103,6 +102,9 @@ function SBCompletion(options)
 			options.callback(e.currentTarget);
 		}
 		the_input.val(options.setValue ? options.setValue(the_input.get(0), e.currentTarget) : e.target.innerText);
+		//##create and dispatch the event
+		var evt = new CustomEvent('sb_completion_on_selected', {detail:{item_selected: this}});
+		the_input.get(0).dispatchEvent(evt);
 		$this.suggestions_list.css('display', 'none');
 		the_input.focus();
 		return false;

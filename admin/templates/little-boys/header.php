@@ -21,7 +21,7 @@
 <body>
 <div id="container">
 	<?php if( !defined('MOD_TEMPLATE') ): ?>
-	<div id="menu" class="col-xs-4 col-md-2 hidden-print">
+	<div id="menu" class="col-xs-5 col-md-2 hidden-print">
 		<?php require_once 'navigation.php'; ?>
 	</div>
 	<div id="mobile-menu" class="hidden-print">
@@ -35,7 +35,9 @@
 				</a>
 				<ul>
 					<li>
-						<a href="<?php print SB_Route::_('profile.php'); ?>"><?php print SB_Text::_('My profile', 'lb'); ?></a>
+						<a href="<?php print SB_Route::_('profile.php'); ?>">
+							<?php _e('My profile', 'lb'); ?>
+						</a>
 					</li>
 					<li>
 						<a href="<?php print SB_Route::_('index.php?mod=users&task=logout'); ?>"><?php _e('Close session', 'lb'); ?></a>

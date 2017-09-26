@@ -6,7 +6,23 @@
 <link rel="stylesheet" href="<?php print BASEURL; ?>/js/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" />
 <script src="<?php print BASEURL; ?>/js/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <div class="wrap">
-	<h1><?php print SB_Text::_('Settings', 'settings'); ?></h1>
+	<h2 id="page-title">		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<?php print SB_Text::_('Settings', 'settings'); ?>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="text-right">
+						<a href="javascript:;" onclick="document.getElementById('form-settings').submit();" 
+							class="btn btn-success">
+							<?php _e('Save', 'settings'); ?>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h2>
 	<div id="settings-tabs">
 		<ul class="nav nav-tabs" role="tablist">
 			<?php if( sb_get_current_user()->can('manage_general_settings') ): ?>
@@ -18,7 +34,7 @@
 		    <?php endif; ?>
 		    <?php SB_Module::do_action('settings_tabs', $settings); ?>
 	  	</ul>
-	  	<form action="" method="post">
+	  	<form id="form-settings" action="" method="post">
 	  		<input type="hidden" name="mod" value="settings" />
 	  		<input type="hidden" name="task" value="save" />
 	  		<div class="tab-content">
@@ -82,8 +98,8 @@
 		  	</div>
 		  	<br/>
 		  	<div class="form-group">
-		  		<a href="<?php print SB_Route::_('index.php'); ?>" class="btn btn-secondary"><?php print SBText::_('Cancelar', 'settings'); ?></a>
-		  		<button class="btn btn-secondary has-popover" type="submit" data-content="<?php print SBText::_('SETTINGS_BUTTON_SAVE'); ?>">
+		  		<a href="<?php print SB_Route::_('index.php'); ?>" class="btn btn-danger"><?php print SBText::_('Cancelar', 'settings'); ?></a>
+		  		<button class="btn btn-success has-popover" type="submit" data-content="<?php print SBText::_('SETTINGS_BUTTON_SAVE'); ?>">
 		  			<?php print SB_Text::_('Save', 'settings'); ?></button>
 		  	</div>
 	  	</form>

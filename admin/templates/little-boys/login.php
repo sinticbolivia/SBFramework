@@ -5,10 +5,9 @@ defined('LT_ADMIN') or die();
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<?php lt_favicon(); ?>
 	<title><?php print SITE_TITLE; ?> - Login</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" href="<?php print TEMPLATE_URL ?>/css/login.css" />
 	<script src="<?php print BASEURL; ?>/js/jquery.min.js"></script>
 	<script src="<?php print TEMPLATE_URL ?>/js/login.js"></script>
@@ -44,7 +43,7 @@ defined('LT_ADMIN') or die();
 	        		<button type="submit" class="login__submit"><?php print SBText::_('Sign in', 'lb'); ?></button>
 	        		<p class="login__signup">
 	        			<?php print SBText::_("Don't have an account?", 'lb'); ?> &nbsp;
-	        			<a><?php print SBText::_('Sign up', 'lb'); ?></a>
+	        			<a href="<?php print SB_Route::_('index.php?mod=users&view=register'); ?>"><?php print SBText::_('Sign up', 'lb'); ?></a>
 	        		</p>
 	        	</form>
       		</div>

@@ -4,6 +4,8 @@ class SB_Route
 	public static function _($_url, $type = null)
 	{
 		$url = BASEURL . '/';
+		if( $_url == '/' )
+			return lt_is_admin() ? $url . 'admin/' : $url;
 		if( defined('ROUTE_SKIP_ADMIN_URL') )
 		{
 			$url .= $_url;
@@ -30,12 +32,17 @@ class SB_Route
 		}
 		return $url;
 	}
-	public static function SetRoute($the_route)
+	public static function SetRoute($the_route, $request_method = 'GET')
 	{
+		$request_method = strtoupper($request_method);
+		if( in_array($request_method, array('POST', 'PUT')) )
+		{
+			$request_method = 'POST';
+		}
 		parse_str($the_route, $query);
 		foreach($query as $p => $v)
 		{
-			SB_Request::setVar($p, $v);
+			SB_Request::setVar($p, $v, $request_method);
 		}
 	}
 	protected static function GetComponents()
@@ -46,6 +53,7 @@ class SB_Route
 	{
 		if( !defined('LT_REWRITE') || !constant('LT_REWRITE') )
 			return BASEURL . '/' . $url;
+	
 		$_url = substr($url, strpos($url, '?') + 1);
 		parse_str($_url, $array);
 		if( !isset($array['mod']) )
@@ -54,9 +62,30 @@ class SB_Route
 		$function = 'lt_' . $array['mod'] . '_rewrite';
 		if( !function_exists($function) )
 		{
-			return $url;
+			return BASEURL . '/' . $url;
 		}
 		
-		return $function($url, $array);
+		$seo_url = $function($url, $array);
+		//##remove common vars
+		unset($array['mod'], $array['task'], $array['view'], $array['id'], $array['slug']);
+		if( count($array) )
+		{
+			if( strstr($seo_url, '?') )
+			{
+				list($url, $query_string) = explode('?', $seo_url);
+				$query_string = sb_querystring_append($query_string, $array);
+				$seo_url = $url . '?' . $query_string;
+			}
+			else
+			{
+				$query_string = http_build_query($array);
+				if( !empty($query_string) )
+				{
+					$seo_url .= '?' . $query_string;
+				}
+			}
+			
+		}
+		return $seo_url;
 	}
 }

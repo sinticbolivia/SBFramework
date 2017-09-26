@@ -95,7 +95,7 @@ class LT_AdminControllerUsers extends SB_Controller
 		
 		if( $captcha && $user_captcha != $captcha  )
 		{
-			$msg = SBText::_('Texto de seguridad invalido.', 'users');
+			$msg = SBText::_('Invalid text security.', 'users');
 			if($ajax) 
 				sb_response_json(array('status' => 'error', 'error' => $msg)); 
 			SB_MessagesStack::AddMessage($msg, 'error');
@@ -103,7 +103,7 @@ class LT_AdminControllerUsers extends SB_Controller
 		}
 		if( $rows <= 0 )
 		{
-			$msg = SBText::_('Usuario o contrase&ntilde;a invalida', 'users'); 
+			$msg = SBText::_('Invalid username or password', 'users'); 
 			if($ajax) 
 				sb_response_json(array('status' => 'error', 'error' => $msg));
 			SB_MessagesStack::AddMessage($msg, 'error');
@@ -113,7 +113,7 @@ class LT_AdminControllerUsers extends SB_Controller
 	
 		if( $row->pwd != md5($pwd) )
 		{
-			$msg = SBText::_('Usuario o contrase&ntilde;a invalida', 'users');
+			$msg = SBText::_('Invalid username or password', 'users');
 			if($ajax) 
 				sb_response_json(array('status' => 'error', 'error' => $msg));
 			SB_MessagesStack::AddMessage($msg, 'error');
@@ -176,6 +176,7 @@ class LT_AdminControllerUsers extends SB_Controller
 	}
 	public function task_logout()
 	{
+		$user = sb_get_current_user();
 		$cookie_name = null;
 		if( defined('LT_ADMIN') )
 		{
@@ -187,9 +188,11 @@ class LT_AdminControllerUsers extends SB_Controller
 			SB_Session::unsetVar('user');
 			$cookie_name = 'lt_session';
 		}
+		SB_Module::do_action('logout', $user);
 		SB_Session::unsetVar($cookie_name);
 		//unset($_COOKIE[$cookie_name]);
 		//setcookie($cookie_name, '', time() - 3600);
+		SB_Module::do_action('users_logout_before_redirect', $user);
 		sb_redirect(SB_Route::_('login.php'));
 	}
 	public function task_new_user()

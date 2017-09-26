@@ -117,6 +117,12 @@ class SB_HtmlDoc extends SB_Object
 		
 		return $tags;
 	}
+	/**
+	 * Set HTML document title
+	 * 
+	 * @param string $title 
+	 * @return SB_HtmlDoc
+	 */
 	public function SetTitle($title)
 	{
 		$this->_title = $title;

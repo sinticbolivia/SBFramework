@@ -31,17 +31,26 @@ jQuery(function($)
 	    var params = jQuery('#form-login').serialize() + '&ajax=1';
 	    jQuery.post('login.php', params, function(res)
 	    {
-	    	if( res.status == 'ok' )
-	    	{
-	    		window.location = res.redirect;
-	    	}
+			console.log(res);
+			if( res.status )
+			{
+				switch(res.status)
+				{
+					case 'ok':
+						window.location = res.redirect;
+					break;
+					case 'error':
+						alert(res.error);
+					break;
+				}
+			}
 	    	else
 	    	{
-	    		animating = false;
-	    		jQuery(".ripple").remove();
-	    		jQuery(that).removeClass("processing");
-	    		alert(res.error);
+	    		alert('Unknow error trying to start session, please contact support');
 	    	}
+			jQuery(".ripple").remove();
+			jQuery(that).removeClass("processing");
+			animating = false;
 	    });
 	    return false;
 	    /*

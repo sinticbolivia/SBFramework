@@ -4,6 +4,7 @@ Template Name: Edisemas Minimal
 Template Author: Sintic Bolivia
 Template Url: http://sinticbolivia.net
 **/
+a{color:#ef860f;}
 a, a:hover{text-decoration:none;}
 body{margin:0;padding:0;font-family: Arial, Verdana;font-size:12px;}
 .gwrap{width:100%;margin:0 auto;}
@@ -11,12 +12,14 @@ body{margin:0;padding:0;font-family: Arial, Verdana;font-size:12px;}
 #logo{font-size:30px;font-style:italic;font-weight:bold;}
 #logo .w0{color:#df0067;}
 #logo .w1{color:#251b5b;}
-#navigation{background:#251b5b;color:#fff;margin:0 -15px;}
+#logo a{display:block;}
+#logo a img{max-width:100%;}
+#navigation{background:#000;color:#fff;margin:0 -15px;}
 #navigation ul{float:right;list-style:none;padding:0;margin:0;}
 #navigation ul li{float:left;margin:0 5px 0 0;}
 #navigation ul li:last-child{margin-right:0;}
 #navigation ul li a{display:block;padding:15px 6px;text-align:center;color:#fff;font-size:15px;font-weight:bold;text-transform:uppercase;}
-#navigation ul li a:hover, #navigation ul li.active a{background:#df0067;}
+#navigation ul li a:hover, #navigation ul li.active a{background:#ef860f;}
 #content{min-height:500px;}
 #content .content-wrap{}
 #sidebar{}
@@ -34,3 +37,5 @@ ul.list li a:hover{background:#f7f7f7;}
 
 .lt-content{}
 .lt-content.list .lt-article{margin:0 0 10px 0;}
+#article-container{}
+#article-container img{margin:10px;max-width:100%;}

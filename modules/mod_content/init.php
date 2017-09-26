@@ -22,7 +22,7 @@ if( !defined('LT_ADMIN') )
 {
 	//SB_Module::add_action('user_tabs', array('SB_ContentHooks', 'action_user_tabs'));
 	//SB_Module::add_action('user_tabs_content', array('SB_ContentHooks', 'action_user_tabs_content'));
-	SB_Module::add_action('rewrite_routes', array('SB_ContentHooks', 'Routes'));
+	
 }
 class SB_ContentHooks
 {
@@ -33,12 +33,17 @@ class SB_ContentHooks
 	}
 	protected function AddActions()
 	{
+		if( !lt_is_admin() )
+		{
+			SB_Module::add_action('rewrite_routes', array($this, 'Routes'));
+		}
 		SB_Module::add_action('before_show_content', array($this, 'action_before_show_content'));
 	}
 	protected function RegisterWidgets()
 	{
 		require_once MOD_CONTENT_DIR . SB_DS . 'widgets' . SB_DS . 'widget.latest-content.php';
 		require_once MOD_CONTENT_DIR . SB_DS . 'widgets' . SB_DS . 'widget.pages.php';
+		require_once MOD_CONTENT_DIR . SB_DS . 'widgets' . SB_DS . 'widget.menu.php';
 	}
 	public function action_before_show_content($article)
 	{
@@ -108,35 +113,35 @@ class SB_ContentHooks
 		$dbh->Query($query);
 		$articles = (int)$dbh->FetchRow()->total;
 		?>
-		<div id="content-stats" class="span6 col-md-6">
-			<div class="widget">
-				<div class="widget-header">
+		<div id="content-stats" class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<div class="widget panel panel-default">
+				<div class="widget-header panel-heading">
 					<i class="icon-list-alt"></i>
-					<h3><?php print SB_Text::_('Estadisticas de Contenido', 'content')?></h3>
+					<h4 class="panel-title"><?php _e('Content Statistics', 'content')?></h4>
 				</div>
-				<div class="widget-content">
+				<div class="widget-content panel-body">
 					<div id="big_stats">
 						<div class="stat">
 							<span class="value"><?php print $sections; ?></span>
 							<span class="text"><?php print SB_Text::_('Secciones', 'content'); ?></span>
 							<div class="text-center">
 								<a href="<?php print SB_Route::_('index.php?mod=content&view=section.default'); ?>" class="btn btn-default">
-									<?php print SBText::_('Ver listado', 'content'); ?>
+									<?php _e('View list', 'content'); ?>
 								</a>
 							</div>
 						</div>
 						<div class="stat">
 							<span class="value"><?php print $articles; ?></span>
-							<span class="text"><?php print SB_Text::_('Contenidos', 'content'); ?></span>
+							<span class="text"><?php print SB_Text::_('Contents', 'content'); ?></span>
 							<div class="text-center">
 								<a href="<?php print SB_Route::_('index.php?mod=content'); ?>" class="btn btn-default">
-									<?php print SBText::_('Ver listado', 'content'); ?>
+									<?php _e('View list', 'content'); ?>
 								</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="clear"></div>
+				
 			</div>
 		</div>
 		<?php 
@@ -252,11 +257,12 @@ class SB_ContentHooks
 		
 		return ob_get_clean();
 	}
-	public static function Routes($routes)
+	public function Routes($routes)
 	{
 		//$routes['/^\/(.*)\/?/'] = 'mod=content&view=article&slug=$1';
 		$routes['/^\/([0-9a-zA-Z-_]+)\/?$/'] = 'mod=content&view=article&slug=$1';
 		$routes['/^\/'.__('section', 'content').'\/([a-zA-Z-_]+)\/?$/'] = 'mod=content&view=section&slug=$1';
+		//print_r($routes);
 		return $routes;
 	}
 	

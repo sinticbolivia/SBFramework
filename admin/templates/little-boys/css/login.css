@@ -536,4 +536,6 @@ input, button {
 	.demo{width:85%;position:relative;margin:10px auto;top:auto;left:auto;}
 	.login__check{left:46%;}
 	.login__input{width:95%;}
+	.login__row .login__icon{float:left;margin-top:6px;}
+	.login__row input{float:left;width:90%;}
 }

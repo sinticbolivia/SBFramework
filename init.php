@@ -1,8 +1,12 @@
 <?php
-/*
 $filename = basename($_SERVER['REQUEST_URI']);
-if( preg_match('/\.(map|jpg|jpeg|css|js|gif|png|txt)$/', $filename, $matches) )
+//if( preg_match('/\.(map|jpg|jpeg|css|js|gif|png|txt)$/', $filename, $matches) )
+if( preg_match('/\.(map)$/', $filename, $matches) )
 	return false;
+/*
+error_log(__FILE__);
+error_log('REQUEST_URI: ' . $_SERVER['REQUEST_URI']);
+error_log('QUERY_STRING' .  $_SERVER['QUERY_STRING']);
 */
 $base_dir = dirname(__FILE__);
 //$cfg_file = file_exists($base_dir . DIRECTORY_SEPARATOR . 'config.php') ? 'config.php' : 'config-min.php';
@@ -98,6 +102,18 @@ elseif( defined('APP_NAME') )
 
 //$app = SB_Application::GetApplication(defined('APP_NAME') ? APP_NAME : null);
 $app = SB_Factory::getApplication($app);
+set_error_handler(function($errno, $error, $error_file, $error_line, $context)
+{
+	$app = SB_Factory::getApplication();
+		
+	$app->Log(array('code' => $errno, 'error' => $error, 'file' => $error_file, 'line' => $error_line, 'context' => $context));
+	//var_dump($errno);
+	if( $errno != E_NOTICE && $errno != E_USER_WARNING && $errno != E_USER_NOTICE )
+	{
+		throw new Exception($error, $errno);
+	}
+	
+}, E_ALL);
 $app->Load();
 
 if( defined('LT_INSTALL') )
@@ -115,7 +131,5 @@ $app->Start();
 //ini_set('post_max_size', '128M');
 //ini_set('upload_max_filesize', '128M');
 //setlocale(LC_NUMERIC, 'en_GB.utf-8');
-//error_log('REQUEST_URI: ' . $_SERVER['REQUEST_URI']);
-//error_log('QUERY_STRING' .  $_SERVER['QUERY_STRING']);
 //error_log(__FILE__);
 //var_dump($_GET['rule']);

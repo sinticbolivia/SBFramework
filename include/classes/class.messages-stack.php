@@ -16,6 +16,15 @@ class SB_MessagesStack
 		SB_MessagesStack::$messages =& $_SESSION['messages'];
 		SB_MessagesStack::$messages[] = array('msg' => $msg, 'type' => $type);
 	}
+	public static function AddError($error)
+	{
+		self::AddMessage($error, 'error');
+	}
+	public static function AddSuccess($message)
+	{
+		self::AddMessage($message, 'success');
+	}
+	public static function AddWarning($warning){self::AddMessage($warning, 'warning');}
 	public static function ShowMessages()
 	{
 		self::Start();

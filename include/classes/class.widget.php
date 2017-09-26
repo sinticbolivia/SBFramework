@@ -3,6 +3,9 @@ abstract class SB_Widget extends SB_Object
 {
 	protected $id;
 	public $title;
+	/**
+	 * @var SB_Database
+	 */
 	public $dbh;
 	
 	public function __construct($title)
@@ -52,6 +55,14 @@ function sb_show_widget($class, $args = array())
 	
 	return true;
 }
+/**
+ * Add a widget instance to a widget area
+ * 
+ * @param string 	$area		The widget area name
+ * @param SB_Widget $widget  	The widget instance
+ * @param array 	$args 		Arguments for widget instance
+ * @return bool
+ */
 function sb_widget_add2area($area, SB_Widget $widget, $args = array())
 {
 	$areas =& SB_Globals::GetVar('widget_areas');

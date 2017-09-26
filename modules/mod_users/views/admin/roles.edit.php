@@ -2,8 +2,21 @@
 $user = sb_get_current_user();
 ?>
 <div class="wrap">
-	<h1><?php print $title; ?></h1>
-	<form action="" method="post">
+	<h2 id="page-title">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"><?php print $title; ?></div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="page-buttons">
+						<a href="javascript:;" class="btn btn-success" onclick="jQuery('#form-user-role').submit();">
+							<?php _e('Save', 'users'); ?>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h2>
+	<form id="form-user-role" action="" method="post">
 		<input type="hidden" name="mod" value="users" />
 		<input type="hidden" name="task" value="roles.save" />
 		<?php if( isset($role) ): ?>
@@ -52,11 +65,11 @@ $user = sb_get_current_user();
 			
 		</div>
 		<p>
-			<a class="btn btn-secondary has-popover" href="<?php print SB_Route::_('index.php?mod=users&view=roles'); ?>"
+			<a class="btn btn-danger has-popover" href="<?php print SB_Route::_('index.php?mod=users&view=roles'); ?>"
 				data-content="<?php print SBText::_('USERS_ROLE_BUTTON_CANCEL'); ?>">
-				<?php print SB_Text::_('Cancelar', 'users'); ?></a>
-			<button class="btn btn-secondary has-popover" type="submit" data-content="<?php print SBText::_('USERS_ROLE_BUTTON_SAVE'); ?>">
-				<?php print SB_Text::_('Guardar', 'users'); ?></button>
+				<?php _e('Cancel', 'users'); ?></a>
+			<button class="btn btn-success has-popover" type="submit" data-content="<?php print SBText::_('USERS_ROLE_BUTTON_SAVE'); ?>">
+				<?php _e('Save', 'users'); ?></button>
 		</p>
 	</form>
 </div>

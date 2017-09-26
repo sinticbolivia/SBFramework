@@ -196,7 +196,8 @@ class LT_AdminControllerContentSection extends SB_Controller
 		$desc 		= SB_Request::getString('description');
 		$parent_id	= SB_Request::getInt('parent_id', 0);
 		$status		= SB_Request::getString('status', 'publish');
-		
+		if( $parent_id < 0 )
+			$parent_id = 0;
 		if( empty($name) )
 		{
 			SB_MessagesStack::AddMessage(SB_Text::_('Debe ingresar un nombre para la secci&oacute;n.', 'content'), 'error');

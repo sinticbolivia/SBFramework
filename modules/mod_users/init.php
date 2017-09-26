@@ -36,10 +36,10 @@ class SB_UsersHooks
 	public static function action_admin_menu()
 	{
 		SB_Menu::addMenuChild('menu-management', 
-					'<span class="glyphicon glyphicon-user"></span>' . SB_Text::_('Usuarios', 'users'), 
+					'<span class="glyphicon glyphicon-user"></span> ' . __('Users', 'users'), 
 					SB_Route::_('index.php?mod=users'), 'menu-users', 'manage_users');
 		SB_Menu::addMenuChild('menu-management', 
-					'<span class="glyphicon glyphicon-th-list"></span>'.SB_Text::_('Roles de Usuario', 'users'), 
+					'<span class="glyphicon glyphicon-th-list"></span> ' . __('User Roles', 'users'), 
 					SB_Route::_('index.php?mod=users&view=roles'), 'menu-user-roles', 'manage_roles');
 	}
 	public static function action_admin_dashboard()
@@ -74,35 +74,35 @@ class SB_UsersHooks
 		$dbh->Query($query);
 		$online_users = $dbh->FetchRow()->online_users;
 		?>
-		<div class="span6 col-md-6">
-			<div class="widget">
-				<div class="widget-header">
-					<i class="icon-list-alt"></i>
-					<h3><?php print SB_Text::_('Estadisticas de Usuarios', 'users')?></h3>
+		<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+			<div class="panel panel-default widget">
+				<div class="panel-heading widget-header">
+					<h3 class="panel-title"><?php _e('Users Statistics', 'users')?></h3>
 				</div>
-				<div class="widget-content">
-					<div id="big_stats">
-						<div class="stat">
-							<span class="value"><?php print $users; ?></span>
-							<span class="text"><?php print SB_Text::_('Usuarios', 'users'); ?></span>
-							<div class="text-center">
-								<a href="<?php print SB_Route::_('index.php?mod=users'); ?>" class="btn btn-default">
-									<?php print SBText::_('Ver listado', 'users'); ?>
-								</a>
+				<div class="panel-body widget-content">
+					<div id="big_stats" class="container-fluid">
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<div class="value"><?php print $users; ?></div>
+								<div class="text"><?php _e('Users', 'users'); ?></div>
+								<div class="text-center">
+									<a href="<?php print SB_Route::_('index.php?mod=users'); ?>" class="btn btn-default">
+										<?php print SBText::_('View list', 'users'); ?>
+									</a>
+								</div>
 							</div>
-						</div>
-						<div class="stat">
-							<span class="value"><?php print $online_users; ?></span>
-							<span class="text"><?php print SB_Text::_('Usuarios Conectados', 'users'); ?></span>
-							<div class="text-center">
-								<a href="<?php print SB_Route::_('index.php?mod=users&view=online_users'); ?>" class="btn btn-default">
-									<?php print SBText::_('Ver listado', 'users'); ?>
-								</a>
+							<div class="col-xs-12 col-md-6">
+								<div class="value"><?php print $online_users; ?></div>
+								<div class="text"><?php print SB_Text::_('Usuarios Conectados', 'users'); ?></div>
+								<div class="text-center">
+									<a href="<?php print SB_Route::_('index.php?mod=users&view=online_users'); ?>" class="btn btn-default">
+										<?php print SBText::_('Ver listado', 'users'); ?>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="clear"></div>
 			</div>
 		</div>
 		<?php 

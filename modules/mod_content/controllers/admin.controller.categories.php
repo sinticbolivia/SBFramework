@@ -99,6 +99,8 @@ class LT_AdminControllerContentCategories extends SB_Controller
 		$parent_id	= SB_Request::getInt('parent_id', 0);
 		$status		= SB_Request::getString('status', 'publish');
 		$lang		= SB_Request::getString('lang', LANGUAGE);
+		if( $parent_id < 0 )
+			$parent_id = 0;
 		if( empty($name) )
 		{
 			SB_MessagesStack::AddMessage(SB_Text::_('You need to enter a category name', 'content'), 'error');

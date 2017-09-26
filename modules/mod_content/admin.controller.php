@@ -89,6 +89,7 @@ class LT_AdminControllerContent extends SB_Controller
 			die('You dont have enough permissions');
 		}
 		$type = SB_Request::getString('type', 'page');
+		$title = __('Create New Content', 'mb');
 		//$data = parse_url(BASEURL);
 		sb_include_module_helper('content');
 		sb_add_script(BASEURL . '/js/fineuploader/all.fine-uploader.min.js', 'fineuploader');
@@ -104,6 +105,8 @@ class LT_AdminControllerContent extends SB_Controller
 		sb_set_view_var('features', $content_types[$type]['features']);
 		//##clear session vars
 		SB_Session::unsetVar('new_article_image_id');
+		
+		$this->document->SetTitle($title);
 		SB_Module::do_action_ref('content_before_new');
 	}
 	public function task_edit()

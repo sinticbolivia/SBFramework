@@ -8,9 +8,9 @@ $call = isMobile() ? 'callto' : 'skype';
 					<div class="widget">
 						<h2 class="title">Contactenos</h2>
 						<div class="body">
-							<div class="phone">Telefono: <a href="<?php print $call; ?>://69601099">69601099</a></div>
-							<div class="mobile">Celular: <a href="<?php print $call; ?>://69601089">69601089</a></div>
-							<address>Av. Brasil #100 entre Bolivar y Sucre, Oruro, Bolivia</address>
+							<div class="phone">Telefono: <a href="<?php print $call; ?>://76155082">76155082</a></div>
+							<div class="mobile">Celular: <a href="<?php print $call; ?>://75427047">75427047</a></div>
+							<address>S. Galvarro, Bolivar y Sucre Ed. Ismael oF 6, Oruro, Bolivia</address>
 						</div>
 					</div>
 				</div>

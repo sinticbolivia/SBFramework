@@ -3,6 +3,7 @@ abstract class SB_Database
 {
 	public	$debug = false;
 	public 	$db_type;
+	public	$databaseName;
 	public 	$lastId;
 	public 	$lastQuery;
 	public	$lcw = '';
@@ -39,7 +40,7 @@ abstract class SB_Database
 	/**
 	 * Append an AND sql operator
 	 * 
-	 * @param string|array $and
+	 * @param array $and The value key params
 	 * @return SB_Database
 	 */
 	public function SqlAND($and, $operator = '=', $prepend_val = '', $append_val = '')
@@ -134,7 +135,7 @@ abstract class SB_Database
 	{
 		$this->builtQuery .= $sql . ' ';
 	}
-	public function SanitizeColumns($cols)
+	public function SanitizeColumns($cols, $table_alias = null)
 	{
 		if( !is_array($cols) )
 		{
@@ -159,12 +160,13 @@ abstract class SB_Database
 				}
 				elseif( strstr($col, '.') )
 				{
-					list($alias, $_col) = explode('.', $col);
-					$scols[] = "{$this->lcw}$alias{$this->rcw}.{$this->lcw}$_col{$this->rcw}";
+					list($table_alias, $_col) = explode('.', $col);
+					$scols[] = "{$this->lcw}$table_alias{$this->rcw}.{$this->lcw}$_col{$this->rcw}";
 				}
 				else
 				{
-					$scols[] = "{$this->lcw}$col{$this->rcw}";
+					$scols[] = $table_alias ? "{$this->lcw}$table_alias{$this->rcw}.{$this->lcw}$col{$this->rcw}" : 
+												"{$this->lcw}$col{$this->rcw}";
 				}
 				
 			}
@@ -179,8 +181,8 @@ abstract class SB_Database
 	}
 	abstract public function Close();
 	abstract public function Query($query);
-	abstract public function FetchResults($query = null);
-	abstract public function FetchRow($query = null);
+	abstract public function FetchResults($query = null, $class = null, $vars = null);
+	abstract public function FetchRow($query = null, $class = null);
 	abstract public function GetVar($query = null, $varname = null);
 	abstract public function NumRows();
 	abstract public function EscapeString($str);
@@ -342,4 +344,6 @@ abstract class SB_Database
 		$query = substr($query, 0, -4);
 		return $this->Query($query);
 	}
+	public function BeginTransaction(){}
+	public function EndTransaction(){}
 }

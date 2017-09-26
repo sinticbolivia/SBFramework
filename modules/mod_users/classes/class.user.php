@@ -12,50 +12,77 @@
  *@property int role_id
  *@property string role_name
  *@property string role_key
+ *@property SB_Role	role
  *@property string $creation_date
  */
 class SB_User extends SB_ORMObject
 {
-	protected $_dbData = null;
-	protected $_permissions = array();
-	protected $_meta = array();
+	protected 	$_permissions = array();
+	protected	$role;
 	
 	public function __construct($user_id = null)
 	{
+		parent::__construct();
 		if( $user_id )
 			$this->getData($user_id);
 	}
 	public function getData($user_id){$this->GetDbData($user_id);}
 	public function GetDbData($user_id)
 	{
-		$dbh = SB_Factory::getDbh();
 		//$query = "SELECT * FROM users u, user_roles r WHERE u.user_id = $user_id AND u.role_id = r.role_id";
 		$query = "SELECT u.*, r.role_name, r.role_description, r.role_key FROM users u LEFT JOIN user_roles r ON u.role_id = r.role_id WHERE u.user_id = $user_id";
-		$res = $dbh->Query($query);
+		$res = $this->dbh->Query($query);
+		
 		if( !$res )
 			return false; 
-		$this->_dbData = $dbh->FetchRow();
+		
+		$this->_dbData = $this->dbh->FetchRow();
+		
 		//check for root
 		if( (int)$this->_dbData->role_id === 0 )
 		{
 			$this->role_id = 0;
 			$this->role_name = 'root';
 			$this->role_description = 'root';
+			$this->role 					= new SB_Role();
+			$this->role->role_id			= 0;
+			$this->role->role_name 			= 'root';
+			$this->role->role_description 	= 'root';
 		}
+		
 		$this->GetDbMeta();
 		$this->GetDbPermissions();
 		
 	}
+	public function SetDbData($data)
+	{
+		if( !is_object($data) )
+			return false;
+		$this->_dbData = (object)$data;
+		if( (int)$this->_dbData->role_id === 0 )
+		{
+			$this->role_id = 0;
+			$this->role_name = 'root';
+			$this->role_description = 'root';
+			$this->role = new SB_Role();
+			$this->role->role_id			= 0;
+			$this->role->role_name 			= 'root';
+			$this->role->role_description 	= 'root';
+		}
+		if( empty($this->meta) )
+			$this->GetDbMeta();
+	}
 	public function GetDbMeta()
 	{
-		$dbh = SB_Factory::getDbh();
+		if( !$this->user_id )
+			return false;
 		//get user meta
 		$query = "SELECT meta_id, meta_key, meta_value, creation_date FROM user_meta WHERE user_id = $this->user_id";
-		if( $dbh->Query($query) )
+		if( $this->dbh->Query($query) )
 		{
-			foreach($dbh->FetchResults() as $row)
+			foreach($this->dbh->FetchResults() as $row)
 			{
-				$this->_meta[$row->meta_key] = trim($row->meta_value);
+				$this->meta[$row->meta_key] = trim($row->meta_value);
 			}
 		}
 	}
@@ -73,19 +100,18 @@ class SB_User extends SB_ORMObject
 			$this->_permissions[] = $cap->permission;
 		}
 	}
-	public function SetDbData($data)
+	/**
+	 * Get the user role
+	 * @return  SB_Role
+	 */
+	public function GetRole()
 	{
-		if( !is_object($data) )
-			return false;
-		$this->_dbData = $data;
-		if( (int)$this->_dbData->role_id === 0 )
+		if( !$this->role )
 		{
-			$this->role_id = 0;
-			$this->role_name = 'root';
-			$this->role_description = 'root';
+			$this->role = new SB_Role($this->role_id);
 		}
-		if( empty($this->_meta) )
-			$this->GetDbMeta();
+		
+		return $this->role;
 	}
 	/**
 	 * Check if user has a permission
@@ -105,6 +131,12 @@ class SB_User extends SB_ORMObject
 	}
 	public function __get($var)
 	{
+		if( $var == 'role' )
+		{
+			return $this->GetRole();
+		}
+		return parent::__get($var);
+		/*
 		if( is_object($this->_dbData) && property_exists($this->_dbData, $var) )
 		{
 			return $this->_dbData->$var;
@@ -115,9 +147,12 @@ class SB_User extends SB_ORMObject
 		}
 		if( isset($this->$var) )
 			return $this->$var;
+		*/
 	}
+	/*
 	public function __set($var, $value)
 	{
+		
 		if( is_object($this->_dbData) && property_exists($this->_dbData, $var) )
 		{
 			$this->_dbData->$var = $value;
@@ -125,6 +160,7 @@ class SB_User extends SB_ORMObject
 		}
 		return parent::__set($var, $value);
 	}
+	*/
 	public static function updateMeta($user_id, $meta_key, $meta_value)
 	{
 		SB_Meta::updateMeta('user_meta', $meta_key, $meta_value, 'user_id', $user_id);

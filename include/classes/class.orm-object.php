@@ -1,15 +1,18 @@
 <?php
 abstract class SB_ORMObject extends SB_Object
 {
+	/**
+	 * @var SB_Database
+	 */
 	protected $dbh;
 	protected $_dbData = null;
 	protected $meta = array();
 	public abstract function GetDbData($id);
 	public abstract function SetDbData($data);
-	protected function __construct()
+	protected function __construct($dbh = null)
 	{
 		$this->_dbData = new stdClass();
-		$this->dbh = SB_Factory::getDbh();
+		$this->dbh = $dbh ? $dbh : SB_Factory::getDbh();
 	}
 	public function jsonSerialize()
 	{

@@ -5,10 +5,15 @@ class SB_Sqlite3 extends SB_Database
 	protected $result = null;
 	public function __construct($db_name)	
 	{
-		$this->db_type = 'sqlite3';
+		$this->db_type 		= 'sqlite3';
+		$this->databaseName = $db_name;
 		$this->lcw = '[';
 		$this->rcw = ']';
 		$this->dbh = new SQLite3($db_name);
+		$this->dbh->busyTimeout(3500);
+		//##set journal mode
+		//$this->dbh->exec('PRAGMA schema.journal_mode = WAL');
+		$this->dbh->exec('PRAGMA journal_mode = wal;');
 	}
 	public function Query($query)
 	{
@@ -19,16 +24,20 @@ class SB_Sqlite3 extends SB_Database
 			throw new Exception("SQLITE3 ERROR: Invalid query, it is empty or null");
 		$this->_rows = 0;
 		$this->lastQuery = $query;
-		
-		if( preg_match('/insert|update|delete\s+from/isU', $query) )
+		if( preg_match('/begin|commit/i', $query) )
 		{
-			//die('query:'.$query);
+			$this->dbh->exec($query);
+			return true;
+		}
+		if( preg_match('/insert\s+into|update|delete\s+from/isU', $query) )
+		{
+			$this->result = null;
 			$res = $this->dbh->exec($query);
 			if( !$res )
 			{
 				throw new Exception('SQLite3 ERROR: ' . $this->dbh->lastErrorMsg() . " QUERY WAS: $query");
 			}
-			if( stristr($query, 'insert') )
+			if( preg_match('/insert\s+into/iU', $query) )
 			{
 				$this->lastId = $this->dbh->lastInsertRowID();
 				return $this->lastId;
@@ -36,23 +45,30 @@ class SB_Sqlite3 extends SB_Database
 			
 			return $res;
 		}
-		
-		
 		//##execute query
 		$this->result = $this->dbh->query($query);
-		if( !$this->result )
-			throw new Exception("SQLite3 ERROR: " . $this->dbh->lastErrorMsg() . " QUERY WAS: " . $query);
 		
-		$this->result->reset();
-		while( $_r = $this->result->fetchArray(SQLITE3_ASSOC) )
+		if( !$this->result )
 		{
-			$this->_rows++;
+			//$this->result->finalize();
+			throw new Exception("SQLite3 ERROR: " . $this->dbh->lastErrorMsg() . " QUERY WAS: " . $query);
 		}
-		$this->result->reset();
-	
+		if( $this->result->numColumns() > 0 )
+		{
+			//$this->result->reset();
+			while( $_r = $this->result->fetchArray(SQLITE3_ASSOC) )
+			{
+				$this->_rows++;
+			}
+			$this->result->reset();
+		}
+		else
+		{
+			$this->_rows = 0;
+		}
 		return $this->_rows;
 	}
-	public function FetchResults($query = null)
+	public function FetchResults($query = null, $class = null, $vars = array())
 	{
 		if( $query )
 			$this->Query($query);
@@ -67,35 +83,82 @@ class SB_Sqlite3 extends SB_Database
 			return $res;
 		}
 		*/
+		$class = ( $class && class_exists($class) ) ? $class : null;
 		while( $row = $this->result->fetchArray(SQLITE3_ASSOC) )
 		{
-			$res[] = (object)$row;
+			if( $class )
+			{
+				$obj = new $class();
+				if( is_array($vars) )
+				{
+					foreach($vars as $var => $value)
+					{
+						$obj->$var = $value;
+					}
+				}
+				if( method_exists($obj, 'SetDbData') )
+				{
+					$obj->SetDbData((object)$row);
+				}
+				elseif( method_exists($obj, 'Bind') )
+				{
+					$obj->Bind((object)$row);
+				}
+				else
+				{
+					$obj->db_data = $row;
+				}
+				$res[] = $obj;
+			}
+			else
+			{
+				$res[] = (object)$row;
+			}
+			//$res[] = (object)$row;
 		}
 		$this->result->finalize();
 		$this->result = null;
 		return $res;
 	}
-	public function FetchRow($query = null)
+	public function FetchRow($query = null, $class = null)
 	{
 		$res = null;
 		if( $query )
 		{
-			$this->lastQuery = $query;
-			$res = $this->dbh->querySingle($query, true);
+			$this->Query($query);
+			/*$res = $this->dbh->querySingle($query, true);
 			if( !$res || (is_array($res) && !count($res)) )
 			{
 				return null;
-			}
+			}*/
 		}
-		else
+		//else
+		//{
+		if( !$this->_rows )
+			return null;
+		
+		$res = $this->result->fetchArray(SQLITE3_ASSOC);
+		$this->result->finalize();
+		$this->result = null;
+		//}
+		//if( !$res )
+		//	return null;
+		
+		if( !$class || !class_exists($class) )
+			return (object)$res;
+		$obj = new $class();
+		if( method_exists($obj, 'SetDbData') )
 		{
-			$res = $this->result->fetchArray(SQLITE3_ASSOC);
-			$this->result->finalize();
-			$this->result = null;
+			$obj->SetDbData((object)$res);
+			return $obj;
 		}
-		
-		
-		return (object)$res;
+		if( method_exists($obj, 'Bind') )
+		{
+			$obj->Bind((object)$res);
+			return $obj;
+		}
+		$obj->db_data = $res;
+		return $obj;
 	}
 	public function GetVar($query = null, $varname = null)
 	{
@@ -158,4 +221,6 @@ class SB_Sqlite3 extends SB_Database
 		$this->builtQuery .= "LIMIT $offset,$limit";
 		return $this;
 	}
+	public function BeginTransaction(){$this->Query('BEGIN');}
+	public function EndTransaction(){$this->Query('COMMIT');}
 }

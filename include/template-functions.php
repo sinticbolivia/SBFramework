@@ -19,6 +19,13 @@ function lt_get_template($tpl_file)
 		return null;
 	return $theme_dir . SB_DS . $tpl_file;
 }
+/**
+ * Include a template file.
+ * The file is relate to current template
+ * 
+ * @param string $tpl_file The template file location
+ * @param array $args The args passed to template file
+ */
 function lt_include_template($tpl_file, $args = null)
 {
 	$tpl_file = $tpl_file . '.php';
@@ -190,12 +197,14 @@ function lt_body_class($classes = null)
 function lt_add_tinymce($args = null)
 {
 	global $tinymce_args;
+	list($lang,) = explode('_', LANGUAGE);
 	$def_args = array(
 			'convert_urls'			=> true,
 			'relative_urls'			=> false,
 			'remove_script_host' 	=> false,
-			'selector' 		=> 'textarea',
-			'language'		=> 'es',
+			'selector' 		=> 'textarea:not(.mceNoEditor)',
+			'editor_deselector' => "mceNoEditor",
+			'language'		=> $lang,//'es',
 			'height'		=> 300,
 			'schema'		=> 'html5',
 			'theme'			=> 'modern',
@@ -331,7 +340,7 @@ function lt_template_fallback()
 	<div id="container">
 		<div id="content">
 			<div class="content-wrap">
-				<?php //SB_MessagesStack::ShowMessages(); ?>
+				<?php SB_MessagesStack::ShowMessages(); ?>
 				<?php sb_show_module(); ?>
 			</div>
 		</div>
@@ -412,4 +421,36 @@ function sb_add_js_global_var($module = null, $varname, $value)
 	}
 	$globals[$varname] = $value;
 	return true;
+}
+/**
+ * Enqueue a javascript file
+ * 
+ * @param mixed $id 
+ * @param mixed $src 
+ * @param mixed $order 
+ * @param mixed $footer 
+ * @return  
+ */
+function lt_add_js($id, $src = null, $order = 0, $footer = false)
+{
+	$registerd_js = array(
+		'jquery'	=> array('src' => BASEURL . '/js/jquery.min.js'),
+		'bootstrap'	=> array(
+			'src'	=> BASEURL . '/js/bootstrap-3.3.5/js/bootstrap.min.js',
+			'href'	=> BASEURL . '/js/bootstrap-3.3.5/css/bootstrap.min.css'
+		)
+	);
+	if( isset($registerd_js[$id]) )
+	{
+		if( isset($registerd_js[$id]['href']) )
+		{
+			sb_add_style($id, $registerd_js[$id]['href']);
+		}
+		sb_add_script($registerd_js[$id]['src'], $id, $order, $footer);
+	}
+	elseif( $id && $src )
+	{
+		sb_add_script($src, $id, $order, $footer);
+	}
+	
 }

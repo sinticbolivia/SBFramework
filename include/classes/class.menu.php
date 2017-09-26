@@ -158,14 +158,14 @@ class SB_Menu
 	
 	public static function buildMainMenu($ops = array())
 	{
-		//asort(self::$_menu);
-		//print_r(self::$menus_levels);
-		//print_r(self::$_menu);
-		//die();
-		
+	
+		$def_ops = array('class' => 'sb-menu', 
+							'class_submenu' => 'sb-submenu');
+		$ops = array_merge($def_ops, $ops);
 		$user = sb_get_current_user();
-		$html_menu = sprintf("<ul %s class=\"sb-menu %s\">", 
-								isset($ops['id']) ? 'id="'.$ops['id'].'"' : '', isset($ops['class']) ? $ops['class']: '');
+		$html_menu = sprintf("<ul %s class=\"%s\">", 
+								isset($ops['id']) ? 'id="'.$ops['id'].'"' : '', 
+								$ops['class']);
 		$max_order = max(array_keys(self::$_menu));
 		//foreach(self::$_menu as $order => $menu)
 		for($i = 0; $i <= $max_order; $i += 0.1)
@@ -175,6 +175,14 @@ class SB_Menu
 			$menu = self::$_menu[$index];
 			if( !$user->can($menu['capability']) ) continue;
 			$attr = '';
+			$submenu_id = "submenu_$i";
+			$ops['submenu_id'] = $submenu_id;
+			$childs = self::_buildChilds($menu, $ops);
+			if( $childs )
+			{
+				$attr .= "data-toggle=\"collapse\" ";
+				$menu['link'] = '#'.$submenu_id;
+			}
 			if( isset($menu['data']) ) foreach($menu['data'] as $name => $val)
 			{
 				$attr .= sprintf("%s=\"%s\" ", $name, $val);
@@ -186,17 +194,23 @@ class SB_Menu
 				unset();
 			}
 			*/
+			
 			$html_menu .= sprintf("<li id=\"%s\" data-menu_order=\"%d\" class=\"sb-menu-item\"><a href=\"%s\" %s>%s</a>%s</li>", 
-									$menu['id'], $menu['order'], $menu['link'], $attr, $menu['title'], self::_buildChilds($menu));
+									$menu['id'], 
+									$menu['order'], 
+									$menu['link'], 
+									$attr, 
+									$menu['title'], 
+									$childs);
 		}
 		$html_menu .= '</ul>';
 		self::$html_menu = $html_menu;
 	}
-	protected static function _buildChilds($menu)
+	protected static function _buildChilds($menu, $ops = array())
 	{
 		if( !count($menu['childs']) )
-			return '';
-		$sub_menu = '<ul class="sb-submenu">';
+			return null;
+		$sub_menu = '<ul '.(isset($ops['submenu_id']) ? 'id="'.$ops['submenu_id'].'"' : '').'class="'.$ops['class_submenu'].'">';
 		$user = sb_get_current_user();
 		$curren_menu_link = '';
 		foreach($menu['childs'] as $order => $submenu)
@@ -213,7 +227,7 @@ class SB_Menu
 									$submenu['order'], 
 									$submenu['link'], 
 									$attr,
-									$submenu['title'], self::_buildChilds($submenu));
+									$submenu['title'], self::_buildChilds($submenu, $ops));
 		}
 		$sub_menu .= '</ul>';
 		
@@ -234,6 +248,7 @@ class SB_Menu
 	 */
 	public static function rederMenu($type, $ops = array())
 	{
+		
 		SB_Module::do_action('before_render_menu', self::$_menu);
 		self::buildMainMenu($ops);
 		print self::$html_menu;

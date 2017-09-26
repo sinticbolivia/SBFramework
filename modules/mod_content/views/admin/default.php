@@ -1,13 +1,19 @@
 <?php
 ?>
 <div class="wrap">
-	<h1>
-		<?php print $title; ?>
-		<a class="btn btn-secondary has-popover pull-right" href="<?php print $new_link; ?>" 
-			data-content="<?php print SBText::_('CONTENT_BUTTON_NEW'); ?>">
-			<?php print $button_new_label; ?>
-		</a>
-	</h1>
+	<h2 id="page-title">
+		<div class="container-fluid">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"><?php print $title; ?></div>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<div class="page-buttons">
+					<a class="btn btn-primary has-popover" href="<?php print $new_link; ?>" 
+						data-content="<?php print SBText::_('CONTENT_BUTTON_NEW'); ?>">
+						<?php print $button_new_label; ?>
+					</a>
+				</div>
+			</div>
+		</div>
+	</h2>
 	<div class="row">
 		<div class="col-md-6">
 			<form action="" method="get" class="">

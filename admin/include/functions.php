@@ -41,5 +41,5 @@ function sb_build_admin_menu()
 			'<span class="glyphicon glyphicon-th"></span>'.__('Templates', 'lt'), 
 			SB_Route::_('templates.php'), 'menu-templates', 'manage_templates');
 	SB_Module::do_action('admin_menu');
-	SB_Menu::buildMainMenu();
+	//SB_Menu::buildMainMenu();
 }

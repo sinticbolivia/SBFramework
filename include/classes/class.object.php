@@ -47,7 +47,7 @@ class SB_Object extends stdClass implements JsonSerializable
 	}
 	public function jsonSerialize()
 	{
-		return $this->_data;
+		return array_merge($this->_data, get_object_vars($this));
 	}
 	/**
 	 * Set object properties values from data
@@ -57,10 +57,18 @@ class SB_Object extends stdClass implements JsonSerializable
 	 */
 	public function Bind($data, $props = null)
 	{
+		$data = (object)$data;
 		foreach($data as $prop => $value)
 		{
-			if( isset($this->$prop) || in_array($prop, $props) )
+			/*
+			if( $props && in_array($prop, $props) )
+			{
 				$this->$prop = trim($value);
+			}
+			else
+			{*/
+				$this->$prop = is_object($value) || is_array($value) ? $value : trim($value);
+			//}
 		}
 	}
 }

@@ -3,11 +3,13 @@ class SB_Request
 {
 	protected 	$vars;
 	protected 	static $instance;
+	public 		static	$rawPath;
 	public 		static $path;
 	public		static $script;
 	public		static $queryString;
 	public 		static $responseCode;
 	public		static $request;
+	public		static	$requestMethod = 'GET';
 	
 	protected function __construct()
 	{
@@ -16,21 +18,26 @@ class SB_Request
 	}
 	protected function ValidateRequest()
 	{
-		$req_url 	= urldecode($_SERVER['REQUEST_URI']);//print_r($_SERVER);
-		$url 		= parse_url($req_url);
-		self::$path 		= isset($url['path']) ? $url['path'] : '';
+		//print_r($_SERVER);
+		$req_url 			= urldecode($_SERVER['REQUEST_URI']);//print_r($_SERVER);
+		$url 				= parse_url($req_url);
+		//print_r($url);
+		self::$rawPath 		= isset($url['path']) ? $url['path'] : '';
 		self::$queryString 	= isset($url['query']) ? $url['query'] : null;
 		self::$script 		= basename(self::$path);
-		self::$request 		= str_replace(BASEURL, '', HTTP_HOST . self::$path . (!empty(self::$queryString) ? '?' . self::$queryString : ''));
+		self::$path 		= str_replace(BASEURL, '', HTTP_HOST . self::$rawPath);
+		self::$request 		= str_replace(BASEURL, '', HTTP_HOST . self::$rawPath . (!empty(self::$queryString) ? '?' . self::$queryString : ''));
+		//var_dump(self::$path);
 		if( file_exists(BASEPATH . SB_DS . self::$script) )
 			self::$responseCode = 200;
 		else
 			self::$responseCode = 400;
-		
+		self::$requestMethod = $_SERVER['REQUEST_METHOD'];
 	}
 	public static function Start()
 	{
 		self::$instance = new SB_Request();
+		self::$instance->ValidateRequest();
 		self::$instance->MergeServerVars();
 	}
 	protected function MergeServerVars()
@@ -44,9 +51,16 @@ class SB_Request
 	{
 		return isset(self::$instance->vars[$var]) ? self::$instance->vars[$var] : $default;
 	}
-	public static function setVar($var, $value)
+	public static function setVar($var, $value, $type = null)
 	{
+		$type = $type ? $type : self::$requestMethod;
 		self::$instance->vars[$var] = $value;
+		if( $type == 'GET' )
+			$_GET[$var] = $value;
+		elseif( $type == 'POST' || $type == 'PUT' )
+			$_POST[$var] = $value;
+	
+		$_REQUEST[$var] = $value;
 	}
 	/**
 	 * Get parameters from request and validate to a specific data type
@@ -125,5 +139,28 @@ class SB_Request
 		if( !($array = self::getVar($array_name)) )
 			return $default;
 		 return isset($array[$var]) ? $array[$var] : $default;
+	}
+	/**
+	 * Save the current request data
+	 * 
+	 * @param string $name
+	 */
+	public static function Save($name)
+	{
+		SB_Session::setVar($name, self::$instance->vars);
+	}
+	/**
+	 * Recover a saved request data
+	 * 
+	 * @param string $name
+	 * @return NULL|Ambigous <string, mixed>
+	 */
+	public static function GetSaved($name)
+	{
+		$data = SB_Session::getVar($name);
+		if( !$data )
+			return null;
+		SB_Session::unsetVar($name);
+		return $data;
 	}
 }

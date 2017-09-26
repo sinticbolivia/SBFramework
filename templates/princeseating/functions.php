@@ -80,6 +80,15 @@ class LT_ThemePrinceseating
 							'featured_image'	=> true,
 							'use_dates'			=> false,
 							'calculated_dates'	=> false
+					),
+					'section'	=> array(
+						'for_object'	=> 'fabrics',
+						'labels'		=> array(
+								'menu_label' 	=> '<span class="glyphicon glyphicon-folder-open"></span> Groups', 
+								'new_label' 	=> 'New Group',
+								'edit_label'	=> 'Edit Group',
+								'listing_label'	=> 'Fabrics Groups'
+						)
 					)
 		);
 		$types['finishes'] = array(
@@ -103,6 +112,30 @@ class LT_ThemePrinceseating
 								'listing_label'	=> 'Finishes Groups'
 						)
 					)
+		);
+		$types['colors'] = array(
+					'labels'	=> array(
+							'menu_label'	=> __('Colors', 'ps'),
+							'new_label'		=> __('New Color', 'ps'),
+							'edit_label'	=> __('Edit Color', 'ps'),
+							'listing_label'	=> __('Colors', 'ps')
+					),
+					'features'	=> array(
+							'featured_image'	=> true,
+							'use_dates'			=> false,
+							'calculated_dates'	=> false
+					),
+					/*
+					'section'	=> array(
+						'for_object'	=> 'colors',
+						'labels'		=> array(
+								'menu_label' 	=> '<span class="glyphicon glyphicon-folder-open"></span> Groups', 
+								'new_label' 	=> 'New Group',
+								'edit_label'	=> 'Edit Group',
+								'listing_label'	=> 'Colors Groups'
+						)
+					)
+					*/
 		);
 		$types['reps'] = array(
 					'labels'	=> array(
@@ -169,6 +202,7 @@ class LT_ThemePrinceseating
 		<li><a href="#dimensions" data-toggle="tab"><?php _e('Dimensions', 'ps'); ?></a></li>
 		<li><a href="#fabrics" data-toggle="tab"><?php _e('Fabrics', 'ps'); ?></a></li>
 		<li><a href="#finishes" data-toggle="tab"><?php _e('Finishes', 'ps'); ?></a></li>
+		<li><a href="#colors" data-toggle="tab"><?php _e('Colors', 'ps'); ?></a></li>
 		<?php
 	}
 	public function action_product_tabs_content($product)
@@ -212,21 +246,24 @@ class LT_ThemePrinceseating
 		
 		//##fabrics
 		sb_include_module_helper('content');
-		$fabrics			= array();
-		$finishes 			= array();
-		$c_fabrics 			= array();
-		$c_finishes			= array();
+		$fabrics	= array();
+		$finishes 	= array();
+		$c_fabrics 	= array();
+		$c_finishes	= array();
+		$colors		= array();
+		$c_colors	= array();
 		if( $product )
 		{
-			$c_fabrics = (array)json_decode($product->_fabrics);
+			$c_fabrics	= (array)json_decode($product->_fabrics);
+			$c_finishes = (array)json_decode($product->_finishes);
+			$c_colors	= (array)json_decode($product->_colors);
+			/*
 			$fabrics = LT_HelperContent::GetArticles(array(
 				'type' 			=> 'fabrics',
 				'rows_per_page'	=> -1,
 				'order_by'		=> 'title',
 				'order'			=> 'asc'
 			));
-			$c_finishes = (array)json_decode($product->_finishes);
-			/*
 			$finishes = LT_HelperContent::GetArticles(array(
 				'type' 			=> 'finishes',
 				'rows_per_page'	=> -1,
@@ -234,7 +271,14 @@ class LT_ThemePrinceseating
 				'order'			=> 'asc'
 			));
 			*/
-			$finishes = LT_HelperContent::GetSections(0, 'finishes');
+			$fabrics	= LT_HelperContent::GetSections(0, 'fabrics');
+			$finishes	= LT_HelperContent::GetSections(0, 'finishes');
+			$colors 	= LT_HelperContent::GetArticles(array(
+				'type' 			=> 'colors',
+				'rows_per_page'	=> -1,
+				'order_by'		=> 'title',
+				'order'			=> 'asc'
+			));
 		}
 		?>
 		<div id="dimensions" class="tab-pane">
@@ -277,12 +321,12 @@ class LT_ThemePrinceseating
 			<div class="form-group">
 				<label><?php _e('Select Fabrics'); ?></label>
 				<div style="width:100%;height:200px;overflow:auto;" class="form-control">
-					<?php foreach($fabrics['articles'] as $f): ?>
+					<?php foreach($fabrics as $g): ?>
 					<div>
 						<label>
-							<input type="checkbox" name="meta[_fabrics][]" value="<?php print $f->content_id; ?>"
-								<?php print in_array($f->content_id, $c_fabrics) ? 'checked' : ''; ?>/>
-							<?php print $f->title; ?>
+							<input type="checkbox" name="meta[_fabrics][]" value="<?php print $g->section_id; ?>"
+								<?php print in_array($f->section_id, $c_fabrics) ? 'checked' : ''; ?>/>
+							<?php print $f->name; ?>
 						</label>
 					</div>
 					<?php endforeach; ?>
@@ -299,6 +343,22 @@ class LT_ThemePrinceseating
 							<input type="checkbox" name="meta[_finishes][]" value="<?php print $g->section_id; ?>"
 								<?php print in_array($g->section_id, $c_finishes) ? 'checked' : ''; ?>/>
 							<?php print $g->name; ?>
+						</label>
+					</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div><!-- end id="finishes" -->
+		<div id="colors" class="tab-pane">
+			<div class="form-group">
+				<label><?php _e('Select Colors'); ?></label>
+				<div style="width:100%;height:200px;overflow:auto;" class="form-control">
+					<?php foreach($colors['articles'] as $c): ?>
+					<div>
+						<label>
+							<input type="checkbox" name="meta[_colors][]" value="<?php print $c->content_id; ?>"
+								<?php print in_array($c->content_id, $c_colors) ? 'checked' : ''; ?>/>
+							<?php print $c->title; ?>
 						</label>
 					</div>
 					<?php endforeach; ?>

@@ -33,6 +33,7 @@ class SB_MySQL extends SB_Database
 		{
 			throw new Exception("Fatal error: cannot connect to database server");
 		}
+		$this->databaseName = $database;
 		// No afectará a $mysqli->real_escape_string();
 		//$this->dbh->query("SET NAMES utf8");
 		$this->Query("SET NAMES utf8");
@@ -117,6 +118,7 @@ class SB_MySQL extends SB_Database
 		}
 			
 		$res = preg_match('/^select/isU', $query, $matches);
+		
 		if( $res > 0 )
 			return $this->isMySqlI ? $this->result->num_rows : mysql_num_rows($this->result);
 			
@@ -132,7 +134,7 @@ class SB_MySQL extends SB_Database
 		return $this->isMySqlI ? $this->result->fetch_array($type) : mysql_fetch_array($this->result, $type);
 		//return mysql_fetch_array($this->result, MYSQL_ASSOC);
 	}
-	public function FetchRow($query = null)
+	public function FetchRow($query = null, $class = null)
 	{
 		if( $query != null )
 		{
@@ -140,7 +142,25 @@ class SB_MySQL extends SB_Database
 				return null;
 		}
 			
-		return $this->isMySqlI ? $this->result->fetch_object() : mysql_fetch_object($this->result);
+		//$row = $this->isMySqlI ? $this->result->fetch_object() : mysql_fetch_object($this->result);
+		$row = $this->FetchObject();
+		if( !$row )
+			return null;
+		if( !$class || !class_exists($class) )
+			return $row;
+		$obj = new $class();
+		if( method_exists($obj, 'SetDbData') )
+		{
+			$obj->SetDbData($row);
+			return $obj;
+		}
+		if( method_exists($obj, 'Bind') )
+		{
+			$obj->Bind($row);
+			return $obj;
+		}
+		$obj->db_data = $row;
+		return $obj;
 	}
 	public function GetVar($query = null, $varname = null)
 	{
@@ -174,15 +194,44 @@ class SB_MySQL extends SB_Database
 		
 		return $this->isMySqlI ? $this->result->fetch_object($class != null ? $class : null) : mysql_fetch_object($this->result, $class != null ? $class : null);
 	}
-	public function FetchResults($query = null)
+	public function FetchResults($query = null, $class = null, $vars = null)
 	{
 		if( $query != null )
 			$this->Query($query);
 		
 		$results = array();
+		$class = ( $class && class_exists($class) ) ? $class : null;
 		while( $row = $this->FetchObject() )
 		{
-			$results[] = $row;
+			if( $class )
+			{
+				$obj = new $class();
+				//##assign object vars for initialization
+				if( is_array($vars) )
+				{
+					foreach($vars as $var => $value)
+					{
+						$obj->$var = $value;
+					}
+				}
+				if( method_exists($obj, 'SetDbData') )
+				{
+					$obj->SetDbData($row);
+				}
+				elseif( method_exists($obj, 'Bind') )
+				{
+					$obj->Bind($row);
+				}
+				else
+				{
+					$obj->db_data = $row;
+				}
+				$results[] = $obj;
+			}
+			else
+			{
+				$results[] = $row;
+			}
 		}
 		return $results;
 	}

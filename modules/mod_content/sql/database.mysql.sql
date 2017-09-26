@@ -65,3 +65,10 @@ CREATE TABLE IF NOT EXISTS category2content(
 	category_id				bigint not null,
 	content_id				bigint not null
 );
+CREATE TABLE IF NOT EXISTS tags(
+	id 						bigint not null auto_increment primary key,
+	object_type				varchar(128),
+	object_id				bigint not null,
+	str						varchar(128),
+	creation_date			datetime
+);

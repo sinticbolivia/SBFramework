@@ -34,19 +34,20 @@ function sb_get_content_sections($parent_id = 0, $for_object = 'page')
 	
 	return $sections;
 }
-function sb_get_categories($parent_id = 0)
+function sb_get_categories($parent_id = 0, $lang = LANGUAGE)
 {
 	$parent_id = (int)$parent_id;
 	$query = "SELECT * FROM categories ";
-	if( $parent_id )
-	{
-		$query .= "WHERE parent_id = $parent_id ";
-	}
+	$query .= "WHERE parent_id = $parent_id AND lang_code = '$lang'";
+	
 	$cats = SB_Factory::getDbh()->FetchResults($query);
+	
 	foreach($cats as $i => $c)
 	{
+		//print_r($cats);die($query);
 		$cats[$i]->childs = sb_get_categories($c->category_id);
 	}
+	
 	return $cats;
 }
 function sb_sections_dropdown($args = array())
@@ -187,6 +188,7 @@ function sb_categories_html_list($args = array())
 	}
 	endif;
 	$sections = sb_get_categories();
+	
 	$select = '<ul id="'.$args['id'].'" class="'.$args['class'].'">';
 	foreach($sections as $s)
 	{
@@ -317,6 +319,9 @@ function lt_content_get_page_templates()
 {
 	$templates = array();
 	$tpl_dir = sb_get_template_dir('frontend');
+	if( !$tpl_dir || $tpl_dir == TEMPLATES_DIR || !is_dir($tpl_dir) )
+		return $templates;
+		
 	$dh = opendir($tpl_dir);
 	while( ($file = readdir($dh)) !== false)
 	{
@@ -410,4 +415,57 @@ function lt_content_register_content_types()
 	$content_types = SB_Module::do_action('content_types', $content_types);
 	
 	return $content_types;
+}
+/**
+ * Get tags for an object
+ * 
+ * Example:
+ * $type = content|section|category|post
+ * 
+ * @param string $type The object type
+ * @param int $id The object id
+ * @return  array
+ */
+function lt_content_get_object_tags($type = null, $id = null)
+{
+	$conds = array();
+	if( $type )
+		$conds['object_type'] = $type;
+	if( (int)$id )
+		$conds['object_id'] = (int)$id;
+	
+	$tags = SB_DbTable::GetTable('tags', 1)->GetRows(-1, 0, $conds);
+	
+	return $tags;
+}
+/**
+ * Insert object tags
+ * 
+ * @param mixed $tags The object tags string or array
+ * @param mixed $object_type The object type
+ * @param mixed $object_id The object id
+ * @return  
+ */
+function lt_content_set_object_tags($tags, $object_type, $object_id)
+{
+	if( !(int)$object_id )
+		return false;
+	$query = "REPLACE INTO tags";
+	if( !is_array($tags) )
+	{
+		$tags = array_map('trim', explode(',', $tags));
+	}
+	$dbh = SB_Factory::getDbh();
+	$_tags = array();
+	foreach($tags as $tag)
+	{
+		$_tags[] = array(
+			'object_type' 	=> $object_type,
+			'object_id' 	=> (int)$object_id,
+			'str'			=> $tag,
+			'creation_date'	=> date('Y-m-d H:i:s')
+		);
+	}
+	$dbh->InsertBulk('tags', $_tags);
+	return true;
 }

@@ -44,6 +44,7 @@ class SB_Language
 		if( !is_dir($path) )
 			return false;//throw new Exception('Locale '.$path.' dir does not exists');
 		$code_set = '';
+		$lang_path = $path . SB_DS . $lang_code;
 		if( strtolower(PHP_OS) == 'linux' )
 		{
 			$system_lang = getenv('LC_NAME');
@@ -53,16 +54,19 @@ class SB_Language
 			//}
 		}
 		//$full_code = sprintf("%s%s", $lang_code, $code_set);
-		if( !is_dir($path . SB_DS . $lang_code) )
+		if( !is_dir($lang_path) )
 		{
 			return false;
 		}
+		//var_dump($lang_path, is_dir($lang_path . '.utf-8'));
 		//##create language link to utf-8 codeset
-		if( !is_dir($path . SB_DS . $lang_code . '.utf-8') && is_writable($path) )
+		if( !is_dir($lang_path . '.utf-8') && is_writable($path) )
 		{
 			if( function_exists('symlink') )
 			{
-				$res = @symlink($path . SB_DS . $lang_code, $path . SB_DS . $lang_code . '.utf-8');
+				//var_dump($path, $lang_code);
+				$slink = $lang_path . '.utf-8';
+				$res = symlink($lang_path, $slink);
 				if( !$res )
 				{
 					sb_copy_recursive($path . SB_DS . $lang_code, $path . SB_DS . $lang_code . '.utf-8');

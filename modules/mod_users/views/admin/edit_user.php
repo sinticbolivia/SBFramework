@@ -18,8 +18,21 @@ $countries = sb_include('countries.php', 'file');
 ?>
 <!-- <link rel="stylesheet" href="<?php print BASEURL;?>/js/fineuploader/fineuploader.css" /> -->
 <div class="wrap">
-	<h1><?php print $title; ?></h1>
-		<form action="" method="post" enctype="multipart/form-data">
+	<h2 id="page-title">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"><?php print $title; ?></div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="page-buttons">
+						<a href="javascript:;" class="btn btn-success" onclick="jQuery('#form-user').submit();">
+							<?php _e('Save', 'users'); ?>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h2>
+		<form id="form-user" action="" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mod" value="users" />
 			<input type="hidden" name="task" value="save_user" />
 			<?php if( isset($user) ): ?>
@@ -207,10 +220,13 @@ $countries = sb_include('countries.php', 'file');
 			  	</div>
 			</div><br/>
 			<p>
-				<a href="index.php?mod=users" class="btn btn-secondary has-popover" data-content="<?php print SBText::_('USERS_BUTTON_CANCEL'); ?>">
-					<?php print SBText::_('Cancelar', 'users'); ?></a>
-				<button type="submit" class="btn btn-secondary has-popover" data-content="<?php print SBText::_('USERS_BUTTON_SAVE'); ?>">
-					<?php print SBText::_('Guardar', 'users'); ?></button>
+				<a href="index.php?mod=users" class="btn btn-danger has-popover" 
+					data-content="<?php print SBText::_('USERS_BUTTON_CANCEL'); ?>">
+					<?php _e('Cancel', 'users'); ?></a>
+				<button type="submit" class="btn btn-success has-popover" 
+					data-content="<?php print SBText::_('USERS_BUTTON_SAVE'); ?>">
+					<?php _e('Save', 'users'); ?>
+				</button>
 			</p>
 		</form>
 </div>

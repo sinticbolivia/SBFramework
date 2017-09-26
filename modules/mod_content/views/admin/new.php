@@ -6,8 +6,20 @@ if( !isset($content) )
 
 ?>
 <div class="wrap">
-	<h1><?php print $title; ?></h1>
-	<form action="" method="post">
+	<h2 id="page-title">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"><?php print $title; ?></div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="page-buttons">
+						<a href="javascript:;" class="btn btn-success" onclick="jQuery('#form-content').submit();">
+							<?php _e('Save', 'content'); ?>
+						</a>
+					</div>
+				</div>
+		</div>
+	</h2>
+	<form id="form-content" action="" method="post">
 		<input type="hidden" name="mod" value="content" />
 		<input type="hidden" name="task" value="save" />
 		<input type="hidden" name="type" value="<?php print $type; ?>" />
@@ -114,9 +126,11 @@ if( !isset($content) )
 				
 			</div>
 			<div id="sidebar" class="col-md-3">
-				<div class="widget">
-					<h2 class="title"><?php print SB_Text::_('Options', 'content'); ?></h2>
-					<div class="body">
+				<div class="panel panel-default widget">
+					<div class="panel-heading">
+						<h2 class="panel-title"><?php print SB_Text::_('Options', 'content'); ?></h2>
+					</div>
+					<div class="panel-body">
 						<div class="form-group">
 							<label class="has-popover" data-content="<?php print SBText::_('CONTENT_STATUS'); ?>"><?php print SB_Text::_('Estado:', 'content'); ?></label>
 							<select name="status" class="form-control">
@@ -135,25 +149,19 @@ if( !isset($content) )
 				  			</select>
 						</div>
 						<?php if( isset($features['use_dates']) && $features['use_dates'] ): ?>
-						<div class="row">
-							<div class="col-md-12 form-group">
-								<label class="has-popover" data-content="<?php print SBText::_('CONTENT_PUBLSIH_DATE'); ?>">
-									<?php print SB_Text::_('Publish Date:', 'content'); ?></label>
-								<div class="row col-md-8">
-									<input type="text" name="publish_date" value="<?php print isset($content) ? sb_format_date($content->publish_date) : date(DATE_FORMAT);  ?>" class="form-control datepicker" />
-								</div>
-							</div>
+						<div class="form-group">
+							<label class="has-popover" data-content="<?php print SBText::_('CONTENT_PUBLSIH_DATE'); ?>">
+								<?php print SB_Text::_('Publish Date:', 'content'); ?>
+							</label>
+							<input type="text" name="publish_date" value="<?php print isset($content) ? sb_format_date($content->publish_date) : date(DATE_FORMAT);  ?>" class="form-control datepicker" />
 						</div>
-						<div class="row">
-							<div class="col-md-12 form-group">
-								<label class="has-popover" data-content="<?php print SBText::_('CONTENT_EXPIRES_DATE'); ?>">
-									<?php print SB_Text::_('Expiration Date:', 'content'); ?></label><br/>
-								<div class="row col-md-8">
-									<input type="text" name="end_date" value="<?php print isset($content) ? 
-																				sb_format_date($content->end_date) : 
-																				date(DATE_FORMAT, strtotime((date('Y')+35).'-01-01'));  ?>" class="form-control datepicker" />
-								</div>
-							</div>
+						<div class="form-group">
+							<label class="has-popover" data-content="<?php print SBText::_('CONTENT_EXPIRES_DATE'); ?>">
+								<?php print SB_Text::_('Expiration Date:', 'content'); ?>
+							</label>
+							<input type="text" name="end_date" value="<?php print isset($content) ? 
+																			sb_format_date($content->end_date) : 
+																			date(DATE_FORMAT, strtotime((date('Y')+35).'-01-01'));  ?>" class="form-control datepicker" />
 						</div>
 						<?php endif; ?>
 						<?php if( isset($features['calculated_dates']) && $features['calculated_dates'] ): ?>
@@ -198,21 +206,23 @@ if( !isset($content) )
 						<?php endif; ?>
 						<?php SB_Module::do_action('content_options', isset($content) ? $content : null); ?>
 						<p class="text-center">
-							<a class="btn btn-secondary has-popover" href="<?php print $back_link; ?>"
+							<a class="btn btn-danger has-popover" href="<?php print $back_link; ?>"
 								data-content="<?php print SBText::_('CONTENT_CANCEL'); ?>">
 								<?php print SB_Text::_('Cancel', 'content'); ?></a>
-							<button type="submit" class="btn btn-secondary has-popover" data-content="<?php print SBText::_('CONTENT_SAVE'); ?>">
+							<button type="submit" class="btn btn-success has-popover" data-content="<?php print SBText::_('CONTENT_SAVE'); ?>">
 								<?php print SB_Text::_('Save', 'content'); ?></button>
 						</p>
 					</div>
 				</div>
 				<?php SB_Module::do_action('after_article_options', isset($content) ? $content : null); ?>
 				<?php if( isset($content) && $content->type == 'page' || (!isset($content) && $type == 'page') ): ?>
-				<div class="widget">
-					<h2 class="title has-popover" data-content="<?php print SBText::_('CONTENT_WH_SECTIONS'); ?>">
-						<?php print SB_Text::_('Template Options', 'content'); ?>
-					</h2>
-					<div class="body">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title has-popover" data-content="<?php print SBText::_('CONTENT_WH_SECTIONS'); ?>">
+							<?php print SB_Text::_('Template Options', 'content'); ?>
+						</h2>
+					</div>
+					<div class="panel-body">
 						<select id="template_file" name="meta[_template]" class="form-control">
 							<option value="-1"><?php _e('-- plantilla --', 'content'); ?></option>
 							<?php foreach(lt_content_get_page_templates() as $tpl): ?>
@@ -243,11 +253,13 @@ if( !isset($content) )
 				</div>
 				<?php endif; ?>
 				<?php if( $type != 'post'  ): ?>
-				<div class="widget">
-					<h2 class="title has-popover" data-content="<?php print SBText::_('CONTENT_WH_SECTIONS'); ?>">
-						<?php _e('Sections', 'content'); ?>
-					</h2>
-					<div class="body">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title has-popover" data-content="<?php print SBText::_('CONTENT_WH_SECTIONS'); ?>">
+							<?php _e('Sections', 'content'); ?>
+						</h2>
+					</div>
+					<div class="panel-body">
 						<?php print sb_sections_html_list(array(
 												'checked' 		=> isset($content) ? $content->GetSectionIds() : array(),
 												'for_object' 	=> $type)); ?>
@@ -255,21 +267,25 @@ if( !isset($content) )
 				</div>
 				<?php endif; ?>
 				<?php if( isset($content) && $content->type == 'post' || (!isset($content) && $type == 'post') ): ?>
-				<div class="widget">
-					<h2 class="title has-popover" data-content="<?php print SBText::_('CONTENT_WH_CATEGORIES'); ?>">
-						<?php _e('Categories', 'content'); ?>
-					</h2>
-					<div class="body">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title has-popover" data-content="<?php print SBText::_('CONTENT_WH_CATEGORIES'); ?>">
+							<?php _e('Categories', 'content'); ?>
+						</h2>
+					</div>
+					<div class="panel-body">
 						<?php print sb_categories_html_list(array('checked' => isset($content) ? $content->GetSectionIds() : array()))?>
 					</div>
 				</div>
 				<?php endif; ?>
-				<?php if( /*isset($content) &&*/ $features['featured_image'] ): ?>
-				<div class="widget">
-					<h2 class="title has-popover" data-content="<?php print SBText::_('CONTENT_WH_FEATURED_IMAGE'); ?>">
-						<?php _e('Featured Image', 'content'); ?>
-					</h2>
-					<div class="body">
+				<?php if( /*isset($content) &&*/ isset($features['featured_image']) && $features['featured_image'] ): ?>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title has-popover" data-content="<?php print SBText::_('CONTENT_WH_FEATURED_IMAGE'); ?>">
+							<?php _e('Featured Image', 'content'); ?>
+						</h2>
+					</div>
+					<div class="panel-body">
 						<div id="featured-image-container">
 							<?php if( isset($content) ): if( $content->_featured_image || $content->_featured_image_id ): ?>
 								<?php if( $content->_featured_image ): ?> 

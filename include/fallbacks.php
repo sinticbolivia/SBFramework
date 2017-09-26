@@ -58,8 +58,8 @@ if(!function_exists('mime_content_type'))
 				'odt' => 'application/vnd.oasis.opendocument.text',
 				'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
 		);
-
-		$ext = @strtolower(array_pop(explode('.',$filename)));
+		$parts = explode('.',$filename);
+		$ext = @strtolower(array_pop($parts));
 		if (array_key_exists($ext, $mime_types)) {
 			return $mime_types[$ext];
 		}

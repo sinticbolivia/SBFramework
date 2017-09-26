@@ -38,6 +38,7 @@ class LT_ControllerContent extends SB_Controller
 	{
 		$id 	= 	SB_Request::getInt('id');
 		$slug 	= SB_Request::getString('slug');
+		
 		if( !$id && !$slug )
 		{
 			sb_set_view('article-not-found');

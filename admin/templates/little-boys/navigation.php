@@ -3,7 +3,9 @@ $user = sb_get_current_user();
 ?>
 <div id="user-session" class="text-center">
 	<img src="<?php print sb_get_user_image_url(sb_get_current_user()->user_id);//print BASEURL; ?>" alt="" class="thumbnail" />
-	<div id="hello-user"><b><?php printf(SB_Text::_('Hello %s', 'lb'), sb_get_current_user()->username); ?></b></div>
+	<div id="hello-user">
+		<b><?php printf(SB_Text::_('Hello %s', 'lb'), sb_get_current_user()->username); ?></b>
+	</div>
 	<a href="<?php print SB_Route::_('profile.php'); ?>"><?php _e('My profile', 'lb'); ?></a><br/>
 	<a href="<?php print SB_Route::_('index.php?mod=users&task=logout'); ?>"><?php _e('Close session', 'lb'); ?></a>
 </div>

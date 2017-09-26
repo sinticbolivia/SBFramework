@@ -101,7 +101,7 @@ class LT_AdminControllerUsersRoles extends SB_Controller
 					'creation_date'				=> $cdate
 			);
 			$dbh->Insert('permissions', $data);
-			SB_MessagesStack::AddMessage(SB_Text::_('Se ha creado un nuevo rol de usuario.'), 'success');
+			SB_MessagesStack::AddMessage(__('The new user role has been created.', 'users'), 'success');
 			sb_redirect(SB_Route::_('index.php?mod=users&view=roles'));
 		}
 		else
@@ -120,7 +120,7 @@ class LT_AdminControllerUsersRoles extends SB_Controller
 				$dbh->Query(rtrim($query, ','));
 			}
 			
-			SB_MessagesStack::AddMessage(SB_Text::_('El rol se ha actualizado.'), 'success');
+			SB_MessagesStack::AddMessage(__('The user role has been updated.'), 'success');
 			sb_redirect(SB_Route::_('index.php?mod=users&view=roles.edit&id='.$role_id));
 		}
 	}
@@ -142,7 +142,7 @@ class LT_AdminControllerUsersRoles extends SB_Controller
 		$role = $dbh->FetchRow();
 		$slug = sb_build_slug($role->role_name);
 		$dbh->Query("DELETE FROM role2permission WHERE role_id = {$role->role_id}");
-		$dbh->Query("DELETE FROM permissions WHERE (permission = 'create_role_$slug' OR permission = '$slug') LIMIT 1");
+		$dbh->Query("DELETE FROM permissions WHERE (permission = 'create_role_$slug' OR permission = '$slug')");
 		$dbh->Query("DELETE FROM user_roles WHERE role_id = {$role->role_id} LIMIT 1");
 		SB_MessagesStack::AddMessage(sprintf(SB_Text::_('El rol %s ha sido borrado', 'users'), $role->role_name), 'error');
 		sb_redirect(SB_Route::_('index.php?mod=users&view=roles'));

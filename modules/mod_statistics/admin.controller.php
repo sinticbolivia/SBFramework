@@ -437,7 +437,7 @@ class LT_AdminControllerStatistics extends SB_Controller
 		);
 		sb_set_view_var('data', $the_data);
 		sb_set_view_var('chart_title', $chart_title);
-		sb_add_script(BASEURL . '/js/Chart.js', 'js-chart');
+		sb_add_script(BASEURL . '/js/Chart.js', 'js-chart', 0, true);
 	}
 	public function task_graph_user_connections_daily()
 	{
