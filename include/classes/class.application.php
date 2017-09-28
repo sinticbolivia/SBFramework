@@ -20,6 +20,7 @@ class SB_Application extends SB_Object
 	protected 	$view;
 	protected	$module;
 	protected	$htmlDocument;
+	protected 	$templateHtml;
 	
 	private function __construct()
 	{
@@ -224,6 +225,61 @@ class SB_Application extends SB_Object
 	public function GetController()
 	{
 		return $this->controller;
+	}
+	public function ProcessTemplate($tpl_file = 'index.php')
+	{
+		global $view_vars;
+	
+		$view 			= SB_Request::getString('view', 'default');
+		
+		SB_Module::do_action('before_process_template');
+		$template_dir 	= sb_get_template_dir();//defined('LT_ADMIN') ? ADM_TEMPLATES_DIR : TEMPLATES_DIR;
+		$template_url	= sb_get_template_url();
+		$mod			= SB_Request::getString('mod', null);
+		
+		//##check if template directory exists
+		if( !$template_dir || !is_dir($template_dir) )
+		{
+			require_ONCE INCLUDE_DIR . SB_DS . 'template-functions.php';
+			lt_template_fallback();
+			return true;
+		}
+		if( defined('LT_ADMIN') )
+		{
+			if( function_exists('sb_build_admin_menu') )
+				sb_build_admin_menu();
+		}
+		else 
+		{
+				
+		}
+		if( !$mod )
+		{
+			$mod = defined('LT_ADMIN') ? 'dashboard' : 'content';
+		}
+		
+		if( !strstr($tpl_file, '.php') )
+			$tpl_file .= '.php';
+		if( lt_is_frontpage() && file_exists($template_dir . SB_DS . 'frontpage.php') )
+		{
+			$tpl_file = 'frontpage.php';
+		}
+		else
+		{
+		}
+		$tpl_file = SB_Module::do_action('template_file', $tpl_file);
+		$this->htmlDocument->AddBodyClass('tpl-' . str_replace('.php', '', $tpl_file));
+		//extract(isset($view_vars[$view]) ? $view_vars[$view] : array());
+		$vars = $this->GetController()->viewVars;
+		extract($vars);
+		ob_start();
+		require_once $template_dir. SB_DS . $tpl_file;
+		$this->templateHtml = ob_get_clean();
+	}
+	public function ShowTemplate()
+	{
+		print $this->templateHtml;
+		sb_end();
 	}
 	/**
 	 * Execute all cron jobs

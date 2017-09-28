@@ -223,7 +223,7 @@ class SB_DbTable extends SB_Object
 					"LIMIT 1";
 					
 		$row = $this->dbh->FetchRow($query, $class);
-		$row->table = $this;
+		if( $row && $class == 'SB_DbRow' ) $row->table = $this;
 		return $row;
 		/*
 		if( $class == null )
@@ -301,7 +301,7 @@ class SB_DbTable extends SB_Object
 		//$query = substr($query, 0, -4);
 		if( $limit > 0 )
 			$query .= "LIMIT $offset, $limit";
-		$items = $this->dbh->FetchResults($query, 'SB_DbRow');
+		$items = $this->dbh->FetchResults($query, 'SB_DbRow', array('table' => $this));
 		
 		return $items;
 	}
@@ -337,7 +337,7 @@ class SB_DbTable extends SB_Object
 		}
 		
 		//die($query);
-		return $this->dbh->FetchResults($query);
+		return $this->dbh->FetchResults($query, 'SB_DbRow', array('table' => $this));
 	}
 	/**
 	 * Insert a new record into table and return the new id
@@ -413,7 +413,10 @@ class SB_DbTable extends SB_Object
 			}
 		}
 		$query .= "LIMIT 1";
-		return $this->dbh->FetchRow($query, 'SB_DbRow');
+		$row = $this->dbh->FetchRow($query, 'SB_DbRow');
+		if( $row )
+			$row->table = $this;
+		return $row;
 	}
 	/**
 	 * Get a table row by column and value

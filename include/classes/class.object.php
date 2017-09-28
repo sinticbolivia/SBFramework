@@ -57,6 +57,8 @@ class SB_Object extends stdClass implements JsonSerializable
 	 */
 	public function Bind($data, $props = null)
 	{
+		if( !$data )
+			return false;
 		$data = (object)$data;
 		foreach($data as $prop => $value)
 		{
@@ -70,5 +72,6 @@ class SB_Object extends stdClass implements JsonSerializable
 				$this->$prop = is_object($value) || is_array($value) ? $value : trim($value);
 			//}
 		}
+		return true;
 	}
 }

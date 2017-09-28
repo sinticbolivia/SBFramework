@@ -110,9 +110,8 @@ set_error_handler(function($errno, $error, $error_file, $error_line, $context)
 	//var_dump($errno);
 	if( $errno != E_NOTICE && $errno != E_USER_WARNING && $errno != E_USER_NOTICE )
 	{
-		throw new Exception($error, $errno);
+		lt_die($error . '<br/><div style="height:200px;overflow:auto;"><code><pre>' . print_r(debug_backtrace(), 1) . '</pre></code></div>');
 	}
-	
 }, E_ALL);
 $app->Load();
 

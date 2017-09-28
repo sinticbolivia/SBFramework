@@ -12,7 +12,6 @@ class SB_Sqlite3 extends SB_Database
 		$this->dbh = new SQLite3($db_name);
 		$this->dbh->busyTimeout(3500);
 		//##set journal mode
-		//$this->dbh->exec('PRAGMA schema.journal_mode = WAL');
 		$this->dbh->exec('PRAGMA journal_mode = wal;');
 	}
 	public function Query($query)
