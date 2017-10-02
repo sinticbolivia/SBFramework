@@ -57,7 +57,7 @@ class SB_DbTable extends SB_Object
 		}
 		if( $default )
 			$DDL .= "DEFAULT $default ";
-		if( $after && isset($this->columns[$after] ) )
+		if( $this->dbh->db_type == 'mysql' && $after && isset($this->columns[$after] ) )
 			$DDL .= "AFTER $after ";
 		$this->dbh->Query($DDL);
 	}

@@ -551,7 +551,7 @@ class LT_AdminControllerUsers extends SB_Controller
 		$dbh = SB_Factory::getDbh();
 		$query = "DELETE FROM user_meta WHERE user_id = {$user->user_id}";
 		$dbh->Query($query);
-		$dbh->Query("DELETE FROM users WHERE user_id = {$user->user_id} LIMIT 1");
+		$dbh->Query("DELETE FROM users WHERE user_id = {$user->user_id}");
 		//##delete user folder
 		SB_MessagesStack::AddMessage(__('The user has been deleted.', 'users'), 'success');
 		sb_redirect(SB_Route::_('index.php?mod=users'));

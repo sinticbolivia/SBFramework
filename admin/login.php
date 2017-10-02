@@ -13,6 +13,8 @@ $mod = SB_Request::getString('mod');
 if( $mod )
 	sb_process_module($mod);
 SB_Session::unsetVar('login_captcha');
-sb_process_template($template_file);
-sb_show_template();
+$app->ProcessTemplate($template_file);
+$app->ShowTemplate();
+//sb_process_template($template_file);
+//sb_show_template();
 //$dbh->Close();
