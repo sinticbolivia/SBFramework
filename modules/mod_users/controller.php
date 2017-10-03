@@ -311,7 +311,7 @@ class LT_ControllerUsers extends LT_ControllerUsersBase
 		$role = sb_get_user_role_by_key('user');
 		$data = array(
 				'username'					=> $username,
-				'pwd'						=> md5($pwd),
+				'pwd'						=> $pwd,
 				'email'						=> $email,
 				'status'					=> 'enabled',
 				'role_id'					=> $role->role_id,

@@ -14,6 +14,10 @@ class SB_MySQL extends SB_Database
 	public function __construct($server, $username, $password, $database = null, $port = 3306)
 	{
 		$this->db_type = 'mysql';
+		if( strstr($server, ':') )
+		{
+			list($server, $port) = array_map('trim', explode(':', $server));
+		}
 		//$this->link = mysql_pconnect($server, $username, $password);
 		//$this->link = mysql_connect($server, $username, $password);
 		if( class_exists('mysqli') )

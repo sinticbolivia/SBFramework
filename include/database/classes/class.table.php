@@ -140,7 +140,7 @@ class SB_DbTable extends SB_Object
 			$exists = $dbh->FetchRow("show tables LIKE '{$table}'");
 			if( $exists )
 			{
-				$_cols = $this->dbh->FetchResults("SHOW COLUMNS FROM {$table}");
+				$_cols = $dbh->FetchResults("SHOW COLUMNS FROM {$table}");
 				foreach($_cols as $col)
 				{
 					$cols[$col->Field] = $col;

@@ -233,7 +233,7 @@ class SB_Application extends SB_Object
 		$view 			= SB_Request::getString('view', 'default');
 		
 		SB_Module::do_action('before_process_template');
-		$template_dir 	= sb_get_template_dir();//defined('LT_ADMIN') ? ADM_TEMPLATES_DIR : TEMPLATES_DIR;
+		$template_dir 	= sb_get_template_dir();
 		$template_url	= sb_get_template_url();
 		$mod			= SB_Request::getString('mod', null);
 		
