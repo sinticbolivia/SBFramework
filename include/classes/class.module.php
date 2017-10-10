@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package SBFramework
+ * @author Sintic Bolivia - Juan Marcelo Aviles Paco
+ */
+ 
 class SB_Module
 {
 	protected static $_actions = array();
@@ -9,15 +14,18 @@ class SB_Module
 			self::$_actions[$tag] = array();
 		$args = func_get_args();
 		//array_shift($args);
-		unset($args[0], $args[1]);
+		unset($args[0], $args[1], $args[2]);
 		sort($args);
 		$hook = array('callback' => $callback, 'args' => $args);
+		//##check if priority index is not defined
 		if( !isset(self::$_actions[$tag][$priority]) )
 		{
+			//##add the hook with priority
 			self::$_actions[$tag][$priority] = $hook;
 		}
 		elseif( isset(self::$_actions[$tag][$priority]) && !isset(self::$_actions[$tag][$priority + 1]) )
 		{
+			
 			self::$_actions[$tag][$priority + 1] = $hook;
 		}
 		else 
@@ -36,6 +44,7 @@ class SB_Module
 			$tail = array_merge($hook, $tail);
 			self::$_actions[$tag] = array_merge($head, $tail);
 			*/
+			
 			while( isset(self::$_actions[$tag][$priority]) )
 			{
 				$priority++;
@@ -47,32 +56,37 @@ class SB_Module
 										&$param7 = null,&$param8 = null,&$param9 = null,&$param10 = null,&$param11 = null,&$param12 = null,
 										&$param13 = null,&$param14 = null, &$param15 = null)
 	{
+		
 		$args = array();
 		$argc = func_num_args();
+		$args_code = '';
+		//##build arguments reference
 		for ($i = 0; $i < $argc; $i++)
 		{
 			if( $i == 0 )
 			{
-			$args[] = $tag;
-			continue;
+				//$args[] = $tag;
+				continue;
 			}
 			$name 	= 'param'.$i;
 			if( $$name === null )
 				break;
 			$args[] =& $$name;
-		}
+			//$args_code .= '$'.$name . ',';
+		}		
 		if( !isset(self::$_actions[$tag]) && isset($args[1]) )
+		{
 			return $args[1];
+		}
 		if( !isset(self::$_actions[$tag]) )
 			return null;
-		$args = array_slice($args, 1);
+		//$args_code = rtrim($args_code, ',');
 		$res = null;
 		$max_priority = max(array_keys(self::$_actions[$tag]));
 		for($i = 0; $i <= $max_priority; $i++ )
 		{
-			if( !isset(self::$_actions[$tag][$i]) ) continue;
+			if( !isset(self::$_actions[$tag][$i]) || !is_callable(self::$_actions[$tag][$i]['callback']) ) continue;
 			$res = call_user_func_array(self::$_actions[$tag][$i]['callback'], $args);
-			//if( $res !== null ) $args[0] = $res;
 		}
 	}
 	public static function do_action($tag)

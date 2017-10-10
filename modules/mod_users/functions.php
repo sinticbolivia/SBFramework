@@ -37,7 +37,6 @@ function sb_get_current_user()
 		$user->GetDbPermissions();
 	//}
 	return $user;
-	sb_is_user_logged_in();
 }
 function sb_get_user_image_url($user_id)
 {
