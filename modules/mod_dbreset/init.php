@@ -1,4 +1,8 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Menu;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+
 class LT_ModDbReset
 {
 	public function __construct()
@@ -17,7 +21,7 @@ class LT_ModDbReset
 			return false;
 		}
 		SB_Menu::addMenuChild('menu-settings', 
-								__('Database Reset', 'dbreset'), 
+								'<span class="glyphicon glyphicon-erase"></span> ' . __('Database Reset', 'dbreset'), 
 								SB_Route::_('index.php?mod=dbreset'), 
 								'menu-dbreset', 
 								'root_manage_backend');

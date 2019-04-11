@@ -1,4 +1,7 @@
 <?php
+namespace SinticBolivia\BeetleCMS\Templates\Admin\LittleBoys;
+use SinticBolivia\SBFramework\Classes\SB_Language as SB_Language;
+use SinticBolivia\SBFramework\Classes\SB_Module;
 require_once dirname(__FILE__) . SB_DS . 'include' . SB_DS . 'hooks.customers.php';
 
 class LT_ThemeLittleBoys

@@ -1,4 +1,12 @@
 <?php
+namespace SinticBolivia\BeetleCMS\Modules\Statistics;
+
+use SinticBolivia\SBFramework\Classes\SB_Language;
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+use SinticBolivia\SBFramework\Classes\SB_Menu;
+use SinticBolivia\SBFramework\Classes\SB_Factory;
+
 class LT_Statistics
 {
 	public function __construct()
@@ -17,17 +25,17 @@ class LT_Statistics
 	public function action_admin_menu()
 	{
 		SB_Menu::addMenuChild('menu-management', 
-								'<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>'.SB_Text::_('Estadisticas', 'statistics'), 
+								'<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>' . __('Estadisticas', 'statistics'), 
 								SB_Route::_('index.php?mod=statistics&view=section_access'), 'menu-statistics', 'manage_statistics');
-		SB_Menu::addMenuChild('menu-statistics', SBText::_('Accesos Contenidos'), SB_Route::_('index.php?mod=statistics&view=section_access'),
+		SB_Menu::addMenuChild('menu-statistics', __('Accesos Contenidos'), SB_Route::_('index.php?mod=statistics&view=section_access'),
 								'menu-stats-contents', 'manage_statistics');
-		SB_Menu::addMenuChild('menu-statistics', SBText::_('Conexiones'), SB_Route::_('index.php?mod=statistics&view=user_access'), 
+		SB_Menu::addMenuChild('menu-statistics', __('Conexiones'), SB_Route::_('index.php?mod=statistics&view=user_access'), 
 								'menu-stats-connections', 'manage_statistics');
-		SB_Menu::addMenuChild('menu-statistics', SBText::_('Graficos'), SB_Route::_('index.php?mod=statistics&view=graph_user_connections'),
+		SB_Menu::addMenuChild('menu-statistics', __('Graficos'), SB_Route::_('index.php?mod=statistics&view=graph_user_connections'),
 								'menu-stats-graphs', 'manage_statistics');
-		SB_Menu::addMenuChild('menu-stats-graphs', SBText::_('Graficos por hora'), SB_Route::_('index.php?mod=statistics&view=graph_user_connections'),
+		SB_Menu::addMenuChild('menu-stats-graphs', __('Graficos por hora'), SB_Route::_('index.php?mod=statistics&view=graph_user_connections'),
 								'menu-stats-graphs-hours', 'manage_statistics');
-		SB_Menu::addMenuChild('menu-stats-graphs', SBText::_('Graficos por dia'), SB_Route::_('index.php?mod=statistics&view=graph_user_connections_daily'),
+		SB_Menu::addMenuChild('menu-stats-graphs', __('Graficos por dia'), SB_Route::_('index.php?mod=statistics&view=graph_user_connections_daily'),
 				'menu-stats-graphs-days', 'manage_statistics');
 	}
 	public function action_authenticate_error($user_db_row, $username, $pwd)

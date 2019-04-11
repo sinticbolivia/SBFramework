@@ -1,4 +1,6 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_MessagesStack;
+
 lt_get_header();
 ?>
 	<div id="content" class="col-xs-12 col-md-10">

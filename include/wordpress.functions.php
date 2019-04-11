@@ -3,7 +3,7 @@
  * Functions to have compatibility with wordpress code/engine
  * @version 1.0
  */
-
+use SinticBolivia\SBFramework\Classes\SB_Factory;
 global $wpdb;
 $wpdb = SB_Factory::getDbh();
 $wpdb->prefix = '';

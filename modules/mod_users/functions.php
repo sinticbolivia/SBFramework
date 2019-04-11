@@ -1,4 +1,12 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Session;
+use SinticBolivia\SBFramework\Classes\SB_Meta;
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Factory;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+use SinticBolivia\SBFramework\Modules\Users\Classes\SB_User;
+use SinticBolivia\SBFramework\Classes\SB_MessagesStack;
+
 function sb_get_user_meta($user_id, $meta_key)
 {
 	return SB_Meta::getMeta('user_meta', $meta_key, 'user_id', $user_id);
@@ -74,49 +82,7 @@ function sb_get_user_roles()
 	}
 	return $roles;
 }
-/**
- * Build a random password
- * 
- * @param int $length
- * @param string $type the charactes to use to build the password, set null to use whole characteres
- * 						letter|number|special
- * @return string
- */
-function sb_gen_random_password($length = 8, $type = null) 
-{
-	$numbers = '1234567890';
-	$letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	$special = '*[]{}-_$';
-	$alphabet = '';
-	if( $type == 'letter' )
-	{
-		$alphabet = $letters;
-	}
-	elseif( $type == 'number' )
-	{
-		$alphabet = $numbers;
-	}
-	elseif( $type == 'letter|number' )
-	{
-		$alphabet = $letters . $numbers;
-	}
-	elseif( $type == 'special' )
-	{
-		$alphabet = $special;
-	}
-	else
-	{
-		$alphabet = $numbers . $letters . $special;
-	}
-	$pass = array(); //remember to declare $pass as an array
-	$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-	for ($i = 0; $i < $length; $i++) 
-	{
-		$n = rand(0, $alphaLength);
-		$pass[] = $alphabet[$n];
-	}
-	return implode($pass); //turn the array into a string
-}
+
 function sb_get_user_by($by, $value)
 {
 	$dbh =  SB_Factory::getDbh();
@@ -151,100 +117,11 @@ function sb_get_user_by($by, $value)
 	}
 	return $user;
 }
-function sb_get_user_role_by_key($key)
-{
-	return SB_Factory::getDbh()->FetchRow(sprintf("SELECT * FROM user_roles WHERE role_key = '%s' LIMIT 1", $key));
-}
+
 function sb_insert_user($data, $send_email = true, $password_is_plain = true)
 {
-	if( !isset($data['user_id']) && (!isset($data['username']) || empty($data['username'])) )
-		throw new Exception(__('The username is empty', 'users'));
-	if( !isset($data['email']) || empty($data['email']) )
-		throw new Exception(__('The user email is empty', 'users'));
-	if( !isset($data['user_id']) && sb_get_user_by('username', $data['username']) )
-		throw new Exception(__('The username already exists', 'users'));
-	$user_by_email = sb_get_user_by('email', $data['email']);
 	
-	//##for new users
-	if( (!isset($data['user_id']) || !$data['user_id']) && $user_by_email )
-	{
-		throw new Exception(__('The email already exists', 'users'));
-	}
-	elseif( isset($data['user_id']) && $data['user_id'] && $user_by_email && $user_by_email->email != $data['email']  )
-	{
-		throw new Exception(__('The email already exists', 'users'));
-	}
-	$def_args = array(
-			'first_name'	=> '',
-			'last_name'		=> '',
-			'role_id'		=> sb_get_user_role_by_key('user')->role_id,
-			'status'		=> 'enabled'
-	);
-	$data = array_merge($def_args, $data);
-	$dbh = SB_Factory::getDbh();
-	SB_Module::do_action('before_insert_user', $data);
-	if( !isset($data['user_id']) || !$data['user_id'] )
-	{
-		$pass = '';
-		if( !isset($data['pwd']) || empty($data['pwd'])  )
-		{
-			$pass = sb_gen_random_password();
-			$data['pwd'] = md5($pass);
-		}
-		else
-		{
-			$pass = $data['pwd'];
-			if( $password_is_plain )
-				$data['pwd'] = md5($data['pwd']);
-		}
-		
-		$data['last_modification_date']	= date('Y-m-d H:i:s');
-		$data['creation_date']			= date('Y-m-d H:i:s');
-		$id 		= $dbh->Insert('users', $data);
-		$user 		= new SB_User($id);
-		$user_dir	= UPLOADS_DIR . SB_DS . sb_build_slug($user->username);
-		if( !is_dir($user_dir) )
-			mkdir($user_dir);
-		if( $send_email )
-		{
-			$url = parse_url(BASEURL);
-			//##send user email
-			$body = sprintf(__("Hello %s<br/><br/>", 'users'), $user->username) .
-			sprintf(__('Thanks for register into our website, you account details are below.<br/><br/>', 'users')).
-			sprintf(__('Username: %s<br/>', 'users'), $user->username).
-			sprintf(__('Password: %s<br/>', 'users'), $pass).
-			'<br/>'.
-			__('Follow the next link in order to start a session.<br/><br/>', 'users').
-			sprintf(__('<a href="%s">Login</a><br/><br/>'), SB_Route::_('index.php?mod=users')).
-			sprintf(__('Greetings<br/><br/>%s', 'users'), SITE_TITLE);
-			$body 		= SB_Module::do_action('register_user_email_body', $body, $user, $pass);
-			$subject 	= SB_Module::do_action('register_user_email_subject', sprintf(__('%s - User Registration', 'users'), SITE_TITLE));
-			$headers = array(
-					'Content-Type: text/html; charset=utf-8',
-					sprintf("From: %s <no-reply@%s>", SITE_TITLE, $url['host'])
-			);
-			$subject 	= SB_Module::do_action('users_new_email_subject', $subject);
-			$body 		= SB_Module::do_action('users_new_email_body', $body, 
-												$data['username'], $data['email'], $pass, $data);
-			$headers	= SB_Module::do_action('users_new_email_headers', $headers);
-			
-			lt_mail($user->email, $subject, $body, $headers);
-		}
-	}
-	else
-	{
-		$user 		= new SB_User($data['user_id']);
-		unset($data['username']);
-		//##try to update the user password
-		if( isset($data['pwd']) && !empty($data['pwd']) )
-		{
-			$data['pwd'] = md5($data['pwd']);
-		}
-		$dbh->Update('users', $data, array('user_id' => $user->user_id));
-		$id = $user->user_id;
-	}
-	SB_Module::do_action('after_insert_user', $id, $data);
-	return $id;
+	
 }
 function sb_get_security_questions()
 {
@@ -255,23 +132,141 @@ function sb_get_security_questions()
 		));
 }
 /**
+ * Check if current user has a session
+ */
+function sb_is_user_logged_in($cookie_name = null)
+{
+		
+	$session_var = '';
+	//$cookie_name = '';
+	$timeout_var = '';
+	if( $cookie_name === null )
+	{
+		if( defined('LT_ADMIN') )
+		{
+			$session_var = 'admin_user';
+			$cookie_name = 'lt_session_admin';
+			$timeout_var = 'admin_timeout';
+		}
+		else
+		{
+			$session_var = 'user';
+			$cookie_name = 'lt_session';
+			$timeout_var = 'timeout';
+		}
+	}
+	else 
+	{
+		if( defined('LT_ADMIN') )
+		{
+			$session_var = 'admin_user';
+			$timeout_var = 'admin_timeout';
+		}
+		else
+		{
+			$session_var = 'user';
+			$timeout_var = 'timeout';
+		}
+	}
+	$dbh 		= SB_Factory::getDbh();
+    if( !isset($_COOKIE[$cookie_name]) )
+    {
+        //SinticBolivia\SBFramework\Classes\SB_MessagesStack::AddMessage(__('Your session has expired', 'users'), 'info');
+        //##close expired sessions
+        $dbh->Query("UPDATE user_sessions SET status = 'EXPIRED' WHERE expires < " . time());
+        //$ctrl = SB_Module::GetControllerInstance('users');
+        //$ctrl->task_logout();
+        return false;
+    }
+    
+    $session_id = $_COOKIE[$cookie_name];
+    $session 	= $dbh->FetchRow("SELECT * FROM user_sessions WHERE id = '$session_id' ORDER BY creation_date DESC LIMIT 1");
+    //print_r($session);die();
+    if( !$session )
+    {	
+        return false;
+    }
+    //print_r($session);
+    //die();
+    if( $session->status == 'CLOSED' )
+    {
+    	return false;
+    }
+	if( $session->status == 'EXPIRED' )
+    {
+    	SinticBolivia\SBFramework\Classes\SB_MessagesStack::AddMessage(__('Your session has expired', 'users'), 'info');
+    	return false;
+    }
+    //##check expiration 
+    if( time() > (int)$session->expires )
+    {
+        //##mark session as expired
+        $dbh->Update('user_sessions', array('status' => 'EXPIRED'), array('id' => $session_id));
+        SinticBolivia\SBFramework\Classes\SB_MessagesStack::AddMessage(__('Your session has expired', 'users'), 'info');
+        $ctrl = SB_Module::GetControllerInstance('users');
+        $ctrl->task_logout();
+        die();
+    }
+    ##check user is in session
+    if( !SB_Session::getVar($session_var) )
+    {
+        $user = $dbh->FetchRow("SELECT * FROM users WHERE user_id = $session->user_id LIMIT 1");
+        SB_Session::setVar($session_var, $user);
+    }
+    //##renew the session 
+    $dbh->Update('user_sessions', array('expires' => time() + SESSION_EXPIRE), array('id' => $session_id));
+    /*
+    $user 		= SB_Session::getVar($session_var);
+	$session 	= SB_Session::getVar($cookie_name);
+	if( !$user || !$session )
+	{
+        SB_Factory::getApplication()->Log("No session found");
+		return false;
+	}
+    
+	##check session timeout
+    SB_Module::do_action('sb_check_session_timout', $user, $session);
+    */
+	return true;
+}
+/**
  * Start the user session
  * 
  * @param object $user The user database record
  * @param string The user password (for logging purposes)
  */
-function sb_user_start_session($user, $pwd = null)
+function sb_user_start_session($user, $pwd = null, $type = 'frontend')
 {
-	SB_Session::setVar('user', $user);
-	$cookie_value = md5(serialize($user) . ':' . session_id());
-	SB_Session::setVar('lt_session', $cookie_value);
-	SB_Session::setVar('timeout', time());
-	SB_Session::unsetVar('login_captcha');
-	SB_Session::unsetVar('inverse_captcha');
+    $dbh = SB_Factory::getDbh();
+    $sessionName    = $type == 'backend' ? 'lt_session_admin' : 'lt_session';
+    $userVar        = $type == 'backend' ? 'admin_user' : 'user';
+	//$cookie_value   = md5(serialize($user) . ':' . session_id());
+    $session_id     = uniqid('sb-');
+    setcookie($sessionName, $session_id, time() + SESSION_EXPIRE);
+    //SB_Session::setVar($userVar, $user);
+	//SB_Session::setVar($sessionName, $cookie_value);
+	//SB_Session::setVar('timeout', time());
+	//SB_Session::unsetVar('login_captcha');
+	//SB_Session::unsetVar('inverse_captcha');
 	//##mark user as logged in
-	sb_update_user_meta($user->user_id, '_logged_in', 'yes');
-	sb_update_user_meta($user->user_id, '_logged_in_time', time());
-	sb_update_user_meta($user->user_id, '_last_login', time());
+	//sb_update_user_meta($user->user_id, '_logged_in', 'yes');
+	//sb_update_user_meta($user->user_id, '_logged_in_time', time());
+	//sb_update_user_meta($user->user_id, '_last_login', time());
+    //sb_update_user_meta($user->user_id, '_timeout', time());
+    //##create use session
+    $session = array(
+        'id'            => $session_id,
+        'user_id'       => $user->user_id,
+        'agent'         => $_SERVER['HTTP_USER_AGENT'],
+        'ip_address'    => $_SERVER['REMOTE_ADDR'],
+        'type'          => $type,
+        'status'        => 'ACTIVE',
+        'expires'       => time() + SESSION_EXPIRE,
+        'creation_date' => date('Y-m-d H:i:s')
+    );
+    $dbh->Insert('user_sessions', $session);
+    //##set user in session
+    SB_Session::setVar($userVar, $user);
 	SB_Module::do_action('authenticated', $user, $user->username, $pwd);
 }
 /**
@@ -280,13 +275,29 @@ function sb_user_start_session($user, $pwd = null)
  */
 function sb_user_close_session($user)
 {
+    $dbh = SB_Factory::getDbh();
+    $cookie_name    = null;
+    $userVar        = null;
+    if( defined('LT_ADMIN') )
+    {
+        $userVar        = 'admin_user';
+        $cookie_name    = 'lt_session_admin';
+    }
+    else
+    {
+        $userVar        = 'user';
+        $cookie_name    = 'lt_session';
+    }
+        
 	if( $user && $user->user_id )
 	{
 		sb_update_user_meta($user->user_id, '_logged_in', 'no');
 		sb_update_user_meta($user->user_id, '_logged_in_time', 0);
 	}
+    $session_id = $_COOKIE[$cookie_name];
+    $dbh->Update('user_sessions', array('status' => 'CLOSED'), array('id' => $session_id));
+    SB_Session::unsetVar($userVar);
+    SB_Session::unsetVar($cookie_name);
 	SB_Module::do_action('logout', $user);
-	SB_Session::unsetVar('user');
-	SB_Session::unsetVar('lt_session');
-	SB_Session::unsetVar('timeout');
+	
 }

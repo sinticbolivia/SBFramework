@@ -373,8 +373,10 @@ function sb_fill_zeros($str, $length = 6)
 }
 function sb_number_format($number, $decimals = null, $decimal_separator = null, $hundred_separator = null)
 {
+	
 	$decimal_separator 	= $decimal_separator !== null ? $decimal_separator : defined('DECIMAL_SEPARATOR') ? DECIMAL_SEPARATOR : '.';
 	$hundred_separator 	= $hundred_separator ? $hundred_separator : defined('HUNDRED_SEPARATOR') ? HUNDRED_SEPARATOR : ',';
-	$decimals 			= $decimals !== null ? (int)$decimals : defined('DECIMALS') ? DECIMALS : 2;
+	$decimals 			= $decimals !== null ? (int)$decimals : ((defined('DECIMALS') && (int)DECIMALS) ? DECIMALS : 2);
+
 	return number_format((float)$number, $decimals, $decimal_separator, $hundred_separator);
 }

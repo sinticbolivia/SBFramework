@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') or die('Dont fuck with me buddy.');
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Factory;
+
 SB_Module::RunSQL('statistics');
 $dbh = SB_Factory::getDbh();
 $permissions = array(

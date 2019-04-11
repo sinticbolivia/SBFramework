@@ -1,4 +1,6 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Module;
+
 class LT_ThemeAdminDefault
 {
 	public function __construct()

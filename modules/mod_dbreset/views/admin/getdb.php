@@ -18,7 +18,7 @@
 		<td><?php print $t->description; ?></td>
 		<td class="text-center"><?php print $t->current_increment; ?></td>
 		<td>
-			<a href="<?php print SB_Route::_('index.php?mod=dbreset&task=reset&table='.$t->table); ?>" 
+			<a href="<?php print b_route('index.php?mod=dbreset&task=reset&table='.$t->table); ?>" 
 				class="btn btn-primary btn-xs confirm"
 				data-message="<?php _e('Alert: Are you sure to delete the table data and reset the counter IDs?', 'dbreset'); ?>">
 				<?php print _e('Reset', 'db'); ?>

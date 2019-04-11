@@ -1,4 +1,21 @@
 <?php
+//namespace SinticBolivia\SBFramework;
+
+use SinticBolivia\SBFramework\Classes\SB_Request;
+use SinticBolivia\SBFramework\Classes\SB_Session;
+use SinticBolivia\SBFramework\Classes\SB_Factory;
+use SinticBolivia\SBFramework\Classes\SB_Language;
+use SinticBolivia\SBFramework\Classes\SB_Text;
+use SinticBolivia\SBFramework\Classes\SB_Text as SBText;
+use SinticBolivia\SBFramework\Classes\SB_Controller;
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Globals;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+use SinticBolivia\SBFramework\Classes\SB_Image;
+use SinticBolivia\SBFramework\Classes\SB_MessagesStack;
+use SinticBolivia\SBFramework\Classes\SB_Attachment;
+use SinticBolivia\SBFramework\Classes\SB_AttachmentImage;
+
 require_once 'fallbacks.php';
 function sb_get_parameter($key, $default = '')
 {
@@ -109,7 +126,11 @@ function sb_get_template_url()
 	static $template_url = null;
 	if( $template_url != null )
 		return $template_url;
-	
+	if( defined('TEMPLATE_URL') )
+	{
+		$template_url = TEMPLATE_URL;
+		return $template_url;
+	}
 	$template		= defined('LT_ADMIN') ? sb_get_parameter('template_admin', 'default') : sb_get_parameter('template_frontend', 'default');
 	$template_url	= defined('LT_ADMIN') ? ADMIN_URL . '/templates/' . $template :  TEMPLATES_URL . '/' . $template;
 	defined('TEMPLATE_URL') or define('TEMPLATE_URL', $template_url);
@@ -134,63 +155,6 @@ function sb_end()
 	$dbh = SB_Factory::getDbh();
 	$dbh->Close();
 	SB_Module::do_action('end');
-}
-function sb_is_user_logged_in($cookie_name = null)
-{
-	$session_var = '';
-	//$cookie_name = '';
-	$timeout_var = '';
-	if( $cookie_name === null )
-	{
-		if( defined('LT_ADMIN') )
-		{
-			$session_var = 'admin_user';
-			$cookie_name = 'lt_session_admin';
-			$timeout_var = 'admin_timeout';
-		}
-		else
-		{
-			$session_var = 'user';
-			$cookie_name = 'lt_session';
-			$timeout_var = 'timeout';
-		}
-	}
-	else 
-	{
-		if( defined('LT_ADMIN') )
-		{
-			$session_var = 'admin_user';
-			$timeout_var = 'admin_timeout';
-		}
-		else
-		{
-			$session_var = 'user';
-			$timeout_var = 'timeout';
-		}
-	}
-	
-	$user 		=& SB_Session::getVar($session_var);
-	$session 	=& SB_Session::getVar($cookie_name);
-	$timeout	=& SB_Session::getVar($timeout_var);
-	
-	if( !$user || !$session || !$timeout )
-	{
-		return false;
-	}
-	//##check session expiration
-	$time_diff = time() - $timeout;
-	if( $time_diff > SESSION_EXPIRE )
-	{
-		SB_MessagesStack::AddMessage(SB_Text::_('La sesion ha expirado', 'info'), 'info');
-		$ctrl = SB_Module::GetControllerInstance('users');
-		$ctrl->task_logout();
-		return false;
-	}
-	//##renew the timeout
-	$timeout = time();
-	//require_once MODULES_DIR . SB_DS . 'mod_users' . SB_DS . 'functions.php';
-	sb_update_user_meta(sb_get_current_user()->user_id, '_timeout', $timeout);
-	return true;
 }
 function sb_set_view_var($name, $value, $view = null)
 {
@@ -351,7 +315,6 @@ function sb_get_permissions($labels = true)
 		return $groups;
 	}
 	
-	
 	$perms = array();
 	foreach($dbh->FetchResults("SELECT * FROM permissions") as $p)
 	{
@@ -397,7 +360,7 @@ function sb_redirect($link = null)
  * @param mixed $footer 
  * @return  void
  */
-function sb_add_script($src, $id, $order = 0, $footer = false)
+function sb_add_script($src, $id, $order = 0, $footer = false, $loadType = null)
 {
 	$scripts =& SB_Globals::GetVar($footer ? 'footer_scripts' : 'scripts');
 	if( !$scripts )
@@ -405,7 +368,7 @@ function sb_add_script($src, $id, $order = 0, $footer = false)
 		SB_Globals::SetVar($footer ? 'footer_scripts' : 'scripts', array());
 		$scripts =& SB_Globals::GetVar($footer ? 'footer_scripts' : 'scripts');
 	}
-	$scripts[] = array('id' => $id, 'src' => $src);
+	$scripts[] = array('id' => $id, 'src' => $src, 'load_type' => $loadType);
 	
 }
 function sb_add_style($id, $src)
@@ -416,26 +379,33 @@ function sb_add_style($id, $src)
 		SB_Globals::SetVar('styles', array());
 		$styles =& SB_Globals::GetVar('styles');
 	}
-	$styles[] = array('id' => $id, 'href' => $src, 'rel' => 'stylesheet');
+	$styles[$id] = array('id' => $id, 'href' => $src, 'rel' => 'stylesheet');
 }
+/**
+ * Include a php file base on INCLUDE_DIR relative path
+ * @param string $file
+ * @param string $type
+ */
 function sb_include($file, $type = 'class')
 {
-	if( $type == 'class' && file_exists(INCLUDE_DIR . SB_DS . 'classes' . SB_DS . $file) )
+	if( $type == 'class' && is_file(INCLUDE_DIR . SB_DS . 'classes' . SB_DS . $file) )
 	{
 		return require_once INCLUDE_DIR . SB_DS . 'classes' . SB_DS . $file;
 	}
-	if( $type = 'file' && file_exists(INCLUDE_DIR . SB_DS . $file) )
+	if( $type = 'file' && is_file(INCLUDE_DIR . SB_DS . $file) )
 	{
 		return require_once INCLUDE_DIR . SB_DS . $file;
 	}
-	if( $type == null && file_exists($file) )
+	if( $type == null && is_file($file) )
 	{
 		return require_once $file;
 	}
 }
 function sb_include_lib($lib_file)
 {
-	$lib_path = INCLUDE_DIR . SB_DS . 'libs' . SB_DS . $lib_file;
+	$lib_dir 	= is_dir(INCLUDE_DIR . SB_DS . 'Libs') ? INCLUDE_DIR . SB_DS . 'Libs' : INCLUDE_DIR . SB_DS . 'libs';
+	$lib_path 	= $lib_dir . SB_DS . $lib_file;
+	
 	sb_include($lib_path, null);
 }
 /**
@@ -531,8 +501,11 @@ function sb_format_datetime($date, $format = null)
 	{
 		$the_format = $format;  
 	}
-	$date_time = is_numeric($date) ? $date : strtotime($date);
+	if( is_numeric($date) )
+		return date("$the_format", $date);
 	
+	//$date_time = is_numeric($date) ? $date : strtotime($date);
+	$date_time = strtotime(str_replace('/', '-', $date));
 	return date($the_format, $date_time);
 }
 /**
@@ -688,8 +661,17 @@ function sb_timezone_choice( $selected_zone )
 
 	return join( "\n", $structure );
 }
+/**
+ * Deletes a directory including contents
+ * 
+ * @param string $directory
+ * @param bool $include_dir if true it will deleted whole contentes and main folder, if false it will delete just contents
+ * @return boolean
+ */
 function sb_delete_dir($directory, $include_dir = true)
 {
+	if( !is_dir($directory) )
+		return false;
 	$dh = opendir($directory);
 	while( ($file = readdir($dh)) !== false)
 	{
@@ -714,11 +696,13 @@ function sb_delete_dir($directory, $include_dir = true)
  * Reply with a json object
  * @param array|object $obj
  */
-function sb_response_json($obj)
+function sb_response_json($obj, $die = true)
 {
 	header('Content-type: application/json');
 	//die(json_encode($obj));
-	die(sb_json_encode($obj));
+	print sb_json_encode($obj);
+	if( $die )
+		die();
 }
 /**
  * Send an email
@@ -781,6 +765,10 @@ EOA;
 	}
 	return call_user_func($func, $email, $subject, $message, implode("\r\n", $headers));
 }
+/**
+ * Check if current session is for backend
+ * @return boolean
+ */
 function lt_is_admin()
 {
 	return defined('LT_ADMIN');
@@ -792,6 +780,7 @@ function lt_die($str)
 		SB_Factory::getDbh()->Close();
 		die();
 	}
+    
 	$url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : SB_Route::_('index.php');
 	ob_start();
 	?>
@@ -815,6 +804,12 @@ function lt_die($str)
 	
 	die($html);
 }
+/**
+ * Get a directory files in recursive way
+ * 
+ * @param string $path 
+ * @return array
+ */
 function sb_get_dir_contents($path)
 {
 	if( !is_dir($path) )
@@ -847,8 +842,8 @@ function sb_get_file_mime($filename)
 	$mime = null;
 	if( function_exists('finfo_open') )
 	{
-		$fh = finfo_open(FILEINFO_MIME_TYPE);
-		$mime = finfo_file($fh, $filename);
+		$fh 	= finfo_open(FILEINFO_MIME_TYPE);
+		$mime 	= finfo_file($fh, $filename);
 		finfo_close($fh);
 	}
 	else
@@ -897,19 +892,20 @@ function sb_copy_recursive($source, $dest)
 }
 function lt_insert_attachment($filename, $obj_type = '', $id = '', $parent = 0, $attachment_type = '', $title = '', $dir = null)
 {
-	if( !file_exists($filename) )
+	if( !is_file($filename) )
 		return null;
 	sb_include('class.image.php');
 	$file_dir	= dirname($filename);
 	$mime 		= sb_get_file_mime($filename);
 	$extension 	= sb_get_file_extension($filename);
 	$name 		= str_replace('.' . $extension, '', basename($filename));
+	$type		= empty($attachment_type) ? $extension : $attachment_type;
 	$data = array(
 			'object_type' 	=> $obj_type,
-			'object_id'		=> $id,
+			'object_id'		=> (int)$id,
 			'title'			=> !empty($title) ? $title : sb_build_slug(basename($filename)),
 			'description'	=> '',
-			'type'			=> empty($attachment_type) ? $extension : $attachment_type,
+			'type'			=> $attachment_type,
 			'mime'			=> $mime,
 			'file'			=> $dir == null ? str_replace(UPLOADS_DIR . SB_DS, '', $filename) : 
 												$dir . SB_DS . basename($filename),
@@ -920,7 +916,11 @@ function lt_insert_attachment($filename, $obj_type = '', $id = '', $parent = 0, 
 	);
 	$dbh = SB_Factory::getDbh();
 	$attach_id = $dbh->Insert('attachments', $data);
-	if( $attachment_type == 'image' )
+	
+	//if( $attachment_type == 'image' || $attachment_type == 'avatar' )
+	$data = getimagesize($filename);
+	
+	if( $data && is_array($data) )
 	{
 		$sizes	= SB_Module::do_action('image_sizes', array(
 					array('w' => 55, 'h' => 55),
@@ -942,9 +942,9 @@ function lt_insert_attachment($filename, $obj_type = '', $id = '', $parent = 0, 
 						//##insert resized image
 						$img_data = array(
 							'object_type'	=> $obj_type,
-							'object_id'		=> $id,
+							'object_id'		=> (int)$id,
 							'title'			=> basename($new_image),
-							'type'			=> 'image',
+							'type'			=> 'thumbnail',
 							'mime'			=> $mime,
 							'file'			=> str_replace(UPLOADS_DIR . SB_DS , '', $new_image),
 							'size'			=> filesize($new_image),
@@ -1089,4 +1089,153 @@ function sb_querystring_append($query_string, $new_args)
 	
 	return http_build_query($params);
 	
+}
+/**
+ * Build a type with underscore to name using camel case
+ * @param string $string
+ * @return string Normalized type name
+ */
+function sb_normalize_type_name($string)
+{
+	$typeName = trim($string);
+	if( strstr($typeName, '_') )
+	{
+		$typeName = str_replace(' ', '', ucwords(str_replace('_', ' ', $typeName)));
+	}
+	
+	return lcfirst($typeName);
+}
+
+function __($text, $domain = 'default')
+{
+	return SB_Text::_($text, $domain);
+}
+function _e($text, $domain = 'default')
+{
+	print SB_Text::_($text, $domain);
+}
+function b_do_action($tags)
+{
+    return call_user_func_array('SinticBolivia\\SBFramework\\Classes\\SB_Module::do_action', func_get_args());   
+}
+/**
+ * Build a valid CMS Route
+ * 
+ * @param string $url
+ * @return string
+ */
+function b_route($url, $type = null)
+{
+    return SinticBolivia\SBFramework\Classes\SB_Route::_($url, $type);
+}
+function b_request_get_var($var, $default = null)
+{
+    return SB_Request::getVar($var, $default);
+}
+function b_request_get_int($var, $default = 0)
+{
+    return SB_Request::getInt($var, $default);
+}
+/**
+ * @brief Register a widget
+ * @param string $class 
+ * @return  bool
+ */
+function sb_register_widget($class)
+{
+	if( !class_exists($class) )
+		return false;
+	if( !SB_Globals::GetVar('widgets') )
+	{
+		SB_Globals::SetVar('widgets', array());
+	}
+	$widgets =& SB_Globals::GetVar('widgets');
+	$widgets[$class] = array('instances' => 0);
+	
+	return true;
+}
+/**
+ * @brief Shows a widget
+ * 
+ * @param string $class 
+ * @param array $args 
+ * @return  bool
+ */
+function sb_show_widget($class, $args = array())
+{
+	$widgets = SB_Globals::GetVar('widgets');
+	if( !isset($widgets[$class]) )
+		return false;
+	
+	$instance = new $class();
+	$instance->Render($args);
+	
+	return true;
+}
+/**
+ * Add a widget instance to a widget area
+ * 
+ * @param string 	$area		The widget area name
+ * @param SB_Widget $widget  	The widget instance
+ * @param array 	$args 		Arguments for widget instance
+ * @return bool
+ */
+function sb_widget_add2area($area, SB_Widget $widget, $args = array())
+{
+	$areas =& SB_Globals::GetVar('widget_areas');
+	if( !$areas )
+	{
+		SB_Globals::SetVar('widget_areas', array());
+		$areas =& SB_Globals::GetVar('widget_areas');
+	}
+	if( !isset($areas[$area]) )
+	{
+		$areas[$area] = array();
+	}
+	$areas[$area][] = array('instance' => $widget, 'args' => $args);
+	
+	return true;
+}
+function sb_widget_area($area)
+{
+	$areas = SB_Globals::GetVar('widget_areas');
+	if( !$areas )
+		return false;
+	if( !isset($areas[$area]) )
+		return false;
+	$the_area = $areas[$area];
+	foreach($the_area as $widget )
+	{
+		$widget['instance']->Render((array)$widget['args']);
+	}
+	return true;
+}
+/**
+ * Crypt or decrypt a string using unique key and initial vector
+ *
+ * @param $action encrypt|decrypt
+ * @param $string The string to crypt or decrypt
+ * @param $key The key for crypt or decrypt
+ * @return string The string crypted or decrypted
+ */
+function sb_encrypt_decrypt($action, $string, $key = '', $initial_vector = '')
+{
+	$output 		= false;
+	$encrypt_method = "AES-256-CBC";
+	$secret_key 	= $key;
+	$secret_iv 		= $initial_vector;
+	// hash
+	$key = hash('sha256', $secret_key);
+	// iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+	$iv = substr(hash('sha256', $secret_iv), 0, 16);
+	if ( $action == 'encrypt' )
+	{
+		$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+		$output = base64_encode($output);
+	}
+	else if( $action == 'decrypt' )
+	{
+		$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+	}
+	return $output;
 }

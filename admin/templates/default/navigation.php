@@ -1,4 +1,6 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Menu;
+
 ?>
 <nav>
 	<div class="container">
@@ -27,10 +29,10 @@
 		*/?>
 		<ul class="right">
 			<li>
-				<a href="javascript:;"><?php printf(SB_Text::_('Hola %s'), sb_get_current_user()->username); ?></a>
+				<a href="javascript:;"><?php printf(__('Hola %s'), sb_get_current_user()->username); ?></a>
 				<ul>
-					<li><a href="<?php print SB_Route::_('profile.php'); ?>"><?php print SB_Text::_('Mi Perfil'); ?></a></li>
-					<li><a href="<?php print SB_Route::_('index.php?mod=users&task=logout'); ?>">Cerrar Sesion</a></li>
+					<li><a href="<?php print b_route('profile.php'); ?>"><?php _e('Mi Perfil'); ?></a></li>
+					<li><a href="<?php print b_route('index.php?mod=users&task=logout'); ?>">Cerrar Sesion</a></li>
 				</ul>
 			</li>
 			<li ></li>

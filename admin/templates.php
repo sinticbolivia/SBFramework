@@ -4,6 +4,14 @@ define('LT_ADMIN', 1);
 require_once dirname(dirname(__FILE__)) . '/init.php';
 require_once INCLUDE_DIR . SB_DS . 'template-functions.php';
 require_once ADM_INCLUDE_DIR . SB_DS . 'functions.php';
+use SinticBolivia\SBFramework\Classes\SB_Request;
+use SinticBolivia\SBFramework\Classes\SB_MessagesStack;
+use SinticBolivia\SBFramework\Classes\SB_Text;
+use SinticBolivia\SBFramework\Classes\SB_Text as SBText;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_BaseTheme;
+
 if( !sb_is_user_logged_in() )
 {
 	sb_redirect(SB_Route::_('login.php'));
@@ -17,6 +25,10 @@ $templates_url = ($type == 'frontend') ? TEMPLATES_URL : ADMIN_URL . '/templates
 if( $activate = SB_Request::getString('activate') )
 {
 	$param = ($type == 'frontend') ? 'template_frontend' : 'template_admin';
+    if( $type == 'frontend' )
+    {
+        SB_BaseTheme::ParseXML(TEMPLATES_DIR . SB_DS . $activate);
+    }
 	sb_update_parameter($param, $activate);
 	SB_MessagesStack::AddMessage(SBText::_('The template has been activated'), 'success');
 	sb_redirect(SB_Route::_('templates.php?type='.$type));
@@ -41,7 +53,7 @@ bottom: 0;opacity:0;transition:opacity 0.4s ease-in-out;}
 <div id="content" class="">
 	<div class="wrap">
 		<?php print SB_MessagesStack::ShowMessages(); ?>
-		<h2><?php print SBText::_('Templates'); ?></h2>
+		<h2><?php _e('Templates'); ?></h2>
 		<ul class="nav nav-tabs">
 			<li class="<?php print $type == 'frontend' ? 'active' : ''; ?>"><a role="tab" href="<?php print SB_Route::_('templates.php?type=frontend'); ?>"><?php print SBText::_('Frontend'); ?></a></li>
 			<li class="<?php print $type == 'backend' ? 'active' : ''; ?>"><a role="tab" href="<?php print SB_Route::_('templates.php?type=backend'); ?>"><?php print SBText::_('Backend'); ?></a></li>
@@ -88,6 +100,11 @@ bottom: 0;opacity:0;transition:opacity 0.4s ease-in-out;}
 								<?php print isset($ctemplate['Template Description']) ? $ctemplate['Template Description'] : __('Unknow', 'lt'); ?>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<?php SB_Module::do_action('template_buttons', $ctemplate, $type); ?>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="row">
@@ -130,13 +147,10 @@ bottom: 0;opacity:0;transition:opacity 0.4s ease-in-out;}
 </div>
 <?php 
 $_html_content = ob_get_clean();
-$template_file = 'index.php';
 $mod = $view = 'templates';
 SB_Request::setVar('view', $view);
+$app->PrepareTemplate();
 $app->ProcessModule(null);
 sb_set_view_var('_html_content', $_html_content, 'templates');
 $app->ProcessTemplate();
 $app->ShowTemplate();
-//sb_process_template($template_file);
-//sb_show_template(); 
-//$dbh->Close();

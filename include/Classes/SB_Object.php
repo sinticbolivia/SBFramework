@@ -1,0 +1,75 @@
+<?php
+namespace SinticBolivia\SBFramework\Classes;
+
+if( !interface_exists('JsonSerializable') ): 
+interface JsonSerializable
+{
+	public function jsonSerialize();
+}
+endif;
+class SB_Object extends \stdClass implements \JsonSerializable
+{
+	public $data = array();
+	
+	/**
+	 * Build a new object unique alphanumeric code
+	 * 
+	 * @return string
+	 */
+	public static function buildNewCode()
+	{
+		$string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+		$new_code = '';
+		$max_length = 8;
+		for($i = 0; $i < $max_length; $i++)
+		{
+			$index = rand(0, strlen($string) - 1);
+			$new_code .= $string[$index];
+		}
+		
+		return strtoupper($new_code);
+	}
+	public function __toString()
+	{
+		return print_r($this, 1);
+	}
+	public function __get($var)
+	{
+		if( property_exists($this, $var) )
+			return $this->$var;
+		return null;
+	}
+	public function __set($var, $value)
+	{
+		$this->$var = $value;
+	}
+	public function jsonSerialize()
+	{
+		return array_merge((array)$this->_data, get_object_vars($this));
+	}
+	/**
+	 * Set object properties values from data
+	 * 
+	 * @param array $data The data to bind into object
+	 * @param array $props	The properties to bind into object
+	 */
+	public function Bind($data, $props = null)
+	{
+		if( !$data )
+			return false;
+		$data = (object)$data;
+		foreach($data as $prop => $value)
+		{
+			/*
+			if( $props && in_array($prop, $props) )
+			{
+				$this->$prop = trim($value);
+			}
+			else
+			{*/
+				$this->$prop = is_object($value) || is_array($value) ? $value : trim($value);
+			//}
+		}
+		return true;
+	}
+}

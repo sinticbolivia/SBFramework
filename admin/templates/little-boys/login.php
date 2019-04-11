@@ -1,4 +1,6 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Route;
+use SinticBolivia\SBFramework\Classes\SBText;
 defined('LT_ADMIN') or die();
 ?>
 <!doctype html>

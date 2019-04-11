@@ -1,4 +1,11 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Controller;
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+use SinticBolivia\SBFramework\Classes\SB_MessagesStack;
+use SinticBolivia\SBFramework\Classes\SB_Text;
+use SinticBolivia\SBFramework\Classes\SB_Text as SBText;
+
 class LT_AdminControllerModules extends SB_Controller
 {
 	public function task_default()
@@ -7,7 +14,7 @@ class LT_AdminControllerModules extends SB_Controller
 		{
 			die('You dont have enough permissions.');
 		}
-		sb_set_view_var('page_title', SB_Text::_('Modules Management'));
+		sb_set_view_var('page_title', __('Modules Management'));
 		sb_set_view_var('available_modules', SB_Module::getAvailableModules());
 		sb_set_view_var('enabled_modules', SB_Module::getEnabledModules());
 	}
@@ -18,9 +25,9 @@ class LT_AdminControllerModules extends SB_Controller
 			die('You dont have enough permissions.');
 		}
 		$modules = SB_Module::getEnabledModules();
-		if( !in_array(SB_Request::getString('the_mod'), $modules) )
+		if( !in_array($this->request->getString('the_mod'), $modules) )
 		{
-			$the_mod = SB_Request::getString('the_mod');
+			$the_mod = $this->request->getString('the_mod');
 			$modules[] = $the_mod;
 			sb_update_parameter('modules', $modules);
 			//call on enabled module file
@@ -30,7 +37,7 @@ class LT_AdminControllerModules extends SB_Controller
 				require_once $module_path . SB_DS . 'on_enabled.php';
 			}
 		}
-		SB_MessagesStack::AddMessage(SB_Text::_('Modulo habilitado corectamente'), 'success');
+		SB_MessagesStack::AddMessage(__('Modulo habilitado corectamente'), 'success');
 		sb_redirect(SB_Route::_('index.php?mod=modules'));
 	}
 	public function task_disable_module()

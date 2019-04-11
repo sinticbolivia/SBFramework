@@ -1,4 +1,6 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Module;
+
 defined('LT_ADMIN') or die();
 ?>
 <!doctype html>
@@ -12,7 +14,7 @@ defined('LT_ADMIN') or die();
 <div id="container">
 	<section class="login">
 		<div class="titulo"><?php _e('Backend Login'); ?></div>
-		<form id="login_form" name="login_form" action="<?php print SB_Route::_('login.php'); ?>" method="post" enctype="application/x-www-form-urlencoded">
+		<form id="login_form" name="login_form" action="<?php print b_route('login.php'); ?>" method="post" enctype="application/x-www-form-urlencoded">
 			<input type="hidden" name="mod" value="users" />
 			<input type="hidden" name="task" value="do_login" />
 			<?php SB_Module::do_action('login_form_before_fields'); ?>
@@ -33,7 +35,7 @@ defined('LT_ADMIN') or die();
 	        <a href="javascript:;" class="enviar" onclick="document.login_form.submit();"><?php _e('Login'); ?></a>
 	        <?php SB_Module::do_action('login_form_buttons'); ?>
 	    </form><br/>
-	 	<?php SB_MessagesStack::ShowMessages(); ?>   
+	 	<?php sb_show_messages(); ?>   
 	</section>
 </div>
 <?php if( defined('BG_ANIMATED') && BG_ANIMATED == 1 ): ?>

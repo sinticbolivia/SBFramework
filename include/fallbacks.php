@@ -49,27 +49,39 @@ if(!function_exists('mime_content_type'))
 				'ps' => 'application/postscript',
 
 				// ms office
-				'doc' => 'application/msword',
-				'rtf' => 'application/rtf',
-				'xls' => 'application/vnd.ms-excel',
-				'ppt' => 'application/vnd.ms-powerpoint',
-
+				'doc' 	=> 'application/msword',
+				'rtf' 	=> 'application/rtf',
+				'xls' 	=> 'application/vnd.ms-excel',
+				'ppt' 	=> 'application/vnd.ms-powerpoint',
+				'xlsx'	=> 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+				'docx'	=> 'application/vnd.openxmlformats-officedocument.?.?',
+				
 				// open office
 				'odt' => 'application/vnd.oasis.opendocument.text',
 				'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
 		);
-		$parts = explode('.',$filename);
-		$ext = @strtolower(array_pop($parts));
-		if (array_key_exists($ext, $mime_types)) {
+		/*
+			'application/vnd.ms-excel',
+			'application/vnd.ms-office',
+			'application/wps-office.xls',
+			'application/wps-office.xlsx'
+		*/
+		$parts 	= explode('.',$filename);
+		$ext 	= @strtolower(array_pop($parts));
+		
+		if (array_key_exists($ext, $mime_types)) 
+		{
 			return $mime_types[$ext];
 		}
-		elseif (function_exists('finfo_open')) {
-			$finfo = finfo_open(FILEINFO_MIME);
-			$mimetype = finfo_file($finfo, $filename);
+		elseif (function_exists('finfo_open')) 
+		{
+			$finfo 		= finfo_open(FILEINFO_MIME);
+			$mimetype 	= finfo_file($finfo, $filename);
 			finfo_close($finfo);
 			return $mimetype;
 		}
-		else {
+		else 
+		{
 			return 'application/octet-stream';
 		}
 	}

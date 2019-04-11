@@ -1,5 +1,6 @@
 /**
- * 
+ * @author J. Marcelo Aviles Paco
+ * @team	SinticBolivia
  */
 function SBCamera(video, canvas)
 {

@@ -4,15 +4,21 @@ define('LT_ADMIN', 1);
 require_once dirname(dirname(__FILE__)) . '/init.php';
 require_once INCLUDE_DIR . SB_DS . 'template-functions.php';
 require_once ADM_INCLUDE_DIR . SB_DS . 'functions.php';
+use SinticBolivia\SBFramework\Classes\SB_Request;
 if( !sb_is_user_logged_in() )
 {
-	sb_redirect(SB_Route::_('login.php'));
+	sb_redirect(b_route('login.php'));
 }
-$template_file = SB_Request::getString('tpl_file', 'index.php');
-$app->ProcessModule(SB_Request::getVar('mod', 'settings'));
-$app->ProcessTemplate($template_file);
-$app->ShowTemplate();
-//sb_process_module(SB_Request::getVar('mod', 'settings'));
-//sb_process_template($template_file);
-//sb_show_template();
-//$dbh->Close();
+try
+{
+	$template_file = SB_Request::getString('tpl_file', 'index.php');
+	$app->PrepareTemplate($template_file);
+	$app->ProcessModule(SB_Request::getVar('mod', 'settings'));
+	$app->ProcessTemplate();
+	$app->ShowTemplate();
+}
+catch(Exception $e)
+{
+	print $e->getMessage();
+}
+

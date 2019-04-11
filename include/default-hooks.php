@@ -1,4 +1,7 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Globals;
+
 class LT_DefaultScripts
 {
 	public function __construct()

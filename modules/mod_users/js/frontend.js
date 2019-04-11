@@ -8,7 +8,7 @@ jQuery(function()
 		//template: 'qq-template-gallery',
 		button: document.getElementById('select-image'),
 		request: {
-			endpoint: mod_users.upload_endpoint
+			endpoint: lt.modules.users.upload_pic_endpoint
 		},
 		validation: {
 			allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']

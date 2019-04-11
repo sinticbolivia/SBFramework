@@ -1,19 +1,24 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Controller;
+use SinticBolivia\SBFramework\Database\SB_MySQL;
+
 class LT_AdminControllerDbReset extends SB_Controller
 {
 	public function task_default()
 	{
+		$this->task_getdb();
 	}
 	public function task_getdb()
 	{
 		$dbserver	= 'localhost';
-		$dbname 	= SB_Request::getString('dbname');
-		$username 	= SB_Request::getString('username');
-		$pass		= SB_Request::getString('pass');
+		$dbname 	= DB_NAME;
+		$username 	= DB_USER;
+		$pass		= DB_PASS;
 		$dbh 		= new SB_MySQL($dbserver, $username, $pass, $dbname);
 		
 		$rows = $dbh->FetchResults("SHOW TABLES");
 		$allow_tables = array(
+		
 			'content' 			=> 'Almacenamiento de los contenidos',
 			'content_meta'		=> 'Metadatos de contenidos',
 			'content_stats'		=> 'Estadisticas de contenido',
@@ -33,13 +38,14 @@ class LT_AdminControllerDbReset extends SB_Controller
 			'message_rcpts'		=> 'Tabla de cola de envios de mensajeria',
 			'user_popups'		=> 'Tabla de mensajes para los usuarios (popup)',
 			'user_popup_rcpts'	=> 'Tabla de cola para popups de usuarios'
+			
 		);
 		$tables = array();
 		foreach($rows as $row)
 		{
 			list($key, $table) = each($row);
-			if( !isset($allow_tables[$table]) )
-				continue;
+			//if( !isset($allow_tables[$table]) )
+				//continue;
 			$query = "SELECT `AUTO_INCREMENT`
 						FROM  INFORMATION_SCHEMA.TABLES
 						WHERE TABLE_SCHEMA = '$dbname'
@@ -56,7 +62,7 @@ class LT_AdminControllerDbReset extends SB_Controller
 	}
 	public function task_reset()
 	{
-		$table = SB_Request::getString('table');
+		$table = $this->request->getString('table');
 		$this->dbh->Query("TRUNCATE $table");
 		if( $table == 'users' )
 		{
@@ -71,6 +77,6 @@ class LT_AdminControllerDbReset extends SB_Controller
 				'creation_date'	=> date('Y-m-d H:i:s')
 			));
 		}
-		sb_redirect(SB_Route::_('index.php?mod=dbreset'));
+		sb_redirect($this->Route('index.php?mod=dbreset'));
 	}
 }

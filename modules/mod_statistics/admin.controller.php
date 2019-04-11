@@ -251,10 +251,20 @@ class LT_AdminControllerStatistics extends SB_Controller
 			$query .= "AND (DATE(cs.creation_date) >= '$fdfrom' AND DATE(cs.creation_date) <= '$fdto') ";
 			$query_string .= "dfrom=$dfrom&dto=$dto";
 		}
-		if( !empty($ids) )
+		
+		//##validate ids
+		$_ids   = array_map('intval', array_map('trim', explode(',', $ids)));
+        $ids    = array();
+        foreach($_ids as $id)
+        {
+            if( !$id ) continue;
+            $ids[] = (int)$id;
+        }
+        
+		if( count($ids) )
 		{
-			$query .= "AND c.content_id IN($ids) ";
-			$query_string .= "&ids=$ids";
+			$query .= "AND c.content_id IN(". implode(',', $ids) .") ";
+			$query_string .= "&ids=" . implode(',', $ids);
 		}
 		
 		$user_query = "SELECT u.username FROM users u WHERE u.user_id = cs.user_id";
@@ -309,10 +319,19 @@ class LT_AdminControllerStatistics extends SB_Controller
 			$query .= "AND (DATE(ss.creation_date) >= '$fdfrom' AND DATE(ss.creation_date) <= '$fdto') ";
 			$query_string .= "dfrom=$dfrom&dto=$dto";
 		}
-		if( !empty($ids) )
+		//##validate ids
+		$_ids   = array_map('intval', array_map('trim', explode(',', $ids)));
+        $ids    = array();
+        foreach($_ids as $id)
+        {
+            if( !$id ) continue;
+            $ids[] = (int)$id;
+        }
+        
+		if( count($ids) )
 		{
-			$query .= "AND s.section_id IN($ids) ";
-			$query_string .= "&ids=$ids";
+			$query .= "AND c.section_id IN(". implode(',', $ids) .") ";
+			$query_string .= "&ids=" . implode(',', $ids);
 		}
 	
 		$dbh->Query(str_replace('{columns}', 'COUNT(s.section_id) as total_rows', $query));

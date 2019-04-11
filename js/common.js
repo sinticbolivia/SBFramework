@@ -1,6 +1,7 @@
 /**
  * 
  */
+//'use strict';
 //================================== //
 //replace native javascript function //
 //================================== //
@@ -21,7 +22,7 @@ window.alert = function(text, on_close_callback, title)
 		label_alert = title;
 	}
 	var btn_close = window.lt && lt.locale && lt.locale.btn_label_close || 'Close';
-	var tpl = '<div class="modal fade" id="js-dlg-alert" tabindex="-1" role="dialog">\
+	var tpl = '<div class="modal fade" id="js-dlg-alert" tabindex="-1" role="dialog" data-backdrop="static">\
 				<div class="modal-dialog" role="document">\
 		    		<div class="modal-content">\
 		      			<div class="modal-header">\
@@ -37,9 +38,11 @@ window.alert = function(text, on_close_callback, title)
 			</div>';
 	if( jQuery('#js-dlg-alert').length > 0 )
 	{
+		jQuery('#js-dlg-alert').modal('hide');
 		jQuery('#js-dlg-alert').remove();
 	}
 	jQuery('body').append(tpl);
+	jQuery('#js-dlg-alert').on('hidden.bs.modal', function(e){});
 	jQuery(document).on('click', '#btn-close-dlg-alert', function()
 	{
 		alert_showing = false;
@@ -52,19 +55,22 @@ window.alert = function(text, on_close_callback, title)
 	
 	return false;
 };
-window.confirm = function(text, title, callback, e)
+window.vconfirm = window.confirm;
+window.confirm 	= function(text, title, callback, e)
 {
-	var event = e || window.event || arguments.callee.caller.arguments[0];
+	console.log(arguments);
+	var $event = e || window.event;// || arguments.callee.caller.arguments[0];
 	//console.log(arguments.callee.caller.arguments);
 	var btn_accept = window.lt && lt.locale && lt.locale.btn_label_accept ? lt.locale.btn_label_accept : 'Accept';
 	var btn_close = window.lt && lt.locale && lt.locale.btn_label_close ? lt.locale.btn_label_close : 'Close';
-	var el  = event.currentTarget || event.target;
+	var el  = $event ? $event.currentTarget || $event.target : null;
 	
-	var href = (el.href) ? "document.location = '" + el.href + "';" : '#';
+	var href = (el && el.href) ? "document.location = '" + el.href + "';" : '#';
 	if( callback && typeof callback == 'function' )
 	{
 		window.confirm_callback = callback;
-		href = 'window.confirm_callback();' ;
+		href = 'window.confirm_callback();';
+		jQuery('#js-dlg-confirm').modal('hide');
 	}
 	var tpl = '<div class="modal fade" id="js-dlg-confirm" tabindex="-1" role="dialog">\
 				<div class="modal-dialog" role="document">\

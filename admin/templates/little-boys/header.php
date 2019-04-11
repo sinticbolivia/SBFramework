@@ -1,4 +1,5 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Route;
 ?>
 <!doctype html>
 <html>

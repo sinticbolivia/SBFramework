@@ -1,13 +1,34 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Controller;
+use SinticBolivia\SBFramework\Classes\SB_Request;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+use SinticBolivia\SBFramework\Classes\SB_MessagesStack;
+use SinticBolivia\SBFramework\Classes\SB_Attachment;
+use SinticBolivia\SBFramework\Classes\SB_AttachmentImage;
+use SinticBolivia\SBFramework\Classes\SB_TableList;
+
+
 class LT_AdminControllerStorage extends SB_Controller
 {
+	/**
+	 * 
+	 * @var \SinticBolivia\SBFramework\Modules\Storage\Models\AttachmentModel
+	 */
+	protected $attachmentModel;
+	
 	public function task_default()
 	{
-		$limit = SB_Request::getInt('limit', defined('ITEMS_PER_PAGE') ? ITEMS_PER_PAGE : 25);
+		$limit	= $this->request->getInt('limit', defined('ITEMS_PER_PAGE') ? ITEMS_PER_PAGE : 25);
+		$layout	= $this->request->getString('layout', 'list');
+		
 		$query = "SELECT * FROM attachments 
+					WHERE 1 = 1
+					AND parent = 0
 					ORDER BY creation_date DESC
 					LIMIT $limit";
-		$items = $this->dbh->FetchResults($query);
+		$class = 'SinticBolivia\SBFramework\Classes\SB_AttachmentImage';
+		
+		$items = $this->dbh->FetchResults($query, $class);
 		$extensions = array(
 				'jpg', 'jpeg',
 				'png',
@@ -17,12 +38,13 @@ class LT_AdminControllerStorage extends SB_Controller
 				'ai',
 				'pdf',
 				'psd',
-				'cdr'
+				'cdr',
+				'zip',
+				'tar.gz',
+				'mp4'
 		);
-		$upload_endpoint = SB_Route::_('index.php?mod=storage&task=upload');
-		sb_set_view_var('upload_endpoint', $upload_endpoint);
-		sb_set_view_var('extensions', $extensions);
-		sb_set_view_var('items', $items);
+		$upload_endpoint = $this->Route('index.php?mod=storage&task=upload');
+		$this->SetVars(get_defined_vars());
 		sb_add_style('storage', MOD_STORAGE_URL . '/css/styles.css');
 		sb_add_script(BASEURL . '/js/fineuploader/all.fine-uploader.min.js', 'fineuploader');
 	}
@@ -35,7 +57,7 @@ class LT_AdminControllerStorage extends SB_Controller
 		
 		sb_include('qqFileUploader.php', 'file');
 		$uh = new qqFileUploader();
-		$uh->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png', 'bmp', 'psd', 'tiff', 'ai', 'zip', 'tar.gz');
+		$uh->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png', 'bmp', 'psd', 'tiff', 'ai', 'zip', 'cdr', 'tar.gz', 'mp4');
 		//$uh->sizeLimit = 10 * 1024 * 1024; //10MB
 		$uh->inputName = 'qqfile';
 		// If you want to use resume feature for uploader, specify the folder to save parts.
@@ -45,9 +67,15 @@ class LT_AdminControllerStorage extends SB_Controller
         {
             sb_response_json($res);
         }
-		$filename = $uh->getUploadName();
+        
+		$filename 	= $uh->getUploadName();
 		//##get uploaded file mime type
-		$mime = sb_get_file_mime($storage_dir . SB_DS . $filename);
+		$mime 		= sb_get_file_mime($storage_dir . SB_DS . $filename);
+		$type		= strstr($mime, 'image') ? 'image' : 'file';
+		
+		$id = lt_insert_attachment($storage_dir . SB_DS . $filename, null, null, 0, $type);
+		/*
+		
 		//##get file extension
 		$extension = sb_get_file_extension($storage_dir . SB_DS . $filename);
 		//## insert the file into database
@@ -65,11 +93,14 @@ class LT_AdminControllerStorage extends SB_Controller
 				'creation_date'	=> date('Y-m-d H:i:s')
 		);
 		$id = $this->dbh->Insert('attachments', $data);
-		$query = "SELECT * FROM attachments ORDER BY creation_date DESC";
+		*/
+		$query = "SELECT * FROM attachments ORDER BY creation_date DESC LIMIT 25";
 		$items = $this->dbh->FetchResults($query);
 		ob_start();
-		foreach($items as $item)
+		foreach($items as $_item)
 		{
+			$item = new SB_Attachment();
+			$item->SetDbData($_item);
 			include 'views/admin/attachment-row.php';
 		}
 		$res['rows'] = ob_get_clean();
@@ -102,14 +133,24 @@ class LT_AdminControllerStorage extends SB_Controller
 	}
 	public function task_uploader()
 	{
+		$layout	= $this->request->getString('layout', 'list');
+		$port	= $this->request->getString('port');
+		/*
 		$this->dbh->Select('COUNT(*)')
-					->From('attachments');
+					->From('attachments')
+					->Where(array('parent' => 0));
+		
 		$this->dbh->Query(null);
 		$total_rows = (int)$this->dbh->GetVar();
-		$table = new LT_TableList('attachments', 'attachment_id', 'storage');
+		*/
+		$table = new SB_TableList('attachments', 'attachment_id', 'storage');
 		$table->SetColumns(array(
 				'attachment_id'		=> array('label' => __('ID', 'storage')),
-				'image'				=> array('label' => __('Image', 'storage'), 'db_col' => false, 'callback' => 'mod_storage_show_table_column_image'),
+				'image'				=> array(
+						'label' 	=> __('Image', 'storage'), 
+						'db_col' 	=> false, 
+						'callback' 	=> 'mod_storage_show_table_column_image'
+				),
 				'file'				=> array('label' => __('File', 'storage')),
 				'mime'				=> array('label' => __('Type', 'storage'))
 		));
@@ -117,6 +158,7 @@ class LT_AdminControllerStorage extends SB_Controller
 				'select' => array('link' => '', 'label' => __('Select', 'storage'), 'icon' => 'glyphicon glyphicon-check'), 
 				'task:delete' => array('link' => '', 'label' => __('Delete', 'storage'), 'icon' => 'glyphicon glyphicon-trash')));
 		$table->showCount = true;
+		$table->AddCondition('parent', '=', 0);
 		$table->Fill();
 		$extensions = array(
 				'jpg', 'jpeg',
@@ -130,23 +172,37 @@ class LT_AdminControllerStorage extends SB_Controller
 				'cdr'
 		);
 		$upload_endpoint = SB_Route::_('index.php?mod=storage&task=upload');
-		sb_set_view_var('table', $table);
-		sb_set_view_var('upload_endpoint', $upload_endpoint);
-		sb_set_view_var('extensions', $extensions);
+		
+		$this->SetVars(get_defined_vars());
+		sb_add_js_global_var('storage', 'layout', $layout);
+		sb_add_js_global_var('storage', 'port', $port);
 		sb_add_style('storage', MOD_STORAGE_URL . '/css/styles.css');
 		sb_add_script(BASEURL . '/js/fineuploader/all.fine-uploader.min.js', 'fineuploader');
 	}
     public function task_delete()
     {
         $id = SB_Request::getInt('id');
-        $row = $this->dbh->FetchRow("SELECT * FROM attachments WHERE attachment_id = $id LIMIT 1");
-        if( !$row )
+        $attachment = new SB_Attachment($id);
+        
+        if( !$attachment || !$attachment->attachment_id )
         {
+			SB_MessagesStack::AddError(__('The attachment does not exists', 'storage'));
             sb_redirect(SB_Route::_('index.php?mod=storage'));
         }
-        @unlink(UPLOADS_DIR . SB_DS . $row->file);
-        $this->dbh->Delete('attachments', array('attachment_id' => $row->attachment_id));
+        $attachment->Delete();
         SB_MessagesStack::AddMessage(__('The attachment has been deleted', 'storage'), 'success');
         sb_redirect(SB_Route::_('index.php?mod=storage'));
+    }
+    public function ajax_get_attachment()
+    {
+    	$id = $this->request->getInt('id');
+    	if( !$id )
+    		throw new Exception($this->__('The attachment id is invalid'));
+    	$attachment = new SB_Attachment($id);
+    	if( !$attachment->attachment_id )
+    		throw new Exception($this->__('The attachment does not exists'));
+    	
+    	sb_response_json(array('status' => 'ok', 'attachment' => $attachment));
+    
     }
 }

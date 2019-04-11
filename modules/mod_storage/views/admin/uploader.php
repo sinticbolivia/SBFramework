@@ -1,4 +1,5 @@
 <?php
+
 ?>
 <div class="wrap">
 	<ul class="nav nav-tabs">
@@ -7,7 +8,43 @@
 	</ul>
 	<div class="tab-content">
 		<div id="files" class="tab-pane active">
-			<?php $table->Show(); ?>
+			<?php 
+			if( !$layout || $layout == 'list' )
+				$table->Show();
+			else { ?> 
+			<div class="container-fluid">
+				<div class="row">
+					<?php $i = 1; foreach($table->items as $_item): $item = $this->attachmentModel->Obj2Attachment($_item);?>
+					<?php 
+					$image 		= BASEURL . '/images/no-image.png';
+					$is_image 	= $item->IsImage();
+					$imgObject 	= null;
+					if( $is_image )
+					{
+						$imgObject = $this->attachmentModel->Attachment2Image($item);
+						$imgObject->SetDbData($item->_dbData);
+					}
+					
+					?>
+					<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+						<div class="attachment" style="height:200px;overflow:hidden;border:1px solid #ececec;margin:0 0 10px 0;">
+							<div class="image" style="width:100%;height:85%;text-align:center;">
+								<img src="<?php print $is_image ? $imgObject->GetThumbnail('330x330', 1, 1)->GetUrl() : $image; ?>" alt="" class="img-responsive" />
+							</div>
+							<div class="info"></div>
+							<div class="actions">
+								<a href="#" class="btn btn-default btn-xs btn-select-attachment" title="<?php print $this->__('Select'); ?>"
+									data-id="<?php print $imgObject->attachment_id; ?>">
+									<span class="glyphicon glyphicon-check"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<?php } ?>
+			
 		</div>
 		<div id="uploader" class="tab-pane">
 			<form id="form-upload" action="" method="post">
@@ -136,9 +173,16 @@ jQuery(function()
 			}
 		}
 	});
-	jQuery('.btn-action-select').click(function(e)
+	jQuery('.btn-action-select, .btn-select-attachment').click(function(e)
 	{
-		parent.jQuery(parent.document).trigger('media_selected', jQuery(this).parents('tr').get(0).dataset);
+		//console.log('storage:', lt.modules.storage);
+		var layout 	= lt.modules.storage.layout ? lt.modules.storage.layout : 'list';
+		var port	= lt.modules.storage.port ? lt.modules.storage.port : null;
+		//console.log('port', port);
+		var data	= layout == 'list' ? jQuery(this).parents('tr').get(0).dataset : this.dataset; 
+		data.port	= port;
+		parent.jQuery(parent.document).trigger('media_selected', data, port);
+		parent.jQuery(parent.document).trigger('storage_attachment_selected', data, port);
 		return false;
 	});
 });

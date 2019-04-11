@@ -1,4 +1,8 @@
 <?php
+namespace SinticBolivia\BeetleCMS\Modules\Settings;
+use SinticBolivia\SBFramework\Classes\SB_Language;
+use SinticBolivia\SBFramework\Classes\SB_Module;
+
 class SB_ModuleSettings
 {
 	public function __construct()

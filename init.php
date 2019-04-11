@@ -3,11 +3,7 @@ $filename = basename($_SERVER['REQUEST_URI']);
 //if( preg_match('/\.(map|jpg|jpeg|css|js|gif|png|txt)$/', $filename, $matches) )
 if( preg_match('/\.(map)$/', $filename, $matches) )
 	return false;
-/*
-error_log(__FILE__);
-error_log('REQUEST_URI: ' . $_SERVER['REQUEST_URI']);
-error_log('QUERY_STRING' .  $_SERVER['QUERY_STRING']);
-*/
+define('SBFRAMEWORK_VER', '2.0.0');
 $base_dir = dirname(__FILE__);
 //$cfg_file = file_exists($base_dir . DIRECTORY_SEPARATOR . 'config.php') ? 'config.php' : 'config-min.php';
 $cfg_file = defined('LT_INSTALL') ? 'config-min.php' : 'config.php';
@@ -15,66 +11,35 @@ if( defined('CFG_FILE') )
 {
 	$cfg_file = CFG_FILE;
 }
-if( !file_exists($base_dir . DIRECTORY_SEPARATOR . $cfg_file) )
+//##detect OS
+if( in_array(PHP_OS, array('WIN32', 'WINNT', 'Windows')) )
+	define('OS_WIN', true);
+else if( PHP_OS == 'Linux' || PHP_OS == 'Unix' )
+	define('OS_LINUX', true);
+	
+if( !defined('LT_INSTALL') && !file_exists($base_dir . DIRECTORY_SEPARATOR . $cfg_file) )
 {
 	header('Location: install/index.php');die();
 }
 	
 require_once $base_dir . DIRECTORY_SEPARATOR . $cfg_file;
+require_once $base_dir . DIRECTORY_SEPARATOR . 'include' . DIRECTORY_SEPARATOR . 'core-functions.php';
 
 if( DEVELOPMENT == 1 )
 {
 	ini_set('display_errors', 1);
 	error_reporting(E_ALL);
 }
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Request;// as SB_Request;
+use SinticBolivia\SBFramework\Classes\SB_Session;// as SB_Session;
+use SinticBolivia\SBFramework\Classes\SB_Factory;// as SB_Factory;
+use SinticBolivia\SBFramework\Classes\SB_Menu;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+
 require_once INCLUDE_DIR . SB_DS . 'functions.php';
 require_once INCLUDE_DIR . SB_DS . 'formatting.php';
-$classes = array(
-		'class.object.php',
-		'class.globals.php',
-		'class.orm-object.php',
-		'class.session.php',
-		'class.request.php',
-		'class.messages-stack.php',
-		'class.module.php',
-		'class.factory.php',
-		'class.meta.php',
-		'class.language.php',
-		'class.route.php',
-		'class.menu.php',
-		'class.shortcode.php',
-		'class.application.php',
-		'class.controller.php',
-		'class.html-doc.php',
-		'class.html-builder.php',
-		'class.compress.php',
-		'class.cron.php',
-		'class.attachment.php',
-		'class.table-list.php',
-		'class.widget.php',
-		'class.theme.php'
-);
-$db_drivers = array(
-		'database.class.php',
-		'database.interface.php',
-		//##database tables
-		'classes/class.table.php'
-);
-//##include database drivers
-if( DB_TYPE == 'mysql' )
-	$db_drivers[] = 'database.mysql.php';
-if( DB_TYPE == 'sqlite' || DB_TYPE == 'sqlite3' )
-	$db_drivers[] = 'database.sqlite3.php';
-if( DB_TYPE == 'postgres' )
-	$db_drivers[] = 'database.postgres.php';
-foreach($classes as $class_file)
-{
-	require_once INCLUDE_DIR . SB_DS . 'classes' . SB_DS . $class_file;
-}
-foreach($db_drivers as $drv)
-{
-	require_once INCLUDE_DIR . SB_DS . 'database' . SB_DS . $drv;
-}
+
 SB_Session::start();
 SB_Request::Start();
 $app = null;
@@ -102,17 +67,8 @@ elseif( defined('APP_NAME') )
 
 //$app = SB_Application::GetApplication(defined('APP_NAME') ? APP_NAME : null);
 $app = SB_Factory::getApplication($app);
-set_error_handler(function($errno, $error, $error_file, $error_line, $context)
-{
-	$app = SB_Factory::getApplication();
-		
-	$app->Log(array('code' => $errno, 'error' => $error, 'file' => $error_file, 'line' => $error_line, 'context' => $context));
-	//var_dump($errno);
-	if( $errno != E_NOTICE && $errno != E_USER_WARNING && $errno != E_USER_NOTICE )
-	{
-		lt_die($error . '<br/><div style="height:200px;overflow:auto;"><code><pre>' . print_r(debug_backtrace(), 1) . '</pre></code></div>');
-	}
-}, E_ALL);
+
+set_error_handler('sb_error_handler', E_ALL);
 $app->Load();
 
 if( defined('LT_INSTALL') )

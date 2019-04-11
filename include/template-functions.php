@@ -1,4 +1,10 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Globals;
+use SinticBolivia\SBFramework\Classes\SB_Request;
+use SinticBolivia\SBFramework\Classes\SB_MessagesStack;
+use SinticBolivia\SBFramework\Classes\SB_Shortcode;
+
 function lt_title()
 {
 	global $app;
@@ -14,10 +20,9 @@ function lt_site_title()
 }
 function lt_get_template($tpl_file)
 {
-	$theme_dir = sb_get_template_dir();
-	if( !file_exists($theme_dir . SB_DS . $tpl_file) )
-		return null;
-	return $theme_dir . SB_DS . $tpl_file;
+	global $app;
+	
+	return $app->GetTemplate()->GetFile($tpl_file);
 }
 /**
  * Include a template file.
@@ -28,49 +33,26 @@ function lt_get_template($tpl_file)
  */
 function lt_include_template($tpl_file, $args = null)
 {
-	$tpl_file = $tpl_file . '.php';
-	if( $tpl = lt_get_template($tpl_file) )
-	{
-		include $tpl;
-	}
+	global $app;
+	$app->GetTemplate()->IncludeFile($tpl_file);
 }
 function lt_get_header($tpl = null, $args = null)
 {
 	global $template_html, $view_vars, $app;
 	
-	$view 			= SB_Request::getString('view', 'default');
-	isset($view_vars[$view]) && (is_array($view_vars[$view]) || is_object($view_vars[$view])) ? extract($view_vars[$view]) : '';
-	
-	$theme_dir = sb_get_template_dir();
-	$tpl_file = 'header' . ($tpl ? '-'.$tpl : '') . '.php';
-	if( !file_exists($theme_dir . SB_DS . $tpl_file) )
-		return '';
-	
-	include $theme_dir . SB_DS . $tpl_file;
+	return $app->GetTemplate()->GetHeader($tpl, $args);
 }
 function lt_get_footer($tpl = null, $args = null)
 {
 	global $template_html, $view_vars, $app;
 	
-	$view 			= SB_Request::getString('view', 'default');
-	isset($view_vars[$view]) && (is_array($view_vars[$view]) || is_object($view_vars[$view])) ? @extract($view_vars[$view]) : '';
-	
-	$theme_dir = sb_get_template_dir();
-	$tpl_file = 'footer' . ($tpl ? '-'.$tpl : '') . '.php';
-
-	file_exists($theme_dir . SB_DS . $tpl_file) ? include $theme_dir . SB_DS . $tpl_file : '';
+	return $app->GetTemplate()->GetFooter($tpl, $args);
 }
 function lt_get_sidebar($tpl = null, $args = null)
 {
 	global $template_html, $view_vars, $app;
 	
-	$view 			= SB_Request::getString('view', 'default');
-	isset($view_vars[$view]) && (is_array($view_vars[$view]) || is_object($view_vars[$view])) ? @extract($view_vars[$view]) : '';
-	
-	$theme_dir = sb_get_template_dir();
-	$tpl_file = 'sidebar' . ($tpl ? '-'.$tpl : '') . '.php';
-
-	include $theme_dir . SB_DS . $tpl_file;
+	$app->GetTemplate()->GetSidebar($tpl, $args);
 }
 function lt_pagination($base_link, $total_pages, $current_page)
 {
@@ -131,7 +113,7 @@ function lt_scripts($footer = false)
 	{
 		foreach($scripts as $js)
 		{
-			printf("<script id=\"%s\" type=\"text/javascript\" src=\"%s\"></script>\n", $js['id'], $js['src']);
+			printf("<script id=\"%s\" type=\"text/javascript\" src=\"%s\" %s></script>\n", $js['id'], $js['src'], $js['load_type'] ? $js['load_type'] : '');
 		}
 	}
 	
@@ -179,7 +161,7 @@ function lt_body_id(){global $app; print 'id="'.$app->htmlDocument->bodyId. '"';
 function lt_body_class($classes = null)
 {
 	global $app;
-	$body_classes = array_map('trim', $app->htmlDocument->bodyClasses);
+	$body_classes = array_map('trim', $app->GetTemplate()->GetHtmlDocument()->bodyClasses);
 	
 	if( is_string($classes) )
 	{
@@ -194,7 +176,7 @@ function lt_body_class($classes = null)
 	
 	print 'class="' . $body_classes_str . '"';
 }
-function lt_add_tinymce($args = null)
+function lt_add_tinymce($args = null, $footer = false)
 {
 	global $tinymce_args;
 	list($lang,) = explode('_', LANGUAGE);
@@ -235,7 +217,8 @@ function lt_add_tinymce($args = null)
 		</script>
 		<?php 
 	}
-	SB_Module::add_action('scripts', '__lt_write_tinymce');
+	SB_Module::add_action(!$footer ? 'scripts' : 'lt_footer', '__lt_write_tinymce');
+	
 }
 function lt_add_datepicker()
 {
@@ -320,7 +303,6 @@ function lt_include_partial($mod, $partial, $data = array())
 	$partial_file = SB_Module::do_action('partial_file', $partial_file, $mod, $partial, $data);
 	if( !$partial_file )
 		return null;
-	//var_dump($partial_file);
 	include $partial_file;
 }
 function lt_template_fallback()
@@ -330,6 +312,7 @@ function lt_template_fallback()
 	<html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 		<title><?php lt_title(); ?></title>
 		<link rel="stylesheet" href="<?php print BASEURL; ?>/js/bootstrap-3.3.5/css/bootstrap.min.css" />
 		<script src="<?php print BASEURL; ?>/js/jquery.min.js"></script>
@@ -453,4 +436,8 @@ function lt_add_js($id, $src = null, $order = 0, $footer = false)
 		sb_add_script($src, $id, $order, $footer);
 	}
 	
+}
+function sb_show_messages()
+{
+    SB_MessagesStack::ShowMessages();
 }

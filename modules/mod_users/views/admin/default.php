@@ -2,26 +2,28 @@
 
 ?>
 <div class="wrap">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-				<h2 id="page-title"><?php _e('Users', 'users'); ?></h2>
-			</div>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-				<div>
-					<a class="btn btn-primary has-popover" href="index.php?mod=users&view=new_user" 
-						data-content="<?php print SBText::_('USERS_BUTTON_NEW'); ?>">
-						<?php _e('New', 'users'); ?>
-					</a>
-					<a href="<?php print SB_Route::_('index.php?mod=users&task=export'); ?>" 
-						class="btn btn-warning has-popover"
-						data-content="<?php print SBText::_('USERS_BUTTON_EXPORT'); ?>">
-						<?php _e('Export', 'users'); ?>
-					</a>
+	<h2 id="page-title">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<?php _e('Users', 'users'); ?>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="text-right">
+						<a class="btn btn-primary has-popover" href="index.php?mod=users&view=new_user" 
+							data-content="<?php print $this->__('USERS_BUTTON_NEW'); ?>">
+							<?php _e('New', 'users'); ?>
+						</a>
+						<a href="<?php print $this->Route('index.php?mod=users&task=export'); ?>" 
+							class="btn btn-warning has-popover"
+							data-content="<?php print $this->__('USERS_BUTTON_EXPORT'); ?>">
+							<?php _e('Export', 'users'); ?>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</h2>
 	<div class="row">
 		<div class="col-md-6">
 			<form action="" method="get" class="">
@@ -45,32 +47,32 @@
 		<th class="col-count">#</th>
 		<th class="col-image">&nbsp;</th>
 		<th class="col-username">
-			<a href="<?php print $username_order_link; ?>" class="has-popover" data-content="<?php print SBText::_('USERS_TH_USER'); ?>">
-				<?php print SB_Text::_('User', 'users'); ?>
-				<span class="glyphicon glyphicon-triangle-<?php print (SB_Request::getString('order_by') == 'username' && SB_Request::getString('order', 'asc') == 'asc') ? 'bottom' : 'top'; ?>"></span>
+			<a href="<?php print $username_order_link; ?>" class="has-popover" data-content="<?php print $this->__('USERS_TH_USER'); ?>">
+				<?php print $this->__('User', 'users'); ?>
+				<span class="glyphicon glyphicon-triangle-<?php print ($this->request->getString('order_by') == 'username' && $this->request->getString('order', 'asc') == 'asc') ? 'bottom' : 'top'; ?>"></span>
 			</a>
 		</th>
 		<th class="col-name">
-			<a href="<?php print $name_order_link; ?>" class="has-popover" data-content="<?php print SBText::_('USERS_TH_NAME'); ?>">
-				<?php print SB_Text::_('Name', 'users'); ?>
-				<span class="glyphicon glyphicon-triangle-<?php print (SB_Request::getString('order_by') == 'name' && SB_Request::getString('order', 'asc') == 'asc') ? 'bottom' : 'top'; ?>"></span>
+			<a href="<?php print $name_order_link; ?>" class="has-popover" data-content="<?php print $this->__('USERS_TH_NAME'); ?>">
+				<?php print $this->__('Name', 'users'); ?>
+				<span class="glyphicon glyphicon-triangle-<?php print ($this->request->getString('order_by') == 'name' && $this->request->getString('order', 'asc') == 'asc') ? 'bottom' : 'top'; ?>"></span>
 			</a>
 		</th>
 		<th class="col-email">
-			<a href="<?php print $email_order_link; ?>" class="has-popover" data-content="<?php print SBText::_('USERS_TH_EMAIL'); ?>">
-				<?php print SB_Text::_('Email', 'users'); ?>
-				<span class="glyphicon glyphicon-triangle-<?php print (SB_Request::getString('order_by') == 'email' && SB_Request::getString('order', 'asc') == 'asc') ? 'bottom' : 'top'; ?>"></span>
+			<a href="<?php print $email_order_link; ?>" class="has-popover" data-content="<?php print $this->__('USERS_TH_EMAIL'); ?>">
+				<?php print $this->__('Email', 'users'); ?>
+				<span class="glyphicon glyphicon-triangle-<?php print ($this->request->getString('order_by') == 'email' && $this->request->getString('order', 'asc') == 'asc') ? 'bottom' : 'top'; ?>"></span>
 			</a>
 		</th>
 		<th class="col-role">
-			<a href="<?php print $rol_order_link; ?>" class="has-popover" data-content="<?php print SBText::_('USERS_TH_ROLE'); ?>">
-				<?php print SB_Text::_('Role', 'users'); ?>
-				<span class="glyphicon glyphicon-triangle-<?php print (SB_Request::getString('order_by') == 'rol_name' && SB_Request::getString('order', 'asc') == 'asc') ? 'bottom' : 'top'; ?>"></span>
+			<a href="<?php print $rol_order_link; ?>" class="has-popover" data-content="<?php print $this->__('USERS_TH_ROLE'); ?>">
+				<?php print $this->__('Role', 'users'); ?>
+				<span class="glyphicon glyphicon-triangle-<?php print ($this->request->getString('order_by') == 'rol_name' && $this->request->getString('order', 'asc') == 'asc') ? 'bottom' : 'top'; ?>"></span>
 			</a>
 		</th>
 		<th>
-			<a href="#" class="has-popover" data-content="<?php print SBText::_('USERS_TH_ACTIONS'); ?>">
-				<?php print SB_Text::_('Actions', 'users'); ?>
+			<a href="#" class="has-popover" data-content="<?php print $this->__('USERS_TH_ACTIONS'); ?>">
+				<?php print $this->__('Actions', 'users'); ?>
 			</a>
 		</th>
 	</tr>

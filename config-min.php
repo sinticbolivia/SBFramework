@@ -21,5 +21,7 @@ define('MODULES_URL', BASEURL . '/modules');
 define('TEMPLATES_URL', BASEURL . '/templates');
 define('UPLOADS_URL', BASEURL . '/uploads');
 define('DEVELOPMENT', 1);
-define('SESSION_EXPIRE', 15 * 60); //15 minutes
-define('LOG_FILE', BASEPATH . SB_DS . 'little-cms.log');
+define('SESSION_EXPIRE', 150 * 60); //150 minutes
+define('LOG_FILE', BASEPATH . SB_DS . 'beetle-cms.log');
+define('LT_REWRITE', 0);
+define('TRANSLATION_USE_POMO', 0);

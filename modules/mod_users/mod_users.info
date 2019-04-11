@@ -1,8 +1,8 @@
 {
 	"Id": "mod_users",
 	"Name": "Users Module",
-	"Description": "A users module for little CMS",
+	"Description": "A users module for Beetle CMS",
 	"Author": "Sintic Bolivia",
 	"Website": "http://sinticbolivia.net",
-	"Version": "1.0"
+	"Version": "2.0"
 }

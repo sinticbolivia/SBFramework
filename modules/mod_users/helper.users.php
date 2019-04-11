@@ -1,4 +1,7 @@
 <?php
+namespace SinticBolivia\SBFramework\Modules\Users;
+use SinticBolivia\SBFramework\Classes\SB_Factory;
+
 class LT_HelperUsers
 {
 	/**

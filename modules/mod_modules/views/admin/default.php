@@ -3,12 +3,12 @@
 <div class="wrap">
 	<h1 id="page-title"><?php print $page_title; ?></h1>
     <p><?php printf(__('Total modules: %d', 'modules'), count($available_modules)); ?></p>
-	<table class="table">
+	<table class="table table-condensed">
 	<thead>
 	<tr>
 		<th width="40">&nbsp;</th>
-		<th><?php print SB_Text::_('Name', 'modules'); ?></th>
-		<th><?php print SB_Text::_('Actions', 'modules'); ?></th>
+		<th><?php _e('Name', 'modules'); ?></th>
+		<th><?php _e('Actions', 'modules'); ?></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -38,18 +38,18 @@
 		</td>
 		<td>
 			<?php if( in_array($mod->Id, $enabled_modules) ): ?>
-			<a href="<?php print SB_Route::_('index.php?mod=modules&task=disable_module&the_mod='.$mod->Id) ?>" class="btn btn-danger btn-xs">
-				<?php print SB_Text::_('Disable', 'modules'); ?>
+			<a href="<?php print $this->Route('index.php?mod=modules&task=disable_module&the_mod='.$mod->Id) ?>" class="btn btn-danger btn-xs">
+				<?php _e('Disable', 'modules'); ?>
 			</a>
 			<?php else: ?>
-			<a href="<?php print SB_Route::_('index.php?mod=modules&task=enable_module&the_mod='.$mod->Id) ?>" class="btn btn-primary btn-xs">
-				<?php print SB_Text::_('Enable', 'modules'); ?>
+			<a href="<?php print $this->Route('index.php?mod=modules&task=enable_module&the_mod='.$mod->Id) ?>" class="btn btn-primary btn-xs">
+				<?php _e('Enable', 'modules'); ?>
 			</a>
 			<?php endif; ?>
 		</td>
 	</tr>
 	<?php endforeach; else: ?>
-	<tr><td colspan="2"><?php print SB_Text::_('There are no modules installed', 'modules'); ?></td></tr>
+	<tr><td colspan="2"><?php _e('There are no modules installed', 'modules'); ?></td></tr>
 	<?php endif; ?>
 	</tbody>
 	</table>

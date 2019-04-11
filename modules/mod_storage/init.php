@@ -1,4 +1,10 @@
 <?php
+namespace SinticBolivia\BeetleCMS\Modules\Storage;
+use SinticBolivia\SBFramework\Classes\SB_Language;
+use SinticBolivia\SBFramework\Classes\SB_Module;
+use SinticBolivia\SBFramework\Classes\SB_Route;
+use SinticBolivia\SBFramework\Classes\SB_Menu;
+
 define('MOD_STORAGE_DIR', dirname(__FILE__));
 define('MOD_STORAGE_URL', MODULES_URL . '/' . basename(MOD_STORAGE_DIR));
 define('STORAGE_DIR', UPLOADS_DIR . SB_DS . 'storage');

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Users Module\n"
-"POT-Creation-Date: 2017-08-20 21:42-0400\n"
-"PO-Revision-Date: 2017-08-20 21:45-0400\n"
+"POT-Creation-Date: 2018-06-18 22:34-0400\n"
+"PO-Revision-Date: 2018-06-18 23:13-0400\n"
 "Last-Translator: \n"
 "Language-Team: Sintic Bolivia <info@sinticbolivia.net>\n"
 "Language: es\n"
@@ -15,188 +15,227 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../admin.controller.php:91 ../../../admin.controller.php:170
-#: ../../../admin.controller.php:283 ../../../controller.php:99
+#: ../../../AdminController.php:109 ../../../on_enabled.php:25
+msgid "Users Management"
+msgstr "Administraci&oacute;n de Usuarios"
+
+#: ../../../AdminController.php:137 ../../../AdminController.php:224
+#: ../../../Controllers/ControllerBase.php:138
 #: ../../../views/admin/online_users.php:62
 msgid "index.php"
 msgstr ""
 
-#: ../../../admin.controller.php:98
+#: ../../../AdminController.php:144
 msgid "Invalid text security."
 msgstr "Texto de seguridad invalido"
 
-#: ../../../admin.controller.php:106 ../../../admin.controller.php:116
+#: ../../../AdminController.php:152 ../../../AdminController.php:162
+#: ../../../Controllers/ApiController.php:36
+#: ../../../Controllers/ApiController.php:38
 msgid "Invalid username or password"
 msgstr "Nombre de usuario o contrase&ntilde;a invalida"
 
-#: ../../../admin.controller.php:124
+#: ../../../AdminController.php:170
 msgid "You are not able to start a session, please contact with administrator."
 msgstr "Usted no puede iniciar sesion, porfavor contacte con el administrador."
 
-#: ../../../admin.controller.php:137 ../../../admin.controller.php:193
+#: ../../../AdminController.php:183
 msgid "login.php"
 msgstr ""
 
-#: ../../../admin.controller.php:144
+#: ../../../AdminController.php:190
 msgid "Authentication failed"
 msgstr "Autenticacion fallida"
 
-#: ../../../admin.controller.php:210 ../../../admin.controller.php:215
-#: ../../../admin.controller.php:293
-msgid "Crear Nuevo Usuario"
-msgstr ""
+#: ../../../AdminController.php:252 ../../../AdminController.php:431
+msgid "Create New User"
+msgstr "Crear Nuevo Usuario"
 
-#: ../../../admin.controller.php:213
+#: ../../../AdminController.php:255
 msgid "index.php?mod=users&task=upload_image"
 msgstr ""
 
-#: ../../../admin.controller.php:224 ../../../admin.controller.php:539
-msgid "Identificador de usuario no valido"
-msgstr ""
+#: ../../../AdminController.php:268
+msgid "User identifier is invalid"
+msgstr "Identificador de usuario invalido"
 
-#: ../../../admin.controller.php:225 ../../../admin.controller.php:238
-#: ../../../admin.controller.php:244 ../../../admin.controller.php:487
-#: ../../../admin.controller.php:507 ../../../admin.controller.php:540
-#: ../../../admin.controller.php:546 ../../../admin.controller.php:554
-#: ../../../controller.php:19 ../../../controller.php:78
-#: ../../../controller.php:131 ../../../controller.php:187
-#: ../../../controller.php:271 ../../../controller.php:342
-#: ../../../functions.php:219 ../../../init.php:40 ../../../init.php:89
+#: ../../../AdminController.php:269 ../../../AdminController.php:281
+#: ../../../AdminController.php:291 ../../../AdminController.php:464
+#: ../../../AdminController.php:469 ../../../Controller.php:31
+#: ../../../Controller.php:80 ../../../Controller.php:111
+#: ../../../Controller.php:171 ../../../Controller.php:307
+#: ../../../Models/UsersModel.php:308 ../../../init.php:93
 msgid "index.php?mod=users"
 msgstr ""
 
-#: ../../../admin.controller.php:229 ../../../admin.controller.php:289
+#: ../../../AdminController.php:274 ../../../AdminController.php:347
+#: ../../../AdminController.php:581
 msgid "You dont have enough permissions"
 msgstr "No tiene suficientes permisos"
 
-#: ../../../admin.controller.php:237 ../../../admin.controller.php:545
-msgid "El usuario no existe"
-msgstr ""
+#: ../../../AdminController.php:280 ../../../Controller.php:185
+#: ../../../Models/UsersModel.php:38 ../../../Models/UsersModel.php:168
+#: ../../../Models/UsersModel.php:242
+msgid "The user does not exists"
+msgstr "El usuario no existe"
 
-#: ../../../admin.controller.php:243 ../../../admin.controller.php:506
-msgid "No puede editar el usuario solicitado."
-msgstr ""
+#: ../../../AdminController.php:287
+msgid "You can't edit the requested user"
+msgstr "No puede editar el usuario solicitado"
 
-#: ../../../admin.controller.php:257 ../../../admin.controller.php:264
-#: ../../../admin.controller.php:293
-msgid "Editar Usuario"
-msgstr ""
+#: ../../../AdminController.php:312 ../../../AdminController.php:431
+#: ../../../on_enabled.php:27
+msgid "Edit User"
+msgstr "Editar Usuario"
 
-#: ../../../admin.controller.php:265
+#: ../../../AdminController.php:322
 msgid "index.php?mod=users&task=upload_image&user_id="
 msgstr ""
 
-#: ../../../admin.controller.php:304
-msgid "Debe ingresar los nombres."
+#: ../../../AdminController.php:353
+msgid "Your need enter the user firstname."
 msgstr ""
 
-#: ../../../admin.controller.php:317
-msgid "Debe ingresar los apellidos."
+#: ../../../AdminController.php:355
+msgid "You need to enter the user lastname."
+msgstr "Necesita ingresar el apellido del usuario"
+
+#: ../../../AdminController.php:358
+msgid "You need to enter a username."
 msgstr ""
 
-#: ../../../admin.controller.php:341
-msgid "Debe seleccionar un rol para el usuario."
+#: ../../../AdminController.php:361
+msgid "You cant use this for role for the user."
 msgstr ""
 
-#: ../../../admin.controller.php:356
+#: ../../../AdminController.php:367
 msgid "You dont have enough permissions to create an user"
 msgstr "No tiene suficientes permisos para crear un usuario"
 
-#: ../../../admin.controller.php:360
+#: ../../../AdminController.php:371
 msgid "You dont have enough permissions to update an user"
 msgstr "No tiene permisos suficientes para actualizar un usuario"
 
-#: ../../../admin.controller.php:371
-msgid "El rol de usuario no existe"
+#: ../../../AdminController.php:375
+msgid "You can' assign this user role"
 msgstr ""
 
-#: ../../../admin.controller.php:380
-msgid "No esta autorizado para crear este rol de usuario"
+#: ../../../AdminController.php:381
+msgid "The user role does not exists"
+msgstr "El rol de usuario no existe"
+
+#: ../../../AdminController.php:384
+msgid "You are not authorized to assign this user role"
 msgstr ""
 
-#: ../../../admin.controller.php:414
-msgid "Debe ingresar una contrase&ntilde;a."
-msgstr ""
+#: ../../../AdminController.php:422
+msgid "The user has been updated"
+msgstr "El usuario fue actualizado"
 
-#: ../../../admin.controller.php:486
+#: ../../../AdminController.php:422
 msgid "The user has been created successfully"
 msgstr "El usuario fue creado correctamente"
 
-#: ../../../admin.controller.php:501
-msgid "El identificador de usuario no existe."
-msgstr ""
+#: ../../../AdminController.php:459
+msgid "The user identifier is invalid"
+msgstr "El identificador de usuario es invalido"
 
-#: ../../../admin.controller.php:523
-msgid "index.php?mod=users&view=edit_user&id="
-msgstr ""
-
-#: ../../../admin.controller.php:553
+#: ../../../AdminController.php:463
 msgid "The user has been deleted."
 msgstr "El usuario fue borrado."
 
-#: ../../../admin.controller.php:661
+#: ../../../AdminController.php:544
 msgid "index.php?mod=users&view=online_users&order_by=user_id&order="
 msgstr ""
 
-#: ../../../admin.controller.php:662
+#: ../../../AdminController.php:545
 msgid "index.php?mod=users&view=online_users&order_by=username&order="
 msgstr ""
 
-#: ../../../admin.controller.php:663
+#: ../../../AdminController.php:546
 msgid "index.php?mod=users&view=online_users&order_by=email&order="
 msgstr ""
 
-#: ../../../admin.controller.php:664
+#: ../../../AdminController.php:547
 msgid "index.php?mod=users&view=online_users&order_by=first_name&order="
 msgstr ""
 
-#: ../../../admin.controller.php:665
+#: ../../../AdminController.php:548
 msgid "index.php?mod=users&view=online_users&order_by=last_name&order="
 msgstr ""
 
-#: ../../../admin.controller.php:666
+#: ../../../AdminController.php:549
 msgid "index.php?mod=users&view=online_users&order_by=last_login&order="
 msgstr ""
 
-#: ../../../admin.controller.php:673
+#: ../../../AdminController.php:556
 msgid "You need to start a session"
 msgstr "Necesita iniciar sesion"
 
-#: ../../../admin.controller.php:685
+#: ../../../AdminController.php:568
 #, php-format
 msgid "users-%s.txt"
 msgstr "usuarios-%s.txt"
 
-#: ../../../controller.php:39
-msgid "El texto de seguridad es invalido"
-msgstr ""
+#: ../../../AdminController.php:587
+msgid "IP Address"
+msgstr "Direcci&oacute;n IP"
 
-#: ../../../controller.php:53
+#: ../../../AdminController.php:588
+msgid "Type"
+msgstr "Tipo"
+
+#: ../../../AdminController.php:590
+msgid "Status"
+msgstr "Estado"
+
+#: ../../../AdminController.php:604
+msgid "Expires"
+msgstr "Expira"
+
+#: ../../../AdminController.php:610
+msgid "Creation Date"
+msgstr "Fecha Creaci&oacute;n"
+
+#: ../../../AdminController.php:614
+msgid "Disconnect user"
+msgstr "Desconectar usuario"
+
+#: ../../../AdminController.php:616 ../../../init.php:98
+#: ../../../views/admin/sessions.php:2
+msgid "User Sessions"
+msgstr "Session de Usuarios"
+
+#: ../../../Controller.php:51
+msgid "The security text is invalid"
+msgstr "El texto de seguridad es invalido"
+
+#: ../../../Controller.php:65
 msgid "login-error.html"
 msgstr ""
 
-#: ../../../controller.php:107 ../../../controller.php:115
+#: ../../../Controller.php:87 ../../../Controller.php:95
 msgid "Error al recuperar la contraseña."
 msgstr ""
 
-#: ../../../controller.php:108 ../../../controller.php:116
-#: ../../../controllers/base.controller.php:49 ../../../views/form-login.php:24
+#: ../../../Controller.php:88 ../../../Controller.php:96
+#: ../../../Controllers/ControllerBase.php:65
 msgid "index.php?mod=users&view=recover_pwd"
 msgstr ""
 
-#: ../../../controller.php:124
+#: ../../../Controller.php:104
 msgid "Las contrase&ntilde;as no coinciden."
 msgstr ""
 
-#: ../../../controller.php:125 ../../../controllers/base.controller.php:24
+#: ../../../Controller.php:105 ../../../Controllers/ControllerBase.php:40
 msgid "index.php?mod=users&view=recover_pwd&hash="
 msgstr ""
 
-#: ../../../controller.php:129
+#: ../../../Controller.php:109
 msgid "Tu contrase&ntilde;a fue actualizada correctamente."
 msgstr ""
 
-#: ../../../controller.php:157
+#: ../../../Controller.php:137
 msgid ""
 "You have not setted up your securiry questions, please setup as they will "
 "need to recover your password."
@@ -204,164 +243,197 @@ msgstr ""
 "No tienes configurado las preguntas de seguridad, pofavor configuralas "
 "porque son necesarias para poder recuperar tu contrase&ntilde;a."
 
-#: ../../../controller.php:160 ../../../controller.php:176
-#: ../../../controller.php:180
+#: ../../../Controller.php:140 ../../../Controller.php:159
+#: ../../../Controller.php:163
 msgid "index.php?mod=users&task=upload_image&update=1"
 msgstr ""
 
-#: ../../../controller.php:270
+#: ../../../Controller.php:148 ../../../views/default.php:3
+msgid "My Account"
+msgstr "Mi Cuenta"
+
+#: ../../../Controller.php:187
+msgid "You must enter your firstname."
+msgstr "Necesitas ingresar tu nombre"
+
+#: ../../../Controller.php:189
+msgid "You must enter your lastname."
+msgstr "Necesita ingresar su apellido."
+
+#: ../../../Controller.php:224
 msgid "Datos actualizados correctamente"
 msgstr ""
 
-#: ../../../controller.php:284 ../../../functions.php:162
+#: ../../../Controller.php:236 ../../../Controller.php:293
+msgid "user"
+msgstr "usuario"
+
+#: ../../../Controller.php:246 ../../../Models/UsersModel.php:68
 msgid "The username is empty"
 msgstr "El nombre de usuario esta vacio"
 
-#: ../../../controller.php:290
+#: ../../../Controller.php:252
 msgid "The email is empty"
 msgstr "El email esta vacio"
 
-#: ../../../controller.php:296
+#: ../../../Controller.php:258
 msgid "The password is empty"
 msgstr "La contrase&ntilde;a esta vacia"
 
-#: ../../../controller.php:302
+#: ../../../Controller.php:264
 msgid "You must to retype your password"
 msgstr "Neesita volver a ingresar su contrase&ntilde;a"
 
-#: ../../../controller.php:309 ../../../controller.php:316
+#: ../../../Controller.php:271 ../../../Controller.php:278
 msgid "The username already exists, choose a new one"
 msgstr "El nombre de usuario ya existe, elija uno nuevo"
 
-#: ../../../controller.php:322
+#: ../../../Controller.php:284
 msgid "The passwords does not match"
 msgstr "Las contrase&ntilde;as no coinciden"
 
-#: ../../../controller.php:341
+#: ../../../Controller.php:306
 msgid ""
 "Your user was registered correctly, please review your email for details"
 msgstr ""
 "Su usuario fue registrado correctamente, porfavor revise su email para mas "
 "detalles"
 
-#: ../../../controllers/admin.controller.roles.php:19
-#: ../../../controllers/admin.controller.roles.php:49
-#: ../../../views/admin/roles.php:10
-msgid "Nuevo Rol"
-msgstr ""
+#: ../../../Controllers/ApiController.php:29
+msgid "The username is required"
+msgstr "El nombre de usuario es requerido"
 
-#: ../../../controllers/admin.controller.roles.php:30
-#: ../../../controllers/admin.controller.roles.php:132
-msgid "Identificador de rol no valido"
-msgstr ""
+#: ../../../Controllers/ApiController.php:31
+msgid "The password is required"
+msgstr "La contrase&ntilde;a es requerida"
 
-#: ../../../controllers/admin.controller.roles.php:31
-#: ../../../controllers/admin.controller.roles.php:37
-#: ../../../controllers/admin.controller.roles.php:105
-#: ../../../controllers/admin.controller.roles.php:133
-#: ../../../controllers/admin.controller.roles.php:140
-#: ../../../controllers/admin.controller.roles.php:148 ../../../init.php:43
-#: ../../../views/admin/roles.edit.php:68
-msgid "index.php?mod=users&view=roles"
-msgstr ""
-
-#: ../../../controllers/admin.controller.roles.php:36
-#: ../../../controllers/admin.controller.roles.php:139
-msgid "El rol no existe"
-msgstr ""
-
-#: ../../../controllers/admin.controller.roles.php:39
-#: ../../../controllers/admin.controller.roles.php:49
-msgid "Editar Rol"
-msgstr ""
-
-#: ../../../controllers/admin.controller.roles.php:60
-msgid "Debe ingresar un nombre para el rol de usuario"
-msgstr ""
-
-#: ../../../controllers/admin.controller.roles.php:70
-msgid "El nombre de rol ya existe."
-msgstr ""
-
-#: ../../../controllers/admin.controller.roles.php:99
-#, php-format
-msgid "Asignar Rol %s"
-msgstr ""
-
-#: ../../../controllers/admin.controller.roles.php:104
-msgid "The new user role has been created."
-msgstr "El nuevo rol de usuario ha sido creado."
-
-#: ../../../controllers/admin.controller.roles.php:123
-msgid "The user role has been updated."
-msgstr "El rol de usuario ha sido creado."
-
-#: ../../../controllers/admin.controller.roles.php:124
-msgid "index.php?mod=users&view=roles.edit&id="
-msgstr ""
-
-#: ../../../controllers/admin.controller.roles.php:147
-#, php-format
-msgid "El rol %s ha sido borrado"
-msgstr ""
-
-#: ../../../controllers/base.controller.php:9
+#: ../../../Controllers/ControllerBase.php:25
 msgid "You must enter your email"
 msgstr "Necesita ingresar su email"
 
-#: ../../../controllers/base.controller.php:17
+#: ../../../Controllers/ControllerBase.php:33
 msgid "The email has not belongs to any registered user."
 msgstr "El email no pertenece a ningun usuario registrado"
 
-#: ../../../controllers/base.controller.php:25
+#: ../../../Controllers/ControllerBase.php:41
 #, php-format
 msgid "Hello %s %s<br/><br/>"
 msgstr "Hola %s %s<br/><br/>"
 
-#: ../../../controllers/base.controller.php:26
+#: ../../../Controllers/ControllerBase.php:42
 msgid ""
 "In order to recover your password, please follow the next link.<br/><br/>"
 msgstr ""
 "Para recuperar su contrase&ntilde;a siga el siguiente enlace.<br/><br/>"
 
-#: ../../../controllers/base.controller.php:27
+#: ../../../Controllers/ControllerBase.php:43
 msgid "Recover password"
 msgstr "Recuperar Contrase&ntilde;a"
 
-#: ../../../controllers/base.controller.php:28
+#: ../../../Controllers/ControllerBase.php:44
 msgid ""
 "If you does not requested your password, please ignore this email.<br/><br/>"
 msgstr ""
 "Si usted no solicito su contrase&ntilde;a porfavor ignore este email.<br/"
 "><br/>"
 
-#: ../../../controllers/base.controller.php:30
+#: ../../../Controllers/ControllerBase.php:46
 msgid "Password Recovery - "
 msgstr "Recuperación de Contraseña -"
 
-#: ../../../controllers/base.controller.php:48
+#: ../../../Controllers/ControllerBase.php:64
 msgid ""
 "Revise su email y siga las intrucciones para recuperar su contrase&ntilde;a."
 msgstr ""
 
-#: ../../../functions.php:164
-msgid "The user email is empty"
-msgstr "El email de usuario esta vacio"
+#: ../../../Controllers/RolesAdminController.php:67
+msgid "Create New User Role"
+msgstr "Crear Nuevo Rol de Usuario"
 
-#: ../../../functions.php:166
+#: ../../../Controllers/RolesAdminController.php:83
+msgid "Identificador de rol no valido"
+msgstr ""
+
+#: ../../../Controllers/RolesAdminController.php:89
+msgid "El rol no existe"
+msgstr ""
+
+#: ../../../Controllers/RolesAdminController.php:95 ../../../on_enabled.php:23
+msgid "Edit Role"
+msgstr "Editar Rol"
+
+#: ../../../Controllers/RolesAdminController.php:106
+msgid "Editar Rol"
+msgstr ""
+
+#: ../../../Controllers/RolesAdminController.php:106
+msgid "Nuevo Rol"
+msgstr ""
+
+#: ../../../Controllers/RolesAdminController.php:117
+msgid "Debe ingresar un nombre para el rol de usuario"
+msgstr ""
+
+#: ../../../Controllers/RolesAdminController.php:126
+msgid "The role name already exists."
+msgstr "El nombre del rol ya existe."
+
+#: ../../../Controllers/RolesAdminController.php:144
+msgid "The new user role has been created."
+msgstr "El nuevo rol de usuario ha sido creado."
+
+#: ../../../Controllers/RolesAdminController.php:149
+msgid "The user role has been updated."
+msgstr "El rol de usuario ha sido creado."
+
+#: ../../../Controllers/RolesAdminController.php:160
+msgid "The role identifier is invalid"
+msgstr "El identificador de rol es invalido"
+
+#: ../../../Controllers/RolesAdminController.php:163
+msgid "The user role has been deleted"
+msgstr "El rol de usuario ha sido borrado"
+
+#: ../../../Models/RolesModel.php:23
+msgid "Invalid role identifier"
+msgstr "Identificador de rol invalido"
+
+#: ../../../Models/RolesModel.php:26
+msgid "The role does not exists"
+msgstr "El rol no existe"
+
+#: ../../../Models/RolesModel.php:39
+#, php-format
+msgid "Assign Role %s"
+msgstr "Asignar Role %s"
+
+#: ../../../Models/RolesModel.php:72
+msgid "El role does not exists"
+msgstr "El rol no existe"
+
+#: ../../../Models/UsersModel.php:75
 msgid "The username already exists"
 msgstr "El nombre de usuario ya existe hes"
 
-#: ../../../functions.php:172 ../../../functions.php:176
+#: ../../../Models/UsersModel.php:81 ../../../Models/UsersModel.php:171
 msgid "The email already exists"
 msgstr "El email ya existe"
 
-#: ../../../functions.php:213
+#: ../../../Models/UsersModel.php:136
+#, php-format
+msgid "%s - User Registration"
+msgstr "%s - Registro de Usuario"
+
+#: ../../../Models/UsersModel.php:163
+msgid "Invalid user identifier"
+msgstr "Identificador de usuario invalido"
+
+#: ../../../Models/UsersModel.php:302
 #, php-format
 msgid "Hello %s<br/><br/>"
 msgstr "Hola %s <br/><br/>"
 
-#: ../../../functions.php:214
+#: ../../../Models/UsersModel.php:303
 msgid ""
 "Thanks for register into our website, you account details are below.<br/><br/"
 ">"
@@ -369,377 +441,377 @@ msgstr ""
 "Gracias por registrarte en nuestro sitio web, los detalles de su cuenta "
 "estan abajo.<br/><br/>"
 
-#: ../../../functions.php:215
+#: ../../../Models/UsersModel.php:304
 #, php-format
 msgid "Username: %s<br/>"
 msgstr "Usuario: %s<br/>"
 
-#: ../../../functions.php:216
+#: ../../../Models/UsersModel.php:305
 #, php-format
 msgid "Password: %s<br/>"
 msgstr "Contrase&ntilde;a: %s<br/>"
 
-#: ../../../functions.php:218
+#: ../../../Models/UsersModel.php:305
+msgid "[Your password]"
+msgstr "[Tu contrasena]"
+
+#: ../../../Models/UsersModel.php:307
 msgid "Follow the next link in order to start a session.<br/><br/>"
 msgstr "Siga el siguiente enlace para iniciar session.<br/><br/>"
 
-#: ../../../functions.php:219
+#: ../../../Models/UsersModel.php:308
 #, php-format
 msgid "<a href=\"%s\">Login</a><br/><br/>"
 msgstr ""
 
-#: ../../../functions.php:220
+#: ../../../Models/UsersModel.php:309
 #, php-format
 msgid "Greetings<br/><br/>%s"
 msgstr "Saludos<br/><br/>%s"
 
-#: ../../../functions.php:222
-#, php-format
-msgid "%s - User Registration"
-msgstr "%s - Registro de Usuario"
-
-#: ../../../functions.php:253
+#: ../../../functions.php:128
 msgid "Which is the name if your first pet?"
 msgstr "Cual es el nombre de su primera mascota?"
 
-#: ../../../functions.php:254
+#: ../../../functions.php:129
 msgid "Which is the name if your first school?"
-msgstr ""
+msgstr "Cual es el nombre de su primera escuela?"
 
-#: ../../../functions.php:255
+#: ../../../functions.php:130
 msgid "Which is the name if your best friend?"
-msgstr ""
+msgstr "Cual es el nombre de su mejor amigo?"
 
-#: ../../../init.php:39 ../../../views/admin/default.php:8
+#: ../../../functions.php:188 ../../../init.php:41
+msgid "Your session has expired"
+msgstr "Su sesi&oacute;n ha expirado"
+
+#: ../../../init.php:92 ../../../init.php:143
+#: ../../../views/admin/default.php:9
 msgid "Users"
 msgstr "Usuarios"
 
-#: ../../../init.php:42
+#: ../../../init.php:95 ../../../views/admin/roles.php:7
 msgid "User Roles"
 msgstr "Roles de Usuario"
 
-#: ../../../init.php:81
-msgid "Estadisticas de Usuarios"
+#: ../../../init.php:96 ../../../views/admin/roles.edit.php:11
+#: ../../../views/admin/roles.edit.php:72
+msgid "index.php?mod=users&view=roles.default"
 msgstr ""
 
-#: ../../../init.php:87
-msgid "Usuarios"
+#: ../../../init.php:99
+msgid "index.php?mod=users&view=sessions"
 msgstr ""
 
-#: ../../../init.php:90 ../../../init.php:99
-msgid "Ver listado"
-msgstr ""
+#: ../../../init.php:136
+msgid "Users Statistics"
+msgstr "Estad&iacute;sticas de Usuarios"
 
-#: ../../../init.php:96 ../../../views/admin/online_users.php:4
+#: ../../../init.php:146
+msgid "View list"
+msgstr "Ver lista"
+
+#: ../../../init.php:152 ../../../views/admin/online_users.php:4
 msgid "Usuarios Conectados"
 msgstr ""
 
-#: ../../../init.php:98
-msgid "index.php?mod=users&view=online_users"
+#: ../../../init.php:155
+msgid "Ver listado"
 msgstr ""
 
-#: ../../../init.php:112
-msgid "index.php?mod=users&view=profile"
-msgstr ""
+#: ../../../init.php:168
+msgid "My Profile"
+msgstr "Mi Perfil"
 
-#: ../../../init.php:112
-msgid "Mi Perfil"
-msgstr ""
-
-#: ../../../on_enabled.php:5
-msgid "Gestionar configuracion"
-msgstr ""
-
-#: ../../../on_enabled.php:6
-msgid "Configuraci&oacute;n General"
+#: ../../../on_enabled.php:10
+msgid "Backend Access"
 msgstr ""
 
 #: ../../../on_enabled.php:11
+msgid "Users menu"
+msgstr "Menu usuarios"
+
+#: ../../../on_enabled.php:18
 msgid "Configuraci&oacute;n de Aplicaci&oacute;n"
 msgstr ""
 
-#: ../../../on_enabled.php:14
-msgid "Gestionar roles"
-msgstr ""
-
-#: ../../../on_enabled.php:15
-msgid "Crear rol"
-msgstr ""
-
-#: ../../../on_enabled.php:16
-msgid "Editar rol"
-msgstr ""
-
-#: ../../../on_enabled.php:17
-msgid "Borrar rol"
-msgstr ""
-
-#: ../../../on_enabled.php:18
-msgid "Gestionar usuarios"
-msgstr ""
-
-#: ../../../on_enabled.php:19
-msgid "Crear usuario"
-msgstr ""
-
-#: ../../../on_enabled.php:20
-msgid "Editar usuario"
-msgstr ""
-
 #: ../../../on_enabled.php:21
-msgid "Borrar usuario"
-msgstr ""
+msgid "Roles Management"
+msgstr "Administraci&oacute;n de Roles"
 
-#: ../../../on_enabled.php:27
+#: ../../../on_enabled.php:22
+msgid "Create Role"
+msgstr "Crear Rol"
+
+#: ../../../on_enabled.php:24
+msgid "Delete Role"
+msgstr "Borrar Rol"
+
+#: ../../../on_enabled.php:26
+msgid "Create User"
+msgstr "Crear Usuario"
+
+#: ../../../on_enabled.php:28
+msgid "Delete User"
+msgstr "Borrar Usuario"
+
+#: ../../../on_enabled.php:29
+msgid "See all users"
+msgstr "Ver todos los usuarios"
+
+#: ../../../on_enabled.php:30
+msgid "See user sessions"
+msgstr "Ver sesiones de usuarios"
+
+#: ../../../on_enabled.php:36
 msgid "Posible"
 msgstr ""
 
-#: ../../../on_enabled.php:33
+#: ../../../on_enabled.php:42
 msgid "Bloqueado"
 msgstr ""
 
-#: ../../../views/admin/default.php:13
+#: ../../../views/admin/default.php:14
 msgid "USERS_BUTTON_NEW"
 msgstr ""
 
-#: ../../../views/admin/default.php:14
+#: ../../../views/admin/default.php:15
 msgid "New"
 msgstr "Nuevo"
 
-#: ../../../views/admin/default.php:16
-msgid "index.php?mod=users&task=export"
-msgstr ""
-
-#: ../../../views/admin/default.php:18
+#: ../../../views/admin/default.php:19
 msgid "USERS_BUTTON_EXPORT"
 msgstr ""
 
-#: ../../../views/admin/default.php:19
+#: ../../../views/admin/default.php:20
 msgid "Export"
 msgstr "Exportar"
 
-#: ../../../views/admin/default.php:48
+#: ../../../views/admin/default.php:50
 msgid "USERS_TH_USER"
 msgstr ""
 
-#: ../../../views/admin/default.php:49
+#: ../../../views/admin/default.php:51
 msgid "User"
 msgstr "Usuario"
 
-#: ../../../views/admin/default.php:54 ../../../views/admin/users_list.php:51
+#: ../../../views/admin/default.php:56 ../../../views/admin/users_list.php:51
 #: ../../../views/admin/users_list.php:57
 msgid "USERS_TH_NAME"
 msgstr ""
 
-#: ../../../views/admin/default.php:55
+#: ../../../views/admin/default.php:57
 msgid "Name"
 msgstr "Nombre"
 
-#: ../../../views/admin/default.php:60 ../../../views/admin/users_list.php:63
+#: ../../../views/admin/default.php:62 ../../../views/admin/users_list.php:63
 msgid "USERS_TH_EMAIL"
 msgstr ""
 
-#: ../../../views/admin/default.php:61 ../../../views/admin/online_users.php:23
+#: ../../../views/admin/default.php:63 ../../../views/admin/online_users.php:23
 #: ../../../views/admin/users_list.php:64 ../../../views/register.php:13
 msgid "Email"
 msgstr ""
 
-#: ../../../views/admin/default.php:66
+#: ../../../views/admin/default.php:68
 msgid "USERS_TH_ROLE"
 msgstr ""
 
-#: ../../../views/admin/default.php:67
+#: ../../../views/admin/default.php:69 ../../../views/admin/roles.php:24
 msgid "Role"
 msgstr "Rol"
 
-#: ../../../views/admin/default.php:72
+#: ../../../views/admin/default.php:74
 msgid "USERS_TH_ACTIONS"
 msgstr ""
 
-#: ../../../views/admin/default.php:73
+#: ../../../views/admin/default.php:75 ../../../views/admin/roles.php:30
 msgid "Actions"
 msgstr "Acciones"
 
-#: ../../../views/admin/default.php:88
+#: ../../../views/admin/default.php:90 ../../../views/admin/roles.php:42
 msgid "Edit"
 msgstr "Editar"
 
-#: ../../../views/admin/default.php:94
+#: ../../../views/admin/default.php:96
 msgid "Are you sure to delete the user?"
 msgstr "Esta seguro de borrar el usuario?"
 
-#: ../../../views/admin/default.php:95
+#: ../../../views/admin/default.php:97
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../../../views/admin/edit_user.php:28 ../../../views/admin/edit_user.php:228
-#: ../../../views/admin/roles.edit.php:12
-#: ../../../views/admin/roles.edit.php:72 ../../../views/recover_pwd.php:35
-msgid "Save"
-msgstr "Guardar"
-
-#: ../../../views/admin/edit_user.php:44 ../../../views/default.php:9
-msgid "Select user image"
-msgstr "Seleccione la image de usuario"
-
-#: ../../../views/admin/edit_user.php:49
-msgid "Subiendo imagen..."
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:55
-msgid "USERS_FIRST_NAME"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:56
-msgid "Nombre:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:64
-msgid "USERS_LAST_NAME"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:65
-msgid "Apellidos:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:77
-msgid "USERS_TAB_PROFILE"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:78
-msgid "Perfil"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:80
-msgid "USERS_TAB_PERSONAL"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:82 ../../../views/default.php:30
-msgid "Personal"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:92
-msgid "USERS_USERNAME"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:93
-msgid "Usuario:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:102
-msgid "USERS_PASSWORD"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:103
-msgid "Contrase&ntilde;a:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:111
-msgid "USERS_USER_ROLE"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:112
-msgid "Rol de Usuario:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:115
-msgid "-- rol --"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:126
-msgid "USERS_CREATION_DATE"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:127
-msgid "Fecha Creaci&oacute;n:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:141
-msgid "USERS_EMAIL"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:142 ../../../views/default.php:38
-msgid "Email:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:151
-msgid "USERS_LABEL_NO_LOGIN"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:153
-msgid "No Login"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:159
-msgid "USERS_OBS"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:160
-msgid "Observaciones:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:167
-msgid "USERS_NOTES"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:168
-msgid "Notas:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:177
-msgid "USERS_BIRTHDAY"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:178
-msgid "Fecha de Nacimiento:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:185
-msgid "USERS_ADDRESS"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:186
-msgid "Direccion:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:193
-msgid "USERS_CITY"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:194
-msgid "Ciudad:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:200
-msgid "USERS_STATE"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:201
-msgid "Provincia:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:207
-msgid "USERS_COUNTRY"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:208
-msgid "Pais:"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:210 ../../../views/default.php:97
-msgid "-- pais --"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:224
-msgid "USERS_BUTTON_CANCEL"
-msgstr ""
-
-#: ../../../views/admin/edit_user.php:225
-#: ../../../views/admin/roles.edit.php:70
+#: ../../../views/admin/edit_user.php:27 ../../../views/admin/edit_user.php:226
+#: ../../../views/admin/roles.edit.php:13
+#: ../../../views/admin/roles.edit.php:74
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../../../views/admin/edit_user.php:227
+#: ../../../views/admin/edit_user.php:29 ../../../views/admin/edit_user.php:229
+#: ../../../views/admin/roles.edit.php:16
+#: ../../../views/admin/roles.edit.php:77 ../../../views/default.php:112
+#: ../../../views/recover_pwd.php:35
+msgid "Save"
+msgstr "Guardar"
+
+#: ../../../views/admin/edit_user.php:45 ../../../views/default.php:10
+msgid "Select user image"
+msgstr "Seleccione la image de usuario"
+
+#: ../../../views/admin/edit_user.php:50
+msgid "Subiendo imagen..."
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:56
+msgid "USERS_FIRST_NAME"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:57
+msgid "Firstname:"
+msgstr "Nombres:"
+
+#: ../../../views/admin/edit_user.php:65
+msgid "USERS_LAST_NAME"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:66
+msgid "Lastname:"
+msgstr "Apellidos:"
+
+#: ../../../views/admin/edit_user.php:78
+msgid "USERS_TAB_PROFILE"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:79 ../../../views/default.php:31
+msgid "Profile"
+msgstr "Perfil"
+
+#: ../../../views/admin/edit_user.php:81
+msgid "USERS_TAB_PERSONAL"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:83 ../../../views/default.php:33
+msgid "Personal"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:93
+msgid "USERS_USERNAME"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:94 ../../../views/form-login.php:11
+msgid "Username:"
+msgstr "Usuario:"
+
+#: ../../../views/admin/edit_user.php:103
+msgid "USERS_PASSWORD"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:104 ../../../views/default.php:45
+#: ../../../views/form-login.php:15
+msgid "Password:"
+msgstr "Contrase&ntilde;a:"
+
+#: ../../../views/admin/edit_user.php:112
+msgid "USERS_USER_ROLE"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:113
+msgid "User Role:"
+msgstr "Rol de Usuario:"
+
+#: ../../../views/admin/edit_user.php:116
+msgid "-- role --"
+msgstr "-- rol --"
+
+#: ../../../views/admin/edit_user.php:127
+msgid "USERS_CREATION_DATE"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:128
+msgid "Creation Date:"
+msgstr "Fecha Creaci&oacute;n"
+
+#: ../../../views/admin/edit_user.php:142
+msgid "USERS_EMAIL"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:143 ../../../views/default.php:41
+msgid "Email:"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:152
+msgid "USERS_LABEL_NO_LOGIN"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:154
+msgid "No Login"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:160
+msgid "USERS_OBS"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:161
+msgid "Observations:"
+msgstr "Observaciones:"
+
+#: ../../../views/admin/edit_user.php:168
+msgid "USERS_NOTES"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:169
+msgid "Notes:"
+msgstr "Notas:"
+
+#: ../../../views/admin/edit_user.php:178
+msgid "USERS_BIRTHDAY"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:179 ../../../views/default.php:82
+msgid "Birthday:"
+msgstr "Fecha Nacimiento:"
+
+#: ../../../views/admin/edit_user.php:186
+msgid "USERS_ADDRESS"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:187 ../../../views/default.php:86
+msgid "Address:"
+msgstr "Direcci&oacute;n:"
+
+#: ../../../views/admin/edit_user.php:194
+msgid "USERS_CITY"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:195 ../../../views/default.php:90
+msgid "City:"
+msgstr "Ciudad:"
+
+#: ../../../views/admin/edit_user.php:201
+msgid "USERS_STATE"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:202 ../../../views/default.php:94
+msgid "State:"
+msgstr "Estado:"
+
+#: ../../../views/admin/edit_user.php:208
+msgid "USERS_COUNTRY"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:209 ../../../views/default.php:98
+msgid "Country:"
+msgstr "Pais:"
+
+#: ../../../views/admin/edit_user.php:211
+msgid "-- country --"
+msgstr "-- pais --"
+
+#: ../../../views/admin/edit_user.php:225
+msgid "USERS_BUTTON_CANCEL"
+msgstr ""
+
+#: ../../../views/admin/edit_user.php:228
 msgid "USERS_BUTTON_SAVE"
 msgstr ""
 
@@ -796,77 +868,70 @@ msgstr ""
 msgid "Volver"
 msgstr ""
 
-#: ../../../views/admin/roles.edit.php:28
-msgid "USERS_ROLE_NAME"
-msgstr ""
-
-#: ../../../views/admin/roles.edit.php:29
-msgid "Nombre del Rol:"
-msgstr ""
-
-#: ../../../views/admin/roles.edit.php:37
-msgid "USERS_ROLE_DESCRIPTION"
-msgstr ""
-
-#: ../../../views/admin/roles.edit.php:38
-msgid "Descripci&oacute;n:"
-msgstr ""
-
-#: ../../../views/admin/roles.edit.php:43
-msgid "USERS_ROLE_PERMISSIONS"
-msgstr ""
-
-#: ../../../views/admin/roles.edit.php:44
-msgid "Permisos:"
-msgstr ""
-
-#: ../../../views/admin/roles.edit.php:49
-msgid "gp_"
-msgstr ""
-
-#: ../../../views/admin/roles.edit.php:69
+#: ../../../views/admin/roles.edit.php:12
+#: ../../../views/admin/roles.edit.php:73
 msgid "USERS_ROLE_BUTTON_CANCEL"
 msgstr ""
 
-#: ../../../views/admin/roles.edit.php:71
+#: ../../../views/admin/roles.edit.php:32
+msgid "USERS_ROLE_NAME"
+msgstr ""
+
+#: ../../../views/admin/roles.edit.php:33
+msgid "Role Name:"
+msgstr "Nombre Rol:"
+
+#: ../../../views/admin/roles.edit.php:41
+msgid "USERS_ROLE_DESCRIPTION"
+msgstr ""
+
+#: ../../../views/admin/roles.edit.php:42
+msgid "Descripci&oacute;n:"
+msgstr ""
+
+#: ../../../views/admin/roles.edit.php:47
+msgid "USERS_ROLE_PERMISSIONS"
+msgstr ""
+
+#: ../../../views/admin/roles.edit.php:48
+msgid "Permissons:"
+msgstr "Permisos:"
+
+#: ../../../views/admin/roles.edit.php:53
+msgid "gp_"
+msgstr ""
+
+#: ../../../views/admin/roles.edit.php:76
 msgid "USERS_ROLE_BUTTON_SAVE"
 msgstr ""
 
-#: ../../../views/admin/roles.php:5
-msgid "Roles de Usuario"
-msgstr ""
-
-#: ../../../views/admin/roles.php:8
+#: ../../../views/admin/roles.php:10
 msgid "USERS_ROLE_BUTTON_NEW"
 msgstr ""
 
-#: ../../../views/admin/roles.php:9
+#: ../../../views/admin/roles.php:11
 msgid "index.php?mod=users&view=roles.new&ctrl=roles"
 msgstr ""
 
-#: ../../../views/admin/roles.php:19
+#: ../../../views/admin/roles.php:12
+msgid "New Role"
+msgstr "Nuevo Rol"
+
+#: ../../../views/admin/roles.php:23
 msgid "USERS_ROLE_TH_ROLE"
 msgstr ""
 
-#: ../../../views/admin/roles.php:20
-msgid "Rol"
-msgstr ""
-
-#: ../../../views/admin/roles.php:25
+#: ../../../views/admin/roles.php:29
 msgid "USERS_ROLE_TH_ACTIONS"
 msgstr ""
 
-#: ../../../views/admin/roles.php:26
-msgid "Acciones"
-msgstr ""
+#: ../../../views/admin/roles.php:46
+msgid "Are you sure to delete the user role?"
+msgstr "Esta seguro de borrar el rol?"
 
-#: ../../../views/admin/roles.php:38
-msgid "Editar"
-msgstr ""
-
-#: ../../../views/admin/roles.php:42
-msgid "Esta seguro de borrar el rol de usuario?"
-msgstr ""
+#: ../../../views/admin/roles.php:46
+msgid "Delete role"
+msgstr "Borrar role"
 
 #: ../../../views/admin/users_list.php:52
 msgid "Nombre"
@@ -880,77 +945,41 @@ msgstr ""
 msgid "Escoger"
 msgstr ""
 
-#: ../../../views/default.php:3
-msgid "My Account"
-msgstr "Mi Cuenta"
-
-#: ../../../views/default.php:13
+#: ../../../views/default.php:14
 msgid "Uploading Image"
 msgstr "Subiendo imagen"
 
-#: ../../../views/default.php:18
+#: ../../../views/default.php:19
 msgid "Firstname"
 msgstr "Nombres"
 
-#: ../../../views/default.php:22
+#: ../../../views/default.php:23
 msgid "Lastname"
 msgstr "Apellidos"
 
-#: ../../../views/default.php:29
-msgid "Profile"
-msgstr "Perfil"
-
-#: ../../../views/default.php:42 ../../../views/form-login.php:15
-msgid "Password:"
-msgstr "Contrase&ntilde;a:"
-
-#: ../../../views/default.php:43
+#: ../../../views/default.php:46
 msgid "Dejar en blanco para no actualizar."
 msgstr ""
 
-#: ../../../views/default.php:47
+#: ../../../views/default.php:50
 msgid "Security Questions"
 msgstr "Preguntas de Seguridad"
 
-#: ../../../views/default.php:49 ../../../views/default.php:61
+#: ../../../views/default.php:52 ../../../views/default.php:64
 msgid "Question #1"
 msgstr "Pregunta #1"
 
-#: ../../../views/default.php:51 ../../../views/default.php:63
+#: ../../../views/default.php:54 ../../../views/default.php:66
 msgid "-- question --"
 msgstr "-- pregunta --"
 
-#: ../../../views/default.php:79
-msgid "Birthday:"
-msgstr "Fecha Nacimiento:"
-
-#: ../../../views/default.php:83
-msgid "Address:"
-msgstr "Direcci&oacute;n:"
-
-#: ../../../views/default.php:87
-msgid "City:"
-msgstr "Ciudad:"
-
-#: ../../../views/default.php:91
-msgid "State:"
-msgstr "Estado:"
-
-#: ../../../views/default.php:95
-msgid "Country:"
-msgstr "Pais:"
-
-#: ../../../views/default.php:109
-msgid "Guardar"
+#: ../../../views/default.php:100
+msgid "-- pais --"
 msgstr ""
 
 #: ../../../views/form-login.php:4
 msgid "User Access"
 msgstr "Acceso de Usuario"
-
-#: ../../../views/form-login.php:11
-msgid "Username:"
-msgstr "Usuario:"
 
 #: ../../../views/form-login.php:19
 msgid "captcha.php?time="
@@ -1003,6 +1032,9 @@ msgstr "Repita su Contrase&ntilde;a"
 #: ../../../views/register.php:25
 msgid "Register"
 msgstr "Registro"
+
+#~ msgid "The user email is empty"
+#~ msgstr "El email de usuario esta vacio"
 
 #~ msgid "You Account has been created"
 #~ msgstr "La cuenta fue creada correctamente."

@@ -1,4 +1,6 @@
 <?php
+use SinticBolivia\SBFramework\Classes\SB_Text;
+
 $countries = array(
 	'AF' => SB_Text::_( 'Afghanistan', 'lt' ),
 	'AX' => SB_Text::_( '&#197;land Islands', 'lt' ),

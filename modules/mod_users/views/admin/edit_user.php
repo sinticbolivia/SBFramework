@@ -1,5 +1,5 @@
 <?php
-$image = SB_Request::getString('imagefile', isset($user) ? sb_get_user_meta($user_id, '_image') : null);
+$image = $this->request->getString('imagefile', isset($user) ? sb_get_user_meta($user_id, '_image') : null);
 $image_url = '';
 if( !$image )
 {
@@ -13,8 +13,8 @@ else
 {
 	$image_url = MODULE_URL . '/images/nobody.png';
 }
-$selected_role = isset($user) ? $user->role_id : SB_Request::getInt('role_id', -1);
-$countries = sb_include('countries.php', 'file');
+$selected_role = isset($user) ? $user->role_id : $this->request->getInt('role_id', -1);
+
 ?>
 <!-- <link rel="stylesheet" href="<?php print BASEURL;?>/js/fineuploader/fineuploader.css" /> -->
 <div class="wrap">
@@ -24,6 +24,7 @@ $countries = sb_include('countries.php', 'file');
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"><?php print $title; ?></div>
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 					<div class="page-buttons">
+                        <a href="<?php print $this->Route('index.php?mod=users'); ?>" class="btn btn-danger"><?php print $this->__('Cancel'); ?></a>
 						<a href="javascript:;" class="btn btn-success" onclick="jQuery('#form-user').submit();">
 							<?php _e('Save', 'users'); ?>
 						</a>
@@ -41,30 +42,30 @@ $countries = sb_include('countries.php', 'file');
 			<input type="hidden" id="imagefile" name="imagefile" value="<?php print $image; ?>" />
 			<div class="form-group row">
 				<div class="col-md-2">
-					<div id="select-image"  title="<?php print SB_Text::_('Select user image', 'users'); ?>">
+					<div id="select-image"  title="<?php print $this->__('Select user image', 'users'); ?>">
 						<img src="<?php print $image_url; ?>" alt="" class="img-thumbnail" />
 					</div>
 					<div id="uploading" style="display:none;">
 						<img src="<?php print BASEURL; ?>/js/fineuploader/loading.gif" alt=""  />
-						<?php print SB_Text::_('Subiendo imagen...', 'users'); ?>
+						<?php print $this->__('Subiendo imagen...', 'users'); ?>
 					</div>
 				</div>
 				<div class="col-md-10">
 					<div class="form-row row">
 						<div class="col-md-4">
-							<label class="has-popover" data-content="<?php print SBText::_('USERS_FIRST_NAME'); ?>">
-								<?php print SB_Text::_('Nombre:', 'users'); ?>
+							<label class="has-popover" data-content="<?php print $this->__('USERS_FIRST_NAME'); ?>">
+								<?php print $this->__('Firstname:', 'users'); ?>
 							</label>
-							<input type="text" name="first_name" value="<?php print SB_Request::getString('first_name', isset($user) ? $user->first_name : ''); ?>" 
+							<input type="text" name="first_name" value="<?php print $this->request->getString('first_name', isset($user) ? $user->first_name : ''); ?>" 
 									class="form-control" maxlength="20" />
 						</div>
 					</div>
 					<div class="form-row row">
 						<div class="col-md-4">
-							<label class="has-popover" data-content="<?php print SBText::_('USERS_LAST_NAME'); ?>">
-								<?php print SB_Text::_('Apellidos:', 'users'); ?>
+							<label class="has-popover" data-content="<?php print $this->__('USERS_LAST_NAME'); ?>">
+								<?php print $this->__('Lastname:', 'users'); ?>
 							</label>
-							<input type="text" name="last_name" value="<?php print SB_Request::getString('last_name', isset($user) ? $user->last_name : ''); ?>" 
+							<input type="text" name="last_name" value="<?php print $this->request->getString('last_name', isset($user) ? $user->last_name : ''); ?>" 
 									class="form-control" maxlength="20" />
 						</div>
 					</div>
@@ -74,33 +75,35 @@ $countries = sb_include('countries.php', 'file');
 			<div id="user-tabs">
 			  	<ul class="nav nav-tabs" role="tablist">
 				    <li class="active">
-				    	<a href="#profile" aria-controls="home" role="tab" data-toggle="tab" class="has-popover" data-content="<?php print SBText::_('USERS_TAB_PROFILE'); ?>">
-				    		<?php print SB_Text::_('Perfil', 'users'); ?></a>
+				    	<a href="#profile" aria-controls="home" role="tab" data-toggle="tab" class="has-popover" data-content="<?php print $this->__('USERS_TAB_PROFILE'); ?>">
+				    		<?php print $this->__('Profile', 'users'); ?></a>
 				    </li>
-				    <li class="has-popover" data-content="<?php print SBText::_('USERS_TAB_PERSONAL'); ?>">
+				    <li class="has-popover" data-content="<?php print $this->__('USERS_TAB_PERSONAL'); ?>">
 				    	<a href="#personal" aria-controls="profile" role="tab" data-toggle="tab">
-				    		<?php print SBText::_('Personal', 'users'); ?></a></li>
-				    <?php SB_Module::do_action('user_tabs', isset($user) ? $user : null); ?>
+				    		<?php print $this->__('Personal', 'users'); ?>
+				    	</a>
+				    </li>
+				    <?php b_do_action('user_tabs', isset($user) ? $user : null); ?>
 			  	</ul>
 			  	<!-- Tab panes -->
 			  	<div class="tab-content">
 				    <div role="tabpanel" class="tab-pane active" id="profile">
-				    	<?php SB_Module::do_action('before_user_tab_personal'); ?>
+				    	<?php b_do_action('before_user_tab_personal'); ?>
 				    	<div class="row">
 				    		<div class="col-md-3">
 					    		<div class="form-group">
-						    		<label for="username" class="has-popover" data-content="<?php print SBText::_('USERS_USERNAME'); ?>">
-						    			<?php print SBText::_('Usuario:', 'users'); ?>
+						    		<label for="username" class="has-popover" data-content="<?php print $this->__('USERS_USERNAME'); ?>">
+						    			<?php print $this->__('Username:', 'users'); ?>
 						    		</label>
 			    					<input type="text" class="form-control" id="username" name="username" 
-			    							value="<?php print SB_Request::getString('username', isset($user) ? $user->username : ''); ?>"
+			    							value="<?php print $this->request->getString('username', isset($user) ? $user->username : ''); ?>"
 			    							/>
 						    	</div>
 					    	</div>
 					    	<div class="col-md-3">
 					    		<div class="form-group">
-						    		<label for="pwd" class="has-popover" data-content="<?php print SBText::_('USERS_PASSWORD'); ?>">
-						    			<?php print SB_Text::_('Contrase&ntilde;a:', 'users'); ?></label>
+						    		<label for="pwd" class="has-popover" data-content="<?php print $this->__('USERS_PASSWORD'); ?>">
+						    			<?php print $this->__('Password:', 'users'); ?></label>
 			    					<input type="password" class="form-control" id="pwd" name="pwd" value="" maxlength="20" />
 						    	</div>
 					    	</div>
@@ -108,11 +111,11 @@ $countries = sb_include('countries.php', 'file');
 				    	<div class="row">
 				    		<div class="col-md-3">
 					    		<div class="form-group">
-						    		<label for="role_id" class="has-popover" data-content="<?php print SBText::_('USERS_USER_ROLE'); ?>">
-						    			<?php print SBText::_('Rol de Usuario:', 'users'); ?>
+						    		<label for="role_id" class="has-popover" data-content="<?php print $this->__('USERS_USER_ROLE'); ?>">
+						    			<?php print $this->__('User Role:', 'users'); ?>
 						    		</label>
 			    					<select id="role_id" name="role_id" class="form-control">
-			    						<option value="-1"><?php print SBText::_('-- rol --', 'users'); ?></option>
+			    						<option value="-1"><?php print $this->__('-- role --', 'users'); ?></option>
 			    						<?php foreach($roles as $role): ?>
 			    						<option value="<?php print $role->role_id; ?>" <?php print ($selected_role == $role->role_id) ? 'selected' : ''; ?>>
 			    							<?php print $role->role_name; ?>
@@ -123,8 +126,8 @@ $countries = sb_include('countries.php', 'file');
 					    	</div>
 					    	<div class="col-md-2">
 					    		<div class="form-group">
-						    		<label for="creation_date" class="has-popover" data-content="<?php print SBText::_('USERS_CREATION_DATE'); ?>">
-						    			<?php print SB_Text::_('Fecha Creaci&oacute;n:', 'users'); ?></label>
+						    		<label for="creation_date" class="has-popover" data-content="<?php print $this->__('USERS_CREATION_DATE'); ?>">
+						    			<?php print $this->__('Creation Date:', 'users'); ?></label>
 						    		<?php if( isset($user) ): ?>
 			    					<input type="text" class="form-control datepicker" id="creation_date" name="creation_date" 
 			    							value="<?php print sb_format_date($user->creation_date); ?>" />
@@ -138,11 +141,11 @@ $countries = sb_include('countries.php', 'file');
 				    	<div class="row">
 				    		<div class="col-md-5">
 				    			<div class="form-group">
-						    		<label for="email" class="has-popover" data-content="<?php print SBText::_('USERS_EMAIL'); ?>">
-						    			<?php print SBText::_('Email:', 'users'); ?>
+						    		<label for="email" class="has-popover" data-content="<?php print $this->__('USERS_EMAIL'); ?>">
+						    			<?php print $this->__('Email:', 'users'); ?>
 						    		</label>
 			    					<input type="email" class="form-control" id="email" placeholder="Email" name="email" 
-			    							value="<?php print SB_Request::getString('email', isset($user) ? $user->email : ''); ?>"
+			    							value="<?php print $this->request->getString('email', isset($user) ? $user->email : ''); ?>"
 			    							maxlength="40" />
 						    	</div>
 				    		</div>
@@ -156,58 +159,58 @@ $countries = sb_include('countries.php', 'file');
 				    	<div class="clearfix"></div>
 				    	<div class="form-group row">
 				    		<div class="col-md-6">
-				    			<label for="observations" class="has-popover" data-content="<?php print SBText::_('USERS_OBS'); ?>">
-					    			<?php print SBText::_('Observaciones:', 'users'); ?>
+				    			<label for="observations" class="has-popover" data-content="<?php print $this->__('USERS_OBS'); ?>">
+					    			<?php print $this->__('Observations:', 'users'); ?>
 					    		</label>
-		    					<textarea class="form-control" id="observations" name="observations"><?php print SB_Request::getString('observations', isset($user) ? sb_get_user_meta($user->user_id, '_observations') : ''); ?></textarea>
+		    					<textarea class="form-control" id="observations" name="observations"><?php print $this->request->getString('observations', isset($user) ? sb_get_user_meta($user->user_id, '_observations') : ''); ?></textarea>
 				    		</div>
 				    	</div>
 				    	<div class="form-group row">
 				    		<div class="col-md-6">
-				    			<label for="notes" class="has-popover" data-content="<?php print SBText::_('USERS_NOTES'); ?>">
-					    			<?php print SBText::_('Notas:', 'users'); ?></label>
-		    					<textarea class="form-control" id="notes" placeholder="" name="notes"><?php print SB_Request::getString('observations', isset($user) ? sb_get_user_meta($user->user_id, '_notes') : ''); ?></textarea>
+				    			<label for="notes" class="has-popover" data-content="<?php print $this->__('USERS_NOTES'); ?>">
+					    			<?php print $this->__('Notes:', 'users'); ?></label>
+		    					<textarea class="form-control" id="notes" placeholder="" name="notes"><?php print $this->request->getString('observations', isset($user) ? sb_get_user_meta($user->user_id, '_notes') : ''); ?></textarea>
 				    		</div>
 				    	</div>
-				    	<?php SB_Module::do_action('after_user_tab_personal', isset($user) ? $user : null); ?>
+				    	<?php b_do_action('after_user_tab_personal', isset($user) ? $user : null); ?>
 				    </div>
 				    <div role="tabpanel" class="tab-pane" id="personal">
 				    	<div class="col-md-2 form-group">
 				    		<div class="row">
-					    		<label class="has-popover" data-content="<?php print SBText::_('USERS_BIRTHDAY'); ?>">
-					    			<?php print SB_Text::_('Fecha de Nacimiento:', 'users')?></label>
-					    		<input class="form-control datepicker" type="text" name="birthday" value="<?php print SB_Request::getString('birthday', isset($user) ? $user->_birthday : ''); ?>" />
+					    		<label class="has-popover" data-content="<?php print $this->__('USERS_BIRTHDAY'); ?>">
+					    			<?php print $this->__('Birthday:', 'users')?></label>
+					    		<input class="form-control datepicker" type="text" name="birthday" value="<?php print $this->request->getString('birthday', isset($user) ? $user->_birthday : ''); ?>" />
 				    		</div>
 				    	</div>
 				    	<div class="clearfix"></div>
 				    	<div class="form-group row">
 				    		<div class="col-md-6">
-				    			<label class="has-popover" data-content="<?php print SBText::_('USERS_ADDRESS'); ?>">
-				    				<?php print SB_Text::_('Direccion:', 'users')?></label>
-				    			<input class="form-control" type="text" name="address" value="<?php print SB_Request::getString('address', isset($user) ? $user->_address : ''); ?>"
+				    			<label class="has-popover" data-content="<?php print $this->__('USERS_ADDRESS'); ?>">
+				    				<?php print $this->__('Address:', 'users')?></label>
+				    			<input class="form-control" type="text" name="address" value="<?php print $this->request->getString('address', isset($user) ? $user->_address : ''); ?>"
 				    				maxlength="80" />
 				    		</div>
 				    	</div>
 				    	<div class="col-md-2 form-group">
 				    		<div class="row">
-					    		<label class="has-popover" data-content="<?php print SBText::_('USERS_CITY'); ?>">
-					    			<?php print SB_Text::_('Ciudad:', 'users')?></label>
-					    		<input class="form-control" type="text" name="city" value="<?php print SB_Request::getString('city', isset($user) ? $user->_city : ''); ?>" />
+					    		<label class="has-popover" data-content="<?php print $this->__('USERS_CITY'); ?>">
+					    			<?php print $this->__('City:', 'users')?></label>
+					    		<input class="form-control" type="text" name="city" value="<?php print $this->request->getString('city', isset($user) ? $user->_city : ''); ?>" />
 					    	</div>
 				    	</div>
 				    	<div class="col-md-2 form-group">
 				    		<div class="ro">
-				    			<label class="has-popover" data-content="<?php print SBText::_('USERS_STATE'); ?>">
-				    				<?php print SB_Text::_('Provincia:', 'users')?></label>
-				    			<input class="form-control" type="text" name="state" value="<?php print SB_Request::getString('state', isset($user) ? $user->_state : ''); ?>" />
+				    			<label class="has-popover" data-content="<?php print $this->__('USERS_STATE'); ?>">
+				    				<?php print $this->__('State:', 'users')?></label>
+				    			<input class="form-control" type="text" name="state" value="<?php print $this->request->getString('state', isset($user) ? $user->_state : ''); ?>" />
 				    		</div>
 				    	</div>
 				    	<div class="col-md-4 form-group">
 				    		<div class="ro">
-					    		<label class="has-popover" data-content="<?php print SBText::_('USERS_COUNTRY'); ?>">
-					    			<?php print SB_Text::_('Pais:', 'users')?></label>
+					    		<label class="has-popover" data-content="<?php print $this->__('USERS_COUNTRY'); ?>">
+					    			<?php print $this->__('Country:', 'users')?></label>
 					    		<select name="country" class="form-control">
-					    			<option value="-1"><?php print SB_Text::_('-- pais --', 'users'); ?></option>
+					    			<option value="-1"><?php print $this->__('-- country --', 'users'); ?></option>
 					    			<?php foreach($countries as $code => $label): ?>
 					    			<option value="<?php print $code; ?>" <?php print isset($user) && $user->_country == $code ? 'selected' : ''; ?>><?php print $label; ?></option>
 					    			<?php endforeach; ?>
@@ -216,15 +219,15 @@ $countries = sb_include('countries.php', 'file');
 				    	</div>
 				    	<div class="clearfix"></div>
 				    </div>
-				    <?php SB_Module::do_action('user_tabs_content', isset($user) ? $user : null); ?>
+				    <?php b_do_action('user_tabs_content', isset($user) ? $user : null); ?>
 			  	</div>
 			</div><br/>
 			<p>
 				<a href="index.php?mod=users" class="btn btn-danger has-popover" 
-					data-content="<?php print SBText::_('USERS_BUTTON_CANCEL'); ?>">
+					data-content="<?php print $this->__('USERS_BUTTON_CANCEL'); ?>">
 					<?php _e('Cancel', 'users'); ?></a>
 				<button type="submit" class="btn btn-success has-popover" 
-					data-content="<?php print SBText::_('USERS_BUTTON_SAVE'); ?>">
+					data-content="<?php print $this->__('USERS_BUTTON_SAVE'); ?>">
 					<?php _e('Save', 'users'); ?>
 				</button>
 			</p>

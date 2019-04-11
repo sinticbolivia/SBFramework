@@ -1,12 +1,13 @@
 <?php
-
+use SinticBolivia\SBFramework\Classes\SB_Attachment;
+use SinticBolivia\SBFramework\Classes\SB_AttachmentImage;
 ?>
 <div class="wrap">
 	<h2>
 		<?php _e('Files Storage', 'storage'); ?>
 		<span class="pull-right" style="font-size:15px;">
 			<?php _e('The file types you can upload are:', 'storage'); ?><br/>
-			JPG, TIFF, EPS, AI, PDF, PSD Y CDR <?php  _e('up to 50MB', 'storage') ?>
+			<?php print implode(',', array_map('strtoupper', $extensions)) ?> <?php  _e('up to 50MB', 'storage') ?>
 		</span>
 	</h2>
 	<form id="form-upload" action="" method="post">
@@ -27,22 +28,58 @@
 			</div>
 		</div>
 	</form>
-	<table id="table-attachments" class="table table-condensed">
-	<thead>
-	<tr>
-		<th><?php _e('Image', 'storage'); ?></th>
-		<th><?php _e('File', 'storage'); ?></th>
-		<th><?php _e('Description', 'storage'); ?></th>
-		<th><?php _e('Type', 'storage'); ?></th>
-		<th><?php _e('Actions', 'storage'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php $i = 1; foreach($items as $item): ?>
-		<?php include 'attachment-row.php'; ?>
-	<?php endforeach; ?>
-	</tbody>
-	</table>
+	<?php if( !$layout || $layout == 'list' ): ?>
+	<div class="table-responsive">
+		<table id="table-attachments" class="table table-condensed">
+		<thead>
+		<tr>
+			<th><?php _e('ID', 'storage'); ?></th>
+			<th><?php _e('Image', 'storage'); ?></th>
+			<th><?php _e('File', 'storage'); ?></th>
+			<th><?php _e('Type', 'storage'); ?></th>
+			<th><?php _e('Actions', 'storage'); ?></th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php $i = 1; foreach($items as $item): ?>
+			<?php include 'attachment-row.php'; ?>
+		<?php endforeach; ?>
+		</tbody>
+		</table>
+	</div>
+	<?php elseif( $layout == 'grid' ): ?>
+	<div class="container-fluid">
+		<div class="row">
+			<?php $i = 1; foreach($items as $item): ?>
+			<?php 
+			$image 		= BASEURL . '/images/no-image.png';
+			$is_image 	= $item->IsImage();
+			$imgObject 	= null;
+			if( $is_image )
+			{
+				$imgObject = new SB_AttachmentImage();
+				$imgObject->SetDbData($item->_dbData);
+			}
+			
+			?>
+			<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
+				<div class="attachment" style="height:200px;overflow:hidden;border:1px solid #ececec;">
+					<div class="image" style="width:100%;height:85%;text-align:center;">
+						<img src="<?php print $is_image ? $imgObject->GetThumbnail('330x330')->GetUrl() : $image; ?>" alt="" />
+					</div>
+					<div class="info"></div>
+					<div class="actions">
+						<a href="#" class="btn btn-default btn-xs btn-select-attachment" title="<?php print $this->__('Select'); ?>"
+							data-id="<?php print $imgObject->attachment_id; ?>">
+							<span class="glyphicon glyphicon-check"></span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<?php endforeach; ?>
+		</div>
+	</div>
+	<?php endif; ?>
 </div>
 <script type="text/template" id="qq-template">
 <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
@@ -114,6 +151,8 @@
 </div>
 </script>
 <script>
+var layout 				= '<?php print $layout; ?>'; 
+
 jQuery(function()
 {
 	window.uploader = new qq.FineUploader({
@@ -163,6 +202,11 @@ jQuery(function()
 	            }
 			}
 		}
+	});
+	jQuery(document).on('click', '.btn-select-attachment', function(e)
+	{
+		jQuery(document).dispatch('storage_attachment_selected', e.target.dataset);
+		return false;
 	});
 });
 </script>
